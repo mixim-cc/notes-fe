@@ -1,3 +1,5 @@
+"use client"
+
 import Editor from "@/components/editor/editor"
 
 import { EditorHeader } from "./editor-header"

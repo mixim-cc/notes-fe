@@ -1,12 +1,15 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import dynamic from "next/dynamic"
 import { OutputData } from "@editorjs/editorjs"
 import { MoveHorizontal } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import TextareaAutosize from "react-textarea-autosize"
 
-import { SimpleEditor } from "./simple-editor"
+const SimpleEditor = dynamic(() => import("./simple-editor").then((mod) => mod.SimpleEditor), {
+  ssr: false,
+})
 
 type EditorData = {
   title?: string
