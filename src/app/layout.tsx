@@ -1,12 +1,12 @@
 import "@/styles/globals.css"
+import Providers from "@/providers/provider"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { cn } from "@/utils/cn"
 import { fontSans } from "@/utils/fonts"
 
-import { ThemeToggle } from "@/components/theme-toggle"
-
 export const metadata = {
   title: "Drafts",
+  manifest: "/manifest.json",
   description: "Simple yet powerful note taking app for productive minds",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
@@ -21,9 +21,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <head />
 
         <body className={cn("min-h-screen bg-base font-sans antialiased", fontSans.variable)}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
-          </ThemeProvider>
+          <Providers>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              {children}
+            </ThemeProvider>
+          </Providers>
         </body>
       </html>
     </>

@@ -1,0 +1,47 @@
+mutation addNote($data: NoteInput!) {
+  note {
+    upsertNote(data: $data){
+      data
+      title
+      parentId
+      id
+      containerId
+    }
+  }
+}
+
+mutation addFolder($id: String, $containerId: String, $title:String! ){
+  note {
+    upsertFolder(title: $title, id: $id, containerId: $containerId) {
+      id
+      containerId
+      title
+      data
+      parentId
+    }
+  }
+}
+
+mutation addFiles($id: String, $data: NoteInput!){
+  note {
+    upsertNote(id: $id, data: $data ){
+      data
+      id
+      parentId
+      title
+      containerId
+    }
+  }
+}
+
+mutation upsertNote($id:String, $data: NoteInput!) {
+  note {
+    upsertNote(id: $id,data: $data){
+      data
+      title
+      parentId
+      id
+      containerId
+    }
+  }
+}
