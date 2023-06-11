@@ -16,17 +16,23 @@ interface FileExplorerState {
   structure: FileStructure[]
 
   selectedFile: string | null
+  isSidebarVisible: boolean
 }
 
 const initialState: FileExplorerState = {
   structure: [],
   selectedFile: null,
+  isSidebarVisible: true,
 }
 
 export const fileExplorerSlice = createSlice({
   name: "file-explorer",
   initialState,
   reducers: {
+    toggleSidebarVisibility: (state) => {
+      state.isSidebarVisible = !state.isSidebarVisible
+    },
+
     triggerSync: (state) => {},
 
     updateEntireTree: (state, action: PayloadAction<{ structure: FileStructure[] }>) => {
@@ -43,6 +49,22 @@ export const fileExplorerSlice = createSlice({
           title,
           parentId,
           type: "FILE",
+          content: null,
+          synced: false,
+          synced_id: null,
+        },
+      ]
+    },
+    addNewFolder: (state, action: PayloadAction<{ title: string; parentId: string | null }>) => {
+      const { parentId, title } = action.payload
+
+      state.structure = [
+        ...state.structure,
+        {
+          id: nanoid(),
+          title,
+          parentId,
+          type: "FOLDER",
           content: null,
           synced: false,
           synced_id: null,
@@ -89,12 +111,14 @@ export const fileExplorerSlice = createSlice({
 
 export const {
   addNewFile,
+  addNewFolder,
   editFileTitle,
   updateEntireTree,
   triggerSync,
   editFile,
   setSelectedFile,
   addFileContent,
+  toggleSidebarVisibility,
 } = fileExplorerSlice.actions
 
 export default fileExplorerSlice.reducer
