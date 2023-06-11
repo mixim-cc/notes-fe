@@ -53,6 +53,7 @@
     "editorjs-text-alignment-blocktune": "^1.0.3",
     "editorjs-toggle-block": "^0.3.11",
     "editorjs-undo": "^2.0.21",
+    "framer-motion": "^10.12.16",
     "graphql": "^16.6.0",
     "lodash": "^4.17.21",
     "lucide-react": "^0.241.0",

@@ -79,7 +79,7 @@ export const Editor = ({ data, onChange, holder }: EditorProps) => {
         id="title"
         defaultValue={data?.title}
         placeholder="Untitled"
-        className="w-full resize-none appearance-none overflow-hidden bg-transparent py-4 text-5xl font-bold leading-[3.75rem] focus:outline-none"
+        className="w-full resize-none  appearance-none overflow-hidden bg-transparent py-4 text-5xl font-bold leading-[3.75rem] focus:outline-none"
         {...register("title")}
       />
       <Controller
