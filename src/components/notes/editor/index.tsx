@@ -18,27 +18,29 @@ export const NoteEditor = () => {
   return (
     <div
       key={selectedNote?.id}
-      className={cn("h-full w-full overflow-y-auto bg-base border border-stroke-base rounded-lg")}
+      className={cn("h-full w-full overflow-y-auto rounded-lg border border-stroke-base bg-base")}
     >
-      <EditorHeader />
-      <div className="flex h-full w-full justify-center overflow-y-auto">
-        <Editor
-          data={{
-            title: selectedNote.title,
-            content: selectedNote?.content,
-          }}
-          holder={`editor-${selectedNote.id}`}
-          onChange={(data) => {
-            dispatch(
-              editFile({
-                id: selectedNote?.id,
-                content: data?.content,
-                title: data?.title,
-              })
-            )
-          }}
-        />
-      </div>
+      <>
+        <EditorHeader />
+        <div className="flex h-full w-full justify-center overflow-y-auto">
+          <Editor
+            data={{
+              title: selectedNote?.title,
+              content: selectedNote?.content,
+            }}
+            holder={`editor-${selectedNote?.id}`}
+            onChange={(data) => {
+              dispatch(
+                editFile({
+                  id: selectedNote?.id,
+                  content: data?.content,
+                  title: data?.title,
+                })
+              )
+            }}
+          />
+        </div>
+      </>
     </div>
   )
 }
