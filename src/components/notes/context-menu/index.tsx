@@ -94,7 +94,7 @@ export const NotesTripleDotsMenu = ({
 }: NotesContextMenuProps) => {
   return (
     <DropdownMenu.Root modal={false}>
-      <DropdownMenu.Trigger>
+      <DropdownMenu.Trigger className="hidden group-hover:block">
         <IconButton
           variant="ghost"
           size="sm"

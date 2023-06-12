@@ -50,7 +50,7 @@ export const SidebarFile = ({
       <div
         onClick={onFileClick}
         className={cn(
-          "min-h-7 text-primary flex flex-1 cursor-pointer items-center justify-between gap-2 rounded-md  px-1 text-sm font-medium transition-all hover:bg-el",
+          "min-h-7 text-primary group flex flex-1 cursor-pointer items-center justify-between gap-2 rounded-md  px-1 text-sm font-medium transition-all hover:bg-el",
           {
             "bg-el": isSelected,
           }

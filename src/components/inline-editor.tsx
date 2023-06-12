@@ -21,6 +21,7 @@ export const InlineEditor = React.forwardRef<HTMLTextAreaElement, InlineEditorPr
         <TextareaAutosize
           {...props}
           ref={ref}
+          
           onFocus={(e) => {
             props?.onFocus?.(e)
             e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)

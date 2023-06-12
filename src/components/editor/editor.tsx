@@ -79,7 +79,13 @@ export const Editor = ({ data, onChange, holder }: EditorProps) => {
         id="title"
         defaultValue={data?.title}
         placeholder="Untitled"
-        className="w-full resize-none  appearance-none overflow-hidden bg-transparent py-4 text-5xl font-bold leading-[3.75rem] focus:outline-none"
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault()
+            return false
+          }
+        }}
+        className="min-h-12 w-full resize-none appearance-none overflow-hidden bg-transparent py-4 text-5xl font-bold leading-[3.75rem] focus:outline-none"
         {...register("title")}
       />
       <Controller
