@@ -1,6 +1,11 @@
 "use client"
 
-import { editFileTitle, setSelectedFile } from "@/services/redux/reducers/file-explorer-reducer"
+import {
+  copyFile,
+  deleteFile,
+  editFileTitle,
+  setSelectedFile,
+} from "@/services/redux/reducers/file-explorer-reducer"
 import { useAppDispatch, useAppSelector } from "@/services/redux/store"
 import { cn } from "@/utils/cn"
 
@@ -18,9 +23,9 @@ export const NoteSidebar = () => {
   return (
     <div
       className={cn(
-        "h-full w-[320px] transition-transform flex flex-col gap-4 flex-shrink-0 overflow-y-auto bg-base border border-stroke-base rounded-lg",
+        "flex h-full w-[320px] shrink-0 flex-col gap-4 overflow-y-auto rounded-lg border border-stroke-base bg-base transition-transform",
         {
-          hidden: isSidebarVisible,
+          hidden: !isSidebarVisible,
         }
       )}
     >
@@ -40,6 +45,13 @@ export const NoteSidebar = () => {
               onTitleChange={(e) => {
                 dispatch(editFileTitle({ id: file.id, title: e.target.value }))
               }}
+              onCopy={() => {
+                dispatch(copyFile(file))
+              }}
+              onDelete={() => {
+                dispatch(deleteFile({ id: file.id }))
+              }}
+              onStar={() => {}}
             />
           ))}
         </div>

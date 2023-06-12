@@ -81,6 +81,39 @@ export const fileExplorerSlice = createSlice({
       })
     },
 
+    deleteFile: (state, action: PayloadAction<{ id: string; parentId?: string }>) => {
+      state.structure = state.structure.filter((obj) => obj.id !== action.payload.id)
+      if (action.payload.parentId) {
+        const files = state.structure.filter((obj) => obj.parentId === action.payload.parentId)
+        state.selectedFile = files.length ? files[0].id : null
+      } else {
+        const files = state.structure.filter((obj) => obj.type === "FILE" && !obj.parentId)
+        state.selectedFile = files[0].id
+      }
+    },
+
+    deleteFolder: (state, action: PayloadAction<{ id: string }>) => {
+      const files = state.structure.filter((obj) => obj.parentId === action.payload.id)
+
+      if (files.length !== 0) {
+        alert("Delete all files before deleting a folder.")
+        return
+      }
+
+      state.structure = state.structure.filter((obj) => obj.id !== action.payload.id)
+      state.selectedFile = files.length ? files[0].id : null
+    },
+
+    copyFile: (state, action: PayloadAction<Partial<FileStructure>>) => {
+      const newId = nanoid()
+      const foundFile = state.structure.find((obj) => obj.id === action.payload.id)
+
+      if (foundFile) {
+        state.structure = [...state.structure, { ...foundFile, id: newId, synced: false }]
+        state.selectedFile = newId
+      }
+    },
+
     editFileTitle: (state, action: PayloadAction<{ title: string; id: string }>) => {
       const { id, title } = action.payload
 
@@ -119,6 +152,9 @@ export const {
   setSelectedFile,
   addFileContent,
   toggleSidebarVisibility,
+  deleteFolder,
+  deleteFile,
+  copyFile,
 } = fileExplorerSlice.actions
 
 export default fileExplorerSlice.reducer

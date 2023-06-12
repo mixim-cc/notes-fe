@@ -52,24 +52,24 @@ export const Editor = ({ data, onChange, holder }: EditorProps) => {
     <div
       className={
         editorWidth === "default"
-          ? "prose prose-neutral dark:prose-invert max-w-none p-4 mx-auto w-[720px] transition-all"
-          : "prose prose-neutral dark:prose-invert max-w-none p-4 mx-auto w-full transition-all"
+          ? "prose prose-neutral mx-auto w-[720px] max-w-none p-4 transition-all dark:prose-invert"
+          : "prose prose-neutral mx-auto w-full max-w-none p-4 transition-all dark:prose-invert"
       }
     >
       {editorWidth === "default" ? (
         <div
-          className="h-6 flex items-center gap-2 cursor-pointer select-none"
+          className="flex h-6 cursor-pointer select-none items-center gap-2"
           onClick={() => setEditorWidth("full")}
         >
-          <MoveHorizontal className="w-4 h-4 text-shade-secondary" />
+          <MoveHorizontal className="h-4 w-4 text-shade-secondary" />
           <p className="text-[13px] font-medium">Wide Layout</p>
         </div>
       ) : (
         <div
-          className="h-6 flex items-center gap-2 cursor-pointer select-none"
+          className="flex h-6 cursor-pointer select-none items-center gap-2"
           onClick={() => setEditorWidth("default")}
         >
-          <MoveHorizontal className="w-4 h-4 text-shade-secondary" />
+          <MoveHorizontal className="h-4 w-4 text-shade-secondary" />
           <p className="text-[13px] font-medium">Default Layout</p>
         </div>
       )}
