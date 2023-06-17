@@ -19,22 +19,16 @@ export default function Page() {
     }
   }
 
-  //   const googleLogin = useGoogleLogin({
-  //     onSuccess: async (tokenResponse) => {
-  //       console.log(tokenResponse)
-  //       // fetching userinfo can be done on the client or the server
-  //       const userInfo = await privateAgent
-  //         .get("https://www.googleapis.com/oauth2/v3/userinfo", {
-  //           headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-  //         })
-  //         .then((res) => res.data)
-
-  //       console.log(userInfo)
-  //     },
-  //   })
+  const googleLogin = useGoogleLogin({
+    flow: "auth-code",
+    onSuccess: async (tokenResponse) => {
+      console.log(tokenResponse)
+      login(tokenResponse.code)
+    },
+  })
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex min-h-screen items-center justify-center gap-16">
       <GoogleLogin
         theme="filled_black"
         onSuccess={(credentialResponse) => {
@@ -45,9 +39,9 @@ export default function Page() {
           console.log("Login Failed")
         }}
       ></GoogleLogin>
-      {/* <Button variant="outline" onClick={() => googleLogin()}>
-        Login With Google - has access code
-      </Button> */}
+      <Button variant="outline" onClick={() => googleLogin()}>
+        Login With Google - Auth Code
+      </Button>
     </div>
   )
 }
