@@ -1,8 +1,9 @@
 import * as process from "process"
 import axios, { AxiosRequestConfig } from "axios"
+import { getAPIUrl } from "@/utils/getAPIUrlFromLocalStorage";
 
 export const privateAgent = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: getAPIUrl(),
 })
 
 export const useAxios =
