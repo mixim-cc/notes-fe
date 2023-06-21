@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { privateAgent } from "@/services/graphql/generated/axiosHelper"
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google"
+import { useGoogleLogin } from "@react-oauth/google"
 
 import { Button } from "@/components/ui/button"
 
@@ -19,28 +19,35 @@ export default function Page() {
     }
   }
 
-  const googleLogin = useGoogleLogin({
+  const signup = async (token: string) => {
+    try {
+      const response = await privateAgent.post("/signup", {
+        token,
+      })
+
+      if (response) {
+        login(token)
+      }
+    } catch (e: any) {
+      console.log(e.response.status)
+      if (e.response.status === 400) {
+        login(token)
+      }
+    }
+  }
+
+  const googleSignup = useGoogleLogin({
     flow: "auth-code",
     onSuccess: async (tokenResponse) => {
       console.log(tokenResponse)
-      login(tokenResponse.code)
+      signup(tokenResponse.code)
     },
   })
 
   return (
     <div className="flex min-h-screen items-center justify-center gap-16">
-      <GoogleLogin
-        theme="filled_black"
-        onSuccess={(credentialResponse) => {
-          console.log(credentialResponse)
-          login(credentialResponse.credential)
-        }}
-        onError={() => {
-          console.log("Login Failed")
-        }}
-      ></GoogleLogin>
-      <Button variant="outline" onClick={() => googleLogin()}>
-        Login With Google - Auth Code
+      <Button variant="outline" onClick={() => googleSignup()}>
+        Login{" "}
       </Button>
     </div>
   )
