@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { privateAgent } from "@/services/graphql/generated/axiosHelper"
-import { useGoogleLogin } from "@react-oauth/google"
+import { CredentialResponse, GoogleLogin, useGoogleLogin } from "@react-oauth/google"
 
 import { Button } from "@/components/ui/button"
 
@@ -37,7 +37,8 @@ export default function Page() {
   }
 
   const googleSignup = useGoogleLogin({
-    flow: "auth-code",
+    flow: "auth-code", // another flow is "implicit"
+
     onSuccess: async (tokenResponse) => {
       console.log(tokenResponse)
       signup(tokenResponse.code)
@@ -46,8 +47,13 @@ export default function Page() {
 
   return (
     <div className="flex min-h-screen items-center justify-center gap-16">
+      {/* <GoogleLogin
+        onSuccess={(response) => {
+          signup(response.credential)
+        }}
+      /> */}
       <Button variant="outline" onClick={() => googleSignup()}>
-        Login{" "}
+        Login
       </Button>
     </div>
   )
