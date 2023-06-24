@@ -1,5 +1,6 @@
 "use client"
 
+import { useGetNoteFolderStructureQuery } from "@/services/graphql/generated/graphql"
 import { editFile } from "@/services/redux/reducers/file-explorer-reducer"
 import { useAppDispatch, useAppSelector } from "@/services/redux/store"
 import { cn } from "@/utils/cn"
@@ -11,9 +12,12 @@ import { EditorHeader } from "./editor-header"
 
 export const NoteEditor = () => {
   const dispatch = useAppDispatch()
+  const { data } = useGetNoteFolderStructureQuery()
   const { structure, selectedFile, isSidebarVisible } = useAppSelector((state) => state.fileExplorerReducer)
 
   const selectedNote = structure.find((files) => files.id === selectedFile)
+
+  console.log(data)
 
   return (
     <div

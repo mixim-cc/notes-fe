@@ -12,6 +12,7 @@
   "dependencies": {
     "@calumk/editorjs-codeflask": "^1.0.9",
     "@calumk/editorjs-columns": "^0.2.4",
+    "@clerk/nextjs": "^4.21.10",
     "@editorjs/attaches": "^1.3.0",
     "@editorjs/checklist": "^1.5.0",
     "@editorjs/code": "^2.8.0",
