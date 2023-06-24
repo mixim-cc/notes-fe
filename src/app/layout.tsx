@@ -3,6 +3,7 @@ import Providers from "@/providers/provider"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { cn } from "@/utils/cn"
 import { fontSans } from "@/utils/fonts"
+import { ClerkProvider } from "@clerk/nextjs"
 
 import { Oasis } from "@/components/ui/oasis"
 
@@ -18,7 +19,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <head />
 
@@ -26,11 +27,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Providers>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               {children}
-              <Oasis />
             </ThemeProvider>
           </Providers>
         </body>
       </html>
-    </>
+    </ClerkProvider>
   )
 }

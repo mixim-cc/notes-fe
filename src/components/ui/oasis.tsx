@@ -3,18 +3,18 @@
 
 import { useEffect, useState } from "react"
 import { cn } from "@/utils/cn"
-import { current } from "@reduxjs/toolkit"
+import { SignOutButton, SignedIn, UserButton, useUser } from "@clerk/nextjs"
 import dayjs from "dayjs"
 import { motion } from "framer-motion"
-import { ChevronLeft, ChevronRight, FileText, Plus, Search } from "lucide-react"
+import { ChevronLeft, ChevronRight, FileText, Plus, Search, User } from "lucide-react"
 
 import { ThemeToggle } from "../theme-toggle"
-import { Avatar, AvatarImage } from "./avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "./avatar"
 import { Button } from "./button"
 import { IconButton } from "./icon-button"
 import { Input } from "./input"
 
-type OasisMenu = "none" | "menu" | "add" | "search"
+type OasisMenu = "none" | "menu" | "add" | "search" | "avatar"
 
 const searchItems = [
   {
@@ -25,6 +25,8 @@ const searchItems = [
 ]
 
 export const Oasis = () => {
+  const { user } = useUser()
+
   const [searchTerm, setSearchTerm] = useState("")
   const [currentMenu, setCurrentMenu] = useState<OasisMenu>("menu")
   const [currentTime, setCurrentTime] = useState(dayjs().format("hh:mm A"))
@@ -38,6 +40,10 @@ export const Oasis = () => {
       clearInterval(interval)
     }
   }, [])
+
+  if (!user) {
+    return null
+  }
 
   return (
     <div className="absolute bottom-[52px] left-[50%] z-20 translate-x-[-50%]">
@@ -175,9 +181,11 @@ export const Oasis = () => {
           )}
 
           <motion.div layout>
-            <Avatar>
-              <AvatarImage src="https://images.unsplash.com/photo-1685998766298-55eb50d947f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80" />
-            </Avatar>
+            <SignOutButton>
+              <Avatar className="cursor-pointer">
+                <AvatarImage src={user.imageUrl} />
+              </Avatar>
+            </SignOutButton>
           </motion.div>
         </motion.div>
       </motion.div>
