@@ -98,21 +98,25 @@ export const Oasis = () => {
               {currentMenu === "none" ? (
                 <div className="flex items-center">
                   <ChevronLeft className="absolute -left-4 hidden h-4 w-4 animate-pulse text-shade-secondary group-hover:block" />
-                  <img
-                    src="/images/logo-dark.svg"
-                    alt="logo"
-                    className="hidden h-10 w-10 object-contain dark:block"
-                  />
-                  <img src="/images/logo.svg" alt="logo" className="h-10 w-10 object-contain dark:hidden" />
+                  <motion.div animate={{ rotate: [0, 180] }}>
+                    <img
+                      src="/images/logo-dark.svg"
+                      alt="logo"
+                      className="hidden h-10 w-10 object-contain dark:block"
+                    />
+                    <img src="/images/logo.svg" alt="logo" className="h-10 w-10 object-contain dark:hidden" />
+                  </motion.div>
                 </div>
               ) : (
                 <div className="flex items-center">
-                  <img
-                    src="/images/logo-dark.svg"
-                    alt="logo"
-                    className="hidden h-10 w-10 object-contain dark:block"
-                  />
-                  <img src="/images/logo.svg" alt="logo" className="h-10 w-10 object-contain dark:hidden" />
+                  <motion.div animate={{ rotate: [180, 0] }} className="flex items-center">
+                    <img
+                      src="/images/logo-dark.svg"
+                      alt="logo"
+                      className="hidden h-10 w-10 object-contain dark:block"
+                    />
+                    <img src="/images/logo.svg" alt="logo" className="h-10 w-10 object-contain dark:hidden" />
+                  </motion.div>
                   <ChevronRight className="absolute -right-4 hidden h-4 w-4 animate-pulse text-shade-secondary group-hover:block" />
                 </div>
               )}
@@ -139,7 +143,15 @@ export const Oasis = () => {
           )}
 
           {currentMenu === "add" && (
-            <motion.div layout className="flex items-center justify-center gap-4">
+            <motion.div
+              animate={{
+                scale: [1, 1, 1, 1, 1],
+              }}
+              transition={{
+                layout: { duration: 0.3 },
+              }}
+              className="flex items-center justify-center gap-4"
+            >
               <Button variant="outline" leftIcon={<Plus className="h-4 w-4" />}>
                 New Draft
               </Button>
