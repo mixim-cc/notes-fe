@@ -47,6 +47,7 @@
     "axios": "^1.4.0",
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
+    "dayjs": "^1.11.8",
     "editorjs-button": "^1.0.4",
     "editorjs-codemirror": "^0.1.3",
     "editorjs-drag-drop": "^1.1.13",

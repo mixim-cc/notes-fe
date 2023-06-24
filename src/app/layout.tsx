@@ -4,6 +4,8 @@ import { ThemeProvider } from "@/providers/theme-provider"
 import { cn } from "@/utils/cn"
 import { fontSans } from "@/utils/fonts"
 
+import { Oasis } from "@/components/ui/oasis"
+
 export const metadata = {
   title: "Drafts",
   manifest: "/manifest.json",
@@ -20,10 +22,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang="en" suppressHydrationWarning>
         <head />
 
-        <body className={cn("min-h-screen bg-base font-sans antialiased", fontSans.variable)}>
+        <body className={cn("relative min-h-screen bg-base antialiased", fontSans.className)}>
           <Providers>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               {children}
+              <Oasis />
             </ThemeProvider>
           </Providers>
         </body>
