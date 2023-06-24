@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react"
 import { cn } from "@/utils/cn"
+import { current } from "@reduxjs/toolkit"
 import dayjs from "dayjs"
 import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, FileText, Plus, Search } from "lucide-react"
@@ -42,10 +43,18 @@ export const Oasis = () => {
     <div className="absolute bottom-[52px] left-[50%] z-20 translate-x-[-50%]">
       <motion.div
         layout
-        className="z-20 flex max-w-[670px] flex-col gap-4 rounded-2xl bg-base p-3 shadow-lg  dark:border dark:border-stroke-base"
+        className="z-20 flex max-w-[670px] flex-col gap-4 rounded-2xl bg-base p-3 shadow-2xl dark:border dark:border-stroke-base"
       >
         {searchTerm && currentMenu === "search" && (
-          <motion.div layout className="flex  cursor-pointer flex-col gap-2">
+          <motion.div
+            animate={{
+              scale: [1, 1, 1, 1, 1],
+            }}
+            transition={{
+              layout: { duration: 0.3 },
+            }}
+            className="flex cursor-pointer flex-col gap-2"
+          >
             {searchItems?.map((searchItem) => (
               <div key={searchItem.id} className="flex gap-2 rounded-md p-2 hover:bg-base-hover ">
                 <FileText className="h-4 w-4" />
@@ -86,20 +95,31 @@ export const Oasis = () => {
                 })
               }}
             >
-              <ChevronLeft className="absolute -left-4 hidden h-4 w-4 animate-pulse text-shade-secondary group-hover:block" />
-
-              <img
-                src="/images/logo-dark.svg"
-                alt="logo"
-                className="hidden h-10 w-10 object-contain dark:block"
-              />
-              <img src="/images/logo.svg" alt="logo" className="h-10 w-10 object-contain dark:hidden" />
-
-              <ChevronRight className="absolute -right-4 hidden h-4 w-4  animate-pulse text-shade-secondary group-hover:block" />
+              {currentMenu === "none" ? (
+                <div className="flex items-center">
+                  <ChevronLeft className="absolute -left-4 hidden h-4 w-4 animate-pulse text-shade-secondary group-hover:block" />
+                  <img
+                    src="/images/logo-dark.svg"
+                    alt="logo"
+                    className="hidden h-10 w-10 object-contain dark:block"
+                  />
+                  <img src="/images/logo.svg" alt="logo" className="h-10 w-10 object-contain dark:hidden" />
+                </div>
+              ) : (
+                <div className="flex items-center">
+                  <img
+                    src="/images/logo-dark.svg"
+                    alt="logo"
+                    className="hidden h-10 w-10 object-contain dark:block"
+                  />
+                  <img src="/images/logo.svg" alt="logo" className="h-10 w-10 object-contain dark:hidden" />
+                  <ChevronRight className="absolute -right-4 hidden h-4 w-4 animate-pulse text-shade-secondary group-hover:block" />
+                </div>
+              )}
             </motion.div>
-            {currentMenu !== "search" && (
+            {currentMenu === "none" && (
               <motion.div layout className="flex flex-col">
-                <div className="text-xs font-medium text-shade-secondary">Good Morning, Anjil</div>
+                <div className="text-xs font-normal text-shade-secondary">Good Morning, Anjil</div>
                 <div className="text-lg font-medium text-shade-primary">It&apos;s {currentTime}</div>
               </motion.div>
             )}
