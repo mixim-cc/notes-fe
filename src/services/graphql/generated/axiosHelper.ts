@@ -15,8 +15,6 @@ export const useAxios = <TData, TVariables>(
 ): ((variables?: TVariables, config?: AxiosRequestConfig<TData>) => Promise<TData>) => {
   const { getToken, sessionId } = useAuth()
 
-  console.log(sessionId)
-
   return async (variables?: TVariables, config?: AxiosRequestConfig<TData>) => {
     return privateAgent
       .post<{ data: TData; errors: { message: string }[] }>(
@@ -24,6 +22,9 @@ export const useAxios = <TData, TVariables>(
         { query, variables },
         {
           ...config,
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
         }
       )
       .then((res) => {
