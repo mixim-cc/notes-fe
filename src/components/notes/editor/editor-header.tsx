@@ -13,10 +13,10 @@ export const EditorHeader = () => {
   const hasParentFolder = !!file?.parentId
 
   return (
-    <div className="flex h-12 items-center justify-between gap-4 border-b border-stroke-base px-4">
+    <div className="flex h-12  items-center justify-between gap-4 border-b border-stroke-base px-4">
       <div className="flex items-center gap-4">
         <IconButton size="sm" onClick={() => dispatch(toggleSidebarVisibility())}>
-          {!isSidebarVisible ? (
+          {isSidebarVisible ? (
             <PanelLeftClose className="text-shade-seondary h-5 w-5" />
           ) : (
             <PanelLeftOpen className="h-5 w-5 text-shade-secondary" />
