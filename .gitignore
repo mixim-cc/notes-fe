@@ -36,3 +36,5 @@ next-env.d.ts
 public/sw.js.map
 
 .env
+.idea
+.env
