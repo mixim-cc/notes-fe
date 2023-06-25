@@ -141,7 +141,7 @@ export const Oasis = () => {
               {currentMenu === "none" ? (
                 <div className="flex items-center">
                   <ChevronLeft className="absolute -left-4 hidden h-4 w-4 animate-pulse text-shade-secondary group-hover:block" />
-                  <motion.div animate={{ rotate: [0, 180] }}>
+                  <motion.div animate={{ rotate: [0, 90] }}>
                     <img
                       src="/images/logo-dark.svg"
                       alt="logo"
@@ -152,7 +152,7 @@ export const Oasis = () => {
                 </div>
               ) : (
                 <div className="flex items-center">
-                  <motion.div animate={{ rotate: [180, 0] }} className="flex items-center">
+                  <motion.div animate={{ rotate: [90, 0] }} className="flex items-center">
                     <img
                       src="/images/logo-dark.svg"
                       alt="logo"

@@ -22,10 +22,12 @@ export const NoteEditor = () => {
   return (
     <div
       key={selectedNote?.id}
-      className={cn("h-full w-full overflow-y-auto rounded-lg border border-stroke-base bg-base")}
+      className={cn("auto h-full w-full overflow-hidden rounded-lg border border-stroke-base bg-base")}
     >
       <>
-        <EditorHeader />
+        <div className="sticky top-0 z-50">
+          <EditorHeader />
+        </div>
         <div className="flex h-full w-full justify-center overflow-y-auto">
           <Editor
             data={{
