@@ -90,7 +90,7 @@ export const Oasis = () => {
             transition={{
               layout: { duration: 0.3 },
             }}
-            className="flex cursor-pointer flex-col gap-4  pb-6"
+            className="flex cursor-pointer flex-col gap-4 pb-6"
           >
             <div className="flex flex-col gap-2">
               <p className="text-xs font-medium text-shade-secondary">My Profile</p>
@@ -99,7 +99,7 @@ export const Oasis = () => {
                 <Avatar className="cursor-pointer">
                   <AvatarImage src={user.imageUrl} />
                 </Avatar>
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col ">
                   <p className="font-medium text-shade-secondary">{user.fullName}</p>
                   <p className="text-sm font-medium text-shade-subtle">
                     {user.primaryEmailAddress.emailAddress}
@@ -109,7 +109,7 @@ export const Oasis = () => {
             </div>
             <SignOutButton>
               <Button
-                className="border-red-300 bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600"
+                className="border border-red-300 bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600 dark:border-back dark:bg-red-700 dark:text-red-200"
                 variant="outline"
                 leftIcon={<LogOut className="h-4 w-4" />}
               >
