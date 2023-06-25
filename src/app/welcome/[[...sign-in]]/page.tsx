@@ -2,6 +2,7 @@
 import { SignInButton } from "@clerk/nextjs"
 
 import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function Page() {
   return (
@@ -89,7 +90,7 @@ export default function Page() {
           ></div>
 
           <div className="flex min-w-max items-center gap-x-3">
-            <SignInButton mode="modal">
+            {/* <SignInButton mode="modal">
               <Button
                 className="border-box-border flex w-full items-center rounded-full border px-4 py-3.5  focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-1"
                 variant="outline"
@@ -97,7 +98,8 @@ export default function Page() {
                 <img src="/images/google.svg" alt="google" />
                 Sign In With Google
               </Button>
-            </SignInButton>
+            </SignInButton> */}
+             <ThemeToggle />
           </div>
         </nav>
       </div>
