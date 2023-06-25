@@ -6,7 +6,7 @@ import { cn } from "@/utils/cn"
 import { SignOutButton, SignedIn, UserButton, useUser } from "@clerk/nextjs"
 import dayjs from "dayjs"
 import { motion } from "framer-motion"
-import { ChevronLeft, ChevronRight, FileText, Plus, Search, User } from "lucide-react"
+import { ChevronLeft, ChevronRight, FileText, LogOut, Plus, Search, User } from "lucide-react"
 
 import { ThemeToggle } from "../theme-toggle"
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar"
@@ -82,6 +82,43 @@ export const Oasis = () => {
           </motion.div>
         )}
 
+        {currentMenu === "avatar" && (
+          <motion.div
+            animate={{
+              scale: [1, 1, 1, 1, 1],
+            }}
+            transition={{
+              layout: { duration: 0.3 },
+            }}
+            className="flex cursor-pointer flex-col gap-4  pb-6"
+          >
+            <div className="flex flex-col gap-2">
+              <p className="text-xs font-medium text-shade-secondary">My Profile</p>
+
+              <div className="flex items-center gap-2 rounded-lg bg-back p-2">
+                <Avatar className="cursor-pointer">
+                  <AvatarImage src={user.imageUrl} />
+                </Avatar>
+                <div className="flex flex-col gap-1">
+                  <p className="font-medium text-shade-secondary">{user.fullName}</p>
+                  <p className="text-sm font-medium text-shade-subtle">
+                    {user.primaryEmailAddress.emailAddress}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <SignOutButton>
+              <Button
+                className="border-red-300 bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600"
+                variant="outline"
+                leftIcon={<LogOut className="h-4 w-4" />}
+              >
+                Log Out
+              </Button>
+            </SignOutButton>
+          </motion.div>
+        )}
+
         <motion.div layout className={"flex h-10 items-center justify-center gap-10 p-1"}>
           <motion.div
             layout
@@ -135,7 +172,7 @@ export const Oasis = () => {
             )}
           </motion.div>
 
-          {currentMenu === "menu" && (
+          {(currentMenu === "menu" || currentMenu === "avatar") && (
             <motion.div layout className="flex items-center justify-center gap-2">
               <IconButton variant="outline" size="lg" onClick={() => setCurrentMenu("add")}>
                 <Plus className="h-5 w-5" />
@@ -181,11 +218,12 @@ export const Oasis = () => {
           )}
 
           <motion.div layout>
-            <SignOutButton>
-              <Avatar className="cursor-pointer">
-                <AvatarImage src={user.imageUrl} />
-              </Avatar>
-            </SignOutButton>
+            <Avatar
+              className="cursor-pointer"
+              onClick={() => setCurrentMenu((prev) => (prev === "avatar" ? "none" : "avatar"))}
+            >
+              <AvatarImage src={user.imageUrl} />
+            </Avatar>
           </motion.div>
         </motion.div>
       </motion.div>
