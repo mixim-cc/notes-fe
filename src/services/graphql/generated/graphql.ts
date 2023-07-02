@@ -151,7 +151,9 @@ export type UpsertNoteMutationVariables = Exact<{
 
 export type UpsertNoteMutation = { note: { upsertNote?: { data?: Record<string, unknown> | null, title?: string | null, parentId?: string | null, id?: string | null, containerId?: string | null } | null } };
 
-export type GetNoteFolderStructureQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetNoteFolderStructureQueryVariables = Exact<{
+  search?: InputMaybe<Scalars['String']>;
+}>;
 
 
 export type GetNoteFolderStructureQuery = { note: { listAll?: Array<{ id?: string | null, title?: string | null, type?: NoteType | null, children?: Array<{ id?: string | null, title?: string | null, type?: NoteType | null } | null> | null } | null> | null } };
@@ -269,9 +271,9 @@ export const useUpsertNoteMutation = <
 useUpsertNoteMutation.getKey = () => ['upsertNote'];
 
 export const GetNoteFolderStructureDocument = `
-    query getNoteFolderStructure {
+    query getNoteFolderStructure($search: String) {
   note {
-    listAll {
+    listAll(search: $search) {
       id
       title
       type

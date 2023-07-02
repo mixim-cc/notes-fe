@@ -193,6 +193,9 @@ export const fileExplorerSlice = createSlice({
     setSelectedFile: (state, action: PayloadAction<{ id: string | null }>) => {
       state.selectedFile = action.payload.id
     },
+    setSelectedFileWithSyncedId: (state, action: PayloadAction<{ id: string | null }>) => {
+      state.selectedFile = state.structure.find((s) => s.synced_id === action.payload.id)?.id
+    },
 
     addFileContent: (state, action: PayloadAction<{ id: string; content: OutputData }>) => {
       const { id, content } = action.payload
@@ -227,6 +230,7 @@ export const {
   copyFile,
   loadInitalData,
   loadInitialContent,
+  setSelectedFileWithSyncedId,
   clear,
 } = fileExplorerSlice.actions
 

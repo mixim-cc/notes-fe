@@ -3,7 +3,15 @@
 
 import { get } from "http"
 import { useEffect, useState } from "react"
-import { clear } from "@/services/redux/reducers/file-explorer-reducer"
+import { useGetNoteFolderStructureQuery } from "@/services/graphql/generated/graphql"
+import {
+  addNewFile,
+  addNewFolder,
+  clear,
+  setSelectedFile,
+  setSelectedFileWithSyncedId,
+  triggerSync,
+} from "@/services/redux/reducers/file-explorer-reducer"
 import { cn } from "@/utils/cn"
 import { SignOutButton, SignedIn, UserButton, useUser } from "@clerk/nextjs"
 import dayjs from "dayjs"
@@ -35,6 +43,31 @@ export const Oasis = () => {
   const [currentMenu, setCurrentMenu] = useState<OasisMenu>("menu")
   const [currentTime, setCurrentTime] = useState(dayjs())
 
+  const { data } = useGetNoteFolderStructureQuery({ search: searchTerm }, { enabled: !!searchTerm })
+
+  const flatStrucuture = data?.note?.listAll?.reduce((output, item) => {
+    const newItem = {
+      id: item.id,
+      title: item.title,
+      type: item.type,
+    }
+
+    output.push(newItem)
+
+    if (item.children && item.children.length > 0) {
+      const children = item.children.map((child) => ({
+        id: child?.id,
+        title: child.title,
+        parentId: item.id,
+        type: child.type,
+      }))
+
+      output.push(...children)
+    }
+
+    return output
+  }, [])
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(dayjs())
@@ -65,17 +98,35 @@ export const Oasis = () => {
             }}
             className="flex cursor-pointer flex-col gap-2"
           >
-            {searchItems?.map((searchItem) => (
-              <div key={searchItem.id} className="flex gap-2 rounded-md p-2 hover:bg-base-hover ">
-                <FileText className="h-4 w-4" />
-                <div className="">
-                  <p className="text-xs text-shade-primary">{searchItem.title}</p>
-                  <p className="text-sm text-shade-primary">{searchItem.description}</p>
+            {flatStrucuture
+              ?.filter?.((f) => f.type === "FILE")
+              ?.map((searchItem) => (
+                <div
+                  key={searchItem.id}
+                  className="flex gap-2 rounded-md p-2 hover:bg-base-hover "
+                  onClick={() => {
+                    dispatch(setSelectedFileWithSyncedId({ id: searchItem?.id }))
+                    setCurrentMenu("menu")
+                    setSearchTerm("")
+                  }}
+                >
+                  <FileText className="h-4 w-4" />
+                  <div className="">
+                    <p className="text-xs text-shade-primary">{searchItem.title}</p>
+                    {/* <p className="text-sm text-shade-primary">{searchItem.description}</p> */}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
 
-            <div className="flex cursor-pointer items-center gap-2 rounded-md p-2 hover:bg-base-hover">
+            <div
+              className="flex cursor-pointer items-center gap-2 rounded-md p-2 hover:bg-base-hover"
+              onClick={() => {
+                dispatch(addNewFile({ parentId: null, title: searchTerm }))
+                dispatch(triggerSync())
+                setCurrentMenu("menu")
+                setSearchTerm("")
+              }}
+            >
               <IconButton size="xs" variant="outline">
                 <Plus className="h-3 w-3 text-shade-secondary" />
               </IconButton>
@@ -203,10 +254,24 @@ export const Oasis = () => {
               }}
               className="flex items-center justify-center gap-4"
             >
-              <Button variant="outline" leftIcon={<Plus className="h-4 w-4" />}>
+              <Button
+                variant="outline"
+                leftIcon={<Plus className="h-4 w-4" />}
+                onClick={() => {
+                  dispatch(addNewFile({ parentId: null, title: "Untitled" }))
+                  dispatch(triggerSync())
+                }}
+              >
                 New Draft
               </Button>
-              <Button variant="outline" leftIcon={<Plus className="h-4 w-4" />}>
+              <Button
+                variant="outline"
+                leftIcon={<Plus className="h-4 w-4" />}
+                onClick={() => {
+                  dispatch(addNewFolder({ parentId: null, title: "Untitled" }))
+                  dispatch(triggerSync())
+                }}
+              >
                 New Folder
               </Button>
             </motion.div>
@@ -248,5 +313,3 @@ const getGreeting = (currentTime: Date) => {
     return "Good Evening"
   }
 }
-
-

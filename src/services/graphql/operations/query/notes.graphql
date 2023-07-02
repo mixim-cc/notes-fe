@@ -1,6 +1,6 @@
-query getNoteFolderStructure {
+query getNoteFolderStructure($search: String) {
   note {
-    listAll{
+    listAll(search: $search){
       id
       title
       type
