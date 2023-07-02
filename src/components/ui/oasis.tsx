@@ -1,12 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
+import { get } from "http"
 import { useEffect, useState } from "react"
+import { clear } from "@/services/redux/reducers/file-explorer-reducer"
 import { cn } from "@/utils/cn"
 import { SignOutButton, SignedIn, UserButton, useUser } from "@clerk/nextjs"
 import dayjs from "dayjs"
 import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, FileText, LogOut, Plus, Search, User } from "lucide-react"
+import { useDispatch } from "react-redux"
 
 import { ThemeToggle } from "../theme-toggle"
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar"
@@ -25,15 +28,16 @@ const searchItems = [
 ]
 
 export const Oasis = () => {
+  const dispatch = useDispatch()
   const { user } = useUser()
 
   const [searchTerm, setSearchTerm] = useState("")
   const [currentMenu, setCurrentMenu] = useState<OasisMenu>("menu")
-  const [currentTime, setCurrentTime] = useState(dayjs().format("hh:mm A"))
+  const [currentTime, setCurrentTime] = useState(dayjs())
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTime(dayjs().format("hh:mm A"))
+      setCurrentTime(dayjs())
     }, 60000) // Update every minute (60,000 milliseconds)
 
     return () => {
@@ -107,7 +111,7 @@ export const Oasis = () => {
                 </div>
               </div>
             </div>
-            <SignOutButton>
+            <SignOutButton signOutCallback={async () => dispatch(clear())}>
               <Button
                 className="border border-red-300 bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600 dark:border-back dark:bg-red-700 dark:text-red-200"
                 variant="outline"
@@ -166,8 +170,12 @@ export const Oasis = () => {
             </motion.div>
             {currentMenu === "none" && (
               <motion.div layout className="flex flex-col">
-                <div className="text-xs font-normal text-shade-secondary">Good Morning, Anjil</div>
-                <div className="text-lg font-medium text-shade-primary">It&apos;s {currentTime}</div>
+                <div className="text-xs font-normal text-shade-secondary">
+                  {getGreeting(currentTime.toDate())}, {user.firstName}
+                </div>
+                <div className="text-lg font-medium text-shade-primary">
+                  It&apos;s {currentTime.format("hh:mm A")}
+                </div>
               </motion.div>
             )}
           </motion.div>
@@ -229,4 +237,14 @@ export const Oasis = () => {
       </motion.div>
     </div>
   )
+}
+
+const getGreeting = (currentTime: Date) => {
+  if (currentTime.getHours() < 12) {
+    return "Good Morning"
+  } else if (currentTime.getHours() < 18) {
+    return "Good Afternoon"
+  } else {
+    return "Good Evening"
+  }
 }

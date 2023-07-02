@@ -19,6 +19,7 @@ import Raw from "@editorjs/raw"
 import Table from "@editorjs/table"
 import Warning from "@editorjs/warning"
 import axios from "axios"
+import Cookie from "js-cookie"
 
 export const EDITOR_TOOLS: ToolConfig = {
   code: Code,
@@ -71,7 +72,12 @@ export const EDITOR_TOOLS: ToolConfig = {
             formData.append("file", file)
             const response = await axios.put(
               `${process.env["NEXT_PUBLIC_API_URL"]}/file/01GZTJFBMB91JT6CTXKH3JZNW1`,
-              formData
+              formData,
+              {
+                headers: {
+                  Authorization: `Bearer ${Cookie.get("__session")}`,
+                },
+              }
             )
 
             console.log(response.data)

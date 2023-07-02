@@ -1,11 +1,13 @@
 "use client"
 
+import { get } from "http"
 import { useEffect, useState } from "react"
 import dynamic from "next/dynamic"
 import { OutputData } from "@editorjs/editorjs"
 import { MoveHorizontal } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import TextareaAutosize from "react-textarea-autosize"
+import { useDeepCompareEffect } from "react-use"
 
 const SimpleEditor = dynamic(() => import("./simple-editor").then((mod) => mod.SimpleEditor), {
   ssr: false,
@@ -18,11 +20,12 @@ type EditorData = {
 
 interface EditorProps {
   data?: EditorData
+  id?: string
   onChange?: (data?: EditorData) => void
   holder: string
 }
 
-export const Editor = ({ data, onChange, holder }: EditorProps) => {
+export const Editor = ({ data, onChange, holder, id }: EditorProps) => {
   const [editorWidth, setEditorWidth] = useState<"default" | "full">("default")
   const { register, control, watch, reset, getValues } = useForm<EditorData>({
     defaultValues: {
@@ -41,12 +44,14 @@ export const Editor = ({ data, onChange, holder }: EditorProps) => {
     return () => unsubscribe()
   }, [onChange, watch])
 
-  useEffect(() => {
-    reset({
-      ...getValues(),
-      title: data?.title,
-    })
-  }, [data?.title, getValues, reset])
+  useDeepCompareEffect(() => {
+    if (data.content)
+      reset({
+        ...getValues(),
+        content: data?.content,
+        title: data?.title,
+      })
+  }, [data?.title, data?.content, reset, holder])
 
   return (
     <div

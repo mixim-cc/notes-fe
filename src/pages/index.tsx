@@ -6,7 +6,6 @@ import { loadInitalData } from "@/services/redux/reducers/file-explorer-reducer"
 import { useAppDispatch, useAppSelector } from "@/services/redux/store"
 import { motion } from "framer-motion"
 import { Loader2 } from "lucide-react"
-import { useDispatch } from "react-redux"
 
 import { Oasis } from "@/components/ui/oasis"
 import { NoteEditor } from "@/components/notes/editor"
@@ -15,10 +14,10 @@ import { NoteSidebar } from "@/components/notes/sidebar"
 export default function Home() {
   const dispatch = useAppDispatch()
   const { data, isFetching } = useGetNoteFolderStructureQuery()
-  const { selectedFile } = useAppSelector((state) => state.fileExplorerReducer)
+  const { selectedFile, structure } = useAppSelector((state) => state.fileExplorerReducer)
 
   useEffect(() => {
-    if (data?.note?.listAll) dispatch(loadInitalData({ data: data?.note?.listAll }))
+    if (data?.note?.listAll && !structure.length) dispatch(loadInitalData({ data: data?.note?.listAll }))
   }, [data?.note?.listAll, dispatch, isFetching])
 
   if (isFetching && !selectedFile) {

@@ -1,5 +1,6 @@
 import { addNewFile, addNewFolder, triggerSync } from "@/services/redux/reducers/file-explorer-reducer"
 import { useAppDispatch } from "@/services/redux/store"
+import { syncAfterDelay } from "@/services/redux/utils/syncAfterDelay"
 import { FilePlus, FolderPlus } from "lucide-react"
 
 import { IconButton } from "@/components/ui/icon-button"
@@ -13,7 +14,7 @@ export const SidebarAdd = () => {
         variant="ghost"
         onClick={() => {
           dispatch(addNewFile({ parentId: null, title: "Untitled" }))
-          dispatch(triggerSync())
+          syncAfterDelay()
         }}
       >
         <FilePlus className="text-shade-seondary h-5 w-5" />
@@ -23,7 +24,7 @@ export const SidebarAdd = () => {
         variant="ghost"
         onClick={() => {
           dispatch(addNewFolder({ parentId: null, title: "Untitled" }))
-          dispatch(triggerSync())
+          syncAfterDelay()
         }}
       >
         <FolderPlus className="text-shade-seondary h-5 w-5" />
