@@ -13,8 +13,8 @@ export const SidebarAdd = () => {
       <IconButton
         variant="ghost"
         onClick={() => {
-          dispatch(addNewFile({ parentId: null, title: "Untitled" }))
-          syncAfterDelay()
+          dispatch(addNewFile({ parentId: null, title: "Untitled", }))
+          dispatch(triggerSync())
         }}
       >
         <FilePlus className="text-shade-seondary h-5 w-5" />
@@ -24,7 +24,7 @@ export const SidebarAdd = () => {
         variant="ghost"
         onClick={() => {
           dispatch(addNewFolder({ parentId: null, title: "Untitled" }))
-          syncAfterDelay()
+          dispatch(triggerSync())
         }}
       >
         <FolderPlus className="text-shade-seondary h-5 w-5" />

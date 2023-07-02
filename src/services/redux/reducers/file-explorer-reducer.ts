@@ -114,7 +114,7 @@ export const fileExplorerSlice = createSlice({
           title,
           parentId,
           type: "FILE",
-          content: null,
+          content: { blocks: [] },
           synced: false,
           synced_id: null,
         },
