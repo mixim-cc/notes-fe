@@ -38,11 +38,11 @@ export const fileExplorerSlice = createSlice({
   initialState,
   reducers: {
     loadInitialContent: (state, action: PayloadAction<{ id: string; content: OutputData | null }>) => {
-      state.structure.map((s) => {
+      state.structure = state.structure.map((s) => {
         if (s.id === action.payload.id) {
           return {
             ...s,
-            content: s.content,
+            content: action.payload.content,
           }
         } else {
           return s
@@ -59,7 +59,7 @@ export const fileExplorerSlice = createSlice({
 
       const flatStrucuture = localStructure.reduce((output, item) => {
         if (state.structure.some((s) => s.synced_id === item.synced_id && s.synced)) {
-          return
+          return output
         }
 
         const newItem = {

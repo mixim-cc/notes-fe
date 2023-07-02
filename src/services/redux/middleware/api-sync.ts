@@ -18,7 +18,7 @@ const useSyncMiddleware: Middleware<{}, RootState> =
     if (action.type === "file-explorer/triggerSync") {
       const responses = await Promise.all(
         getState().fileExplorerReducer.structure.map(async (structure) => {
-          if (!structure.synced) {
+          if (!structure.synced && structure.content) {
             const response = await apiClient<UpsertNoteMutation, UpsertNoteMutationVariables>(
               UpsertNoteDocument
             )({
