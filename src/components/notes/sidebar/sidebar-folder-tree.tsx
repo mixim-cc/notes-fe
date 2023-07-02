@@ -8,7 +8,7 @@ export const SidebarFolderTree = () => {
   const { structure, selectedFile } = useAppSelector((state) => state.fileExplorerReducer)
 
   const rootFolders = structure?.filter(
-    (struct) => !struct.parentId && struct.type === "FOLDER" && struct.title !== "Journal"
+    (struct) => !struct?.parentId && struct?.type === "FOLDER" && struct.title !== "Journal"
   )
 
   return (

@@ -90,13 +90,17 @@ const Folder = ({ folderId, folderTitle }: FolderProps) => {
           isEditing={isEditing}
           setIsEditing={setIsEditing}
           value={folderTitle}
-          onChange={(e) => dispatch(editFileTitle({ id: folderId, title: e.target.value }))}
+          onChange={(e) => {
+            dispatch(editFileTitle({ id: folderId, title: e.target.value }))
+            syncAfterDelay()
+          }}
           className="w-full resize-none appearance-none overflow-hidden bg-transparent py-2 text-sm text-shade-primary focus:outline-none"
         />
         <FilePlus
           onClick={(e) => {
             e.preventDefault()
             dispatch(addNewFile({ parentId: folderId, title: "Untitled File" }))
+            dispatch(triggerSync())
           }}
           className="hidden h-4 w-4 shrink-0 cursor-pointer hover:text-shade-primary group-hover:block"
         />

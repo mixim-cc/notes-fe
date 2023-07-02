@@ -1,8 +1,19 @@
+import * as process from "process"
 import type { CodegenConfig } from "@graphql-codegen/cli"
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: "https://mygpt-be.onrender.com/query",
+  schema: [
+    {
+      [`https://mygpt-be.onrender.com/query` as string]: {
+        headers: {
+          schema: "true",
+          Authorization:
+            "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Imluc18yUmVQdXZSZENIQnpsTG5lVGowTERLUWs0WnciLCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJleHAiOjE2ODgzMDU5MjQsImlhdCI6MTY4ODMwNTg2NCwiaXNzIjoiaHR0cHM6Ly9ib2xkLWNhdHRsZS03MS5jbGVyay5hY2NvdW50cy5kZXYiLCJuYmYiOjE2ODgzMDU4NTQsInNpZCI6InNlc3NfMlMxQlRDYzZPTmoxSkV2OEwzQ3E3cjdDaktlIiwic3ViIjoidXNlcl8yUmVUSnBaeGFzRW5Pc2dPRXVYclRuTUVTc0kifQ.sd2Tg3SeXfPJpdM8asp7gpjpZ8jHqveYMDokFA4_ZCodePRceLBKb_4ydiaHnkMabDXoqMsfdnqAiOb-t-zcMJl7mB0zEr2Zv0Mc_CHJH0KjOo3nP_uWGVRBH9kEbW4enIUwJ4Td3mMpEqvTvJIFdxikOUOqBL1M0biwAMD99o9kZr33GNhiyt3s1r0dAjr4kbGIl8OhJEL2UqfQamDi_D8Q3h75lmL3v7Lszg196qmJFXRPBr3CROJkBCXPcBNjSDYQlAs3jPlFPyKXfzzLgINayY1IWYLzcvKUtNC1WVQB_ghTTJqfgjCDsVer2n6rRN4utWl34N2bnrl8yglctw",
+        },
+      },
+    },
+  ],
   documents: "src/services/graphql/operations/**/*.graphql",
   generates: {
     "src/services/graphql/generated/graphql.ts": {
