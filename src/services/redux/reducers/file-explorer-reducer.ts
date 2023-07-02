@@ -1,3 +1,4 @@
+import { NoteType } from "@/services/graphql/generated/graphql"
 import { OutputData } from "@editorjs/editorjs"
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { nanoid } from "nanoid"
@@ -25,10 +26,74 @@ const initialState: FileExplorerState = {
   isSidebarVisible: true,
 }
 
+type InitalLoadData = {
+  id?: string
+  title?: string
+  type?: NoteType
+  children?: Array<{ id?: string; title?: string; type?: NoteType }>
+}
+
 export const fileExplorerSlice = createSlice({
   name: "file-explorer",
   initialState,
   reducers: {
+    loadInitialContent: (state, action: PayloadAction<{ id: string; content: OutputData | null }>) => {
+      state.structure.map((s) => {
+        if (s.id === action.payload.id) {
+          return {
+            ...s,
+            content: s.content,
+          }
+        } else {
+          return s
+        }
+      })
+    },
+
+    loadInitalData: (state, action: PayloadAction<{ data: InitalLoadData[] }>) => {
+      const localStructure = action.payload.data.map((d) => ({
+        ...d,
+        synced_id: d.id,
+        id: nanoid(),
+      }))
+
+      const flatStrucuture = localStructure.reduce((output, item) => {
+        if (state.structure.some((s) => s.synced_id === item.synced_id && s.synced)) {
+          return
+        }
+
+        const newItem = {
+          id: item.id,
+          title: item.title,
+          parentId: null,
+          type: item.type,
+          content: null,
+          synced: true,
+          synced_id: item.synced_id,
+        }
+
+        output.push(newItem)
+
+        if (item.children && item.children.length > 0) {
+          const children = item.children.map((child) => ({
+            id: nanoid(),
+            title: child.title,
+            parentId: item.id,
+            type: child.type,
+            synced: true,
+            content: null,
+            synced_id: child.id,
+          }))
+
+          output.push(...children)
+        }
+
+        return output
+      }, [] as FileStructure[])
+      state.structure = flatStrucuture
+      state.selectedFile = flatStrucuture?.filter((f) => f.type === "FILE")[0]?.id
+    },
+
     toggleSidebarVisibility: (state) => {
       state.isSidebarVisible = !state.isSidebarVisible
     },
@@ -139,6 +204,11 @@ export const fileExplorerSlice = createSlice({
         return obj
       })
     },
+
+    clear: (state) => {
+      state.structure = initialState.structure
+      state.selectedFile = initialState.selectedFile
+    },
   },
 })
 
@@ -155,6 +225,9 @@ export const {
   deleteFolder,
   deleteFile,
   copyFile,
+  loadInitalData,
+  loadInitialContent,
+  clear,
 } = fileExplorerSlice.actions
 
 export default fileExplorerSlice.reducer

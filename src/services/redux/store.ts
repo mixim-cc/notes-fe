@@ -4,7 +4,7 @@ import { useDispatch, useSelector, type TypedUseSelectorHook } from "react-redux
 import { persistReducer } from "redux-persist"
 import defaultStorage from "redux-persist/lib/storage"
 
-import syncMiddleware from "./middleware/api-sync"
+import useSync from "./middleware/api-sync"
 import fileExplorerReducer from "./reducers/file-explorer-reducer"
 
 const persistConfig = {
@@ -23,7 +23,7 @@ export type RootState = ReturnType<typeof rootReducer>
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: [syncMiddleware],
+  middleware: [useSync],
 })
 
 export type AppDispatch = typeof store.dispatch

@@ -1,4 +1,4 @@
-import { addNewFile, addNewFolder } from "@/services/redux/reducers/file-explorer-reducer"
+import { addNewFile, addNewFolder, triggerSync } from "@/services/redux/reducers/file-explorer-reducer"
 import { useAppDispatch } from "@/services/redux/store"
 import { FilePlus, FolderPlus } from "lucide-react"
 
@@ -13,18 +13,20 @@ export const SidebarAdd = () => {
         variant="ghost"
         onClick={() => {
           dispatch(addNewFile({ parentId: null, title: "Untitled" }))
+          dispatch(triggerSync())
         }}
       >
-        <FilePlus className="h-5 w-5 text-shade-seondary" />
+        <FilePlus className="text-shade-seondary h-5 w-5" />
       </IconButton>
 
       <IconButton
         variant="ghost"
         onClick={() => {
           dispatch(addNewFolder({ parentId: null, title: "Untitled" }))
+          dispatch(triggerSync())
         }}
       >
-        <FolderPlus className="h-5 w-5 text-shade-seondary" />
+        <FolderPlus className="text-shade-seondary h-5 w-5" />
       </IconButton>
     </div>
   )
