@@ -13,7 +13,9 @@ export const EditorHeader = () => {
   const hasParentFolder = !!file?.parentId
 
   return (
-<div className="flex h-12 items-center justify-between gap-4 border-b border-stroke-base bg-base px-4">      <div className="flex items-center gap-4">
+    <div className="flex h-12 items-center justify-between gap-4 border-b border-stroke-base bg-base px-4">
+      {" "}
+      <div className="flex items-center gap-4">
         <IconButton size="sm" onClick={() => dispatch(toggleSidebarVisibility())}>
           {isSidebarVisible ? (
             <PanelLeftClose className="text-shade-seondary h-5 w-5" />
@@ -26,7 +28,7 @@ export const EditorHeader = () => {
 
         <div className="flex items-center gap-3">
           {hasParentFolder ? (
-            <>
+            <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
                 <FolderIcon className="text-shade-seondary h-5 w-5" />
                 <p className="text-sm text-shade-secondary">
@@ -34,7 +36,7 @@ export const EditorHeader = () => {
                 </p>
               </div>
               <p className="text-sm text-shade-secondary">/</p>
-            </>
+            </div>
           ) : null}
 
           <p className="text-sm text-shade-primary">{file?.title}</p>

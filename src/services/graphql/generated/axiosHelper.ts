@@ -1,7 +1,7 @@
-import * as process from "process"
 import { getAPIUrl } from "@/utils/getAPIUrlFromLocalStorage"
 import { useAuth } from "@clerk/nextjs"
 import axios, { AxiosRequestConfig } from "axios"
+import Cookie from "js-cookie"
 
 axios.defaults.withCredentials = true
 
@@ -43,7 +43,16 @@ export const apiClient =
   ): ((variables?: TVariables, config?: AxiosRequestConfig<TData>) => Promise<TData>) =>
   async (variables?: TVariables, config?: AxiosRequestConfig<TData>) =>
     privateAgent
-      .post<{ data: TData; errors: { message: string }[] }>("/query", { query, variables }, config)
+      .post<{ data: TData; errors: { message: string }[] }>(
+        "/query",
+        { query, variables },
+        {
+          ...config,
+          headers: {
+            Authorization: `Bearer ${Cookie.get("__session")}`,
+          },
+        }
+      )
       .then((res) => {
         if (!res.data.data || res.data.errors) {
           return { error: res.data.errors } as TData

@@ -6,6 +6,7 @@ import {
   deleteFolder,
   editFileTitle,
   setSelectedFile,
+  triggerSync,
 } from "@/services/redux/reducers/file-explorer-reducer"
 import { useAppSelector } from "@/services/redux/store"
 import { cn } from "@/utils/cn"
@@ -44,12 +45,15 @@ export const EditorFolder = ({ files, folderId, folderTitle }: EditorFolderProps
             }}
             onTitleChange={(e) => {
               dispatch(editFileTitle({ id: file.id, title: e.target.value }))
+              dispatch(triggerSync())
             }}
             onCopy={() => {
               dispatch(copyFile(file))
+              dispatch(triggerSync())
             }}
             onDelete={() => {
               dispatch(deleteFile({ id: file.id, parentId: folderId }))
+              dispatch(triggerSync())
             }}
           />
         ))}

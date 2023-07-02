@@ -9,7 +9,7 @@ import { Middleware } from "redux"
 import { FileStructure, updateEntireTree } from "../reducers/file-explorer-reducer"
 import { RootState } from "../store"
 
-const syncMiddleware: Middleware<{}, RootState> =
+const useSyncMiddleware: Middleware<{}, RootState> =
   ({ getState, dispatch }) =>
   (next) =>
   async (action) => {
@@ -50,4 +50,4 @@ const syncMiddleware: Middleware<{}, RootState> =
     return result
   }
 
-export default syncMiddleware
+export default useSyncMiddleware

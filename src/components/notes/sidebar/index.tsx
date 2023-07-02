@@ -21,6 +21,8 @@ export const NoteSidebar = () => {
 
   const individualFiles = structure?.filter((f) => !f?.parentId && f.type === "FILE")
 
+  
+
   return (
     <AnimatePresence>
       {isSidebarVisible && (
