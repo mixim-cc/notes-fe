@@ -3,6 +3,7 @@ import Providers from "@/providers/provider"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { fontSans } from "@/utils/fonts"
 import { ClerkProvider } from "@clerk/nextjs"
+import { Analytics } from "@vercel/analytics/react"
 
 // export const metadata = {
 //   title: "Drafts",
@@ -21,6 +22,7 @@ export default function App({ Component, pageProps }) {
         <Providers>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             <Component {...pageProps} />
+            <Analytics />
           </ThemeProvider>
         </Providers>
       </ClerkProvider>
