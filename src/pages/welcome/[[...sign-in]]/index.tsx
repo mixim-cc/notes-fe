@@ -12,8 +12,8 @@ export default function Page() {
       </head>
 
       <div className="mx-auto flex max-w-7xl flex-col overflow-hidden ">
-        <div className="bg-body/20 backdrop-brightness-20 z-10 py-4 backdrop-blur-sm">
-          <nav className="relative flex w-full justify-between gap-6">
+        <div className="bg-body/20 backdrop-brightness-20 z-10 p-4 backdrop-blur-sm">
+          <nav className="relative flex w-full justify-between gap-6 ">
             <div className="relative inline-flex min-w-max">
               <a href="/" className="relative flex items-center gap-3">
                 <svg
@@ -109,12 +109,12 @@ export default function Page() {
           </nav>
         </div>
 
-        <section className="relative pt-32 lg:pt-16">
+        <section className="relative p-4 pt-32 lg:pt-16">
           <div className="flex flex-col gap-10 lg:flex-row lg:gap-12">
             <div className="mx-auto flex flex-col items-center text-center lg:flex-1 lg:items-start lg:py-7 xl:py-8">
               <div className="text-heading-3 dark:ring-primary border-box-border hover:border-border relative mx-auto mb-4 rounded-full border px-3 py-1 text-sm leading-6">
                 <a
-                  href="https://instagram.com"
+                  href="https://youtu.be/cY_0OmK3gaU"
                   target="_blank"
                   className="text-heading-1 font-semibold"
                   rel="noreferrer"
@@ -146,12 +146,12 @@ export default function Page() {
                 </SignInButton>
               </div>
 
-              <div className="relative mx-auto w-full max-w-7xl items-center py-12">
+              <div className="relative mx-auto w-full max-w-7xl items-center p-8 py-12">
                 <div className="bg-box-bg rounded-3xl p-4">
                   <img
                     alt=""
                     className="relative w-full rounded object-cover shadow-2xl lg:rounded-2xl"
-                    src="/images/Notes.png"
+                    src="/images/MiximDraftScreenshot.png"
                   />
                 </div>
               </div>
@@ -160,7 +160,7 @@ export default function Page() {
         </section>
 
         <section id="services">
-          <div className="md:sapce-y-24 mt-24 space-y-10">
+          <div className="md:sapce-y-24 mt-24 space-y-10 p-4">
             <div className="mx-auto max-w-3xl space-y-4 text-center">
               <div className="text-heading-1 text-2xl font-semibold sm:text-3xl md:text-4xl">
                 Unveiling Our Powerful Features
