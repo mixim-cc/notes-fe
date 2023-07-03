@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }) {
     <main className={fontSans.className}>
       <ClerkProvider>
         <Providers>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             <Component {...pageProps} />
           </ThemeProvider>
         </Providers>
