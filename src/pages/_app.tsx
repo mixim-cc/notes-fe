@@ -1,9 +1,13 @@
 import "@/styles/globals.css"
+import { type } from "os"
+import { useEffect } from "react"
 import Providers from "@/providers/provider"
 import { ThemeProvider } from "@/providers/theme-provider"
+import { triggerSync } from "@/services/redux/reducers/file-explorer-reducer"
 import { fontSans } from "@/utils/fonts"
 import { ClerkProvider } from "@clerk/nextjs"
 import { Analytics } from "@vercel/analytics/react"
+import { useDispatch } from "react-redux"
 
 // export const metadata = {
 //   title: "Drafts",
@@ -16,6 +20,8 @@ import { Analytics } from "@vercel/analytics/react"
 // }
 
 export default function App({ Component, pageProps }) {
+  
+
   return (
     <main className={fontSans.className}>
       <ClerkProvider>

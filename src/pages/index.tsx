@@ -2,7 +2,11 @@
 
 import { useEffect } from "react"
 import { useGetNoteFolderStructureQuery } from "@/services/graphql/generated/graphql"
-import { loadInitalData } from "@/services/redux/reducers/file-explorer-reducer"
+import {
+  loadInitalData,
+  setNetworkStatus,
+  triggerSync,
+} from "@/services/redux/reducers/file-explorer-reducer"
 import { useAppDispatch, useAppSelector } from "@/services/redux/store"
 import { motion } from "framer-motion"
 import { Loader2 } from "lucide-react"
@@ -19,6 +23,30 @@ export default function Home() {
   useEffect(() => {
     if (data?.note?.listAll && !structure.length) dispatch(loadInitalData({ data: data?.note?.listAll }))
   }, [data?.note?.listAll, dispatch, isFetching])
+
+  useEffect(() => {
+    const onlineHandler = () => {
+      dispatch(setNetworkStatus({ status: "online" }))
+      dispatch(triggerSync())
+    }
+
+    const offlineHandler = () => {
+      dispatch(setNetworkStatus({ status: "offline" }))
+      dispatch(triggerSync())
+    }
+
+    if (typeof window !== undefined) {
+      window.addEventListener("online", onlineHandler)
+      window.addEventListener("offline", offlineHandler)
+    }
+
+    return () => {
+      if (typeof window !== undefined) {
+        window.removeEventListener("online", onlineHandler)
+        window.removeEventListener("offline", offlineHandler)
+      }
+    }
+  }, [])
 
   if (isFetching && !selectedFile) {
     return (

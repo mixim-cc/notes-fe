@@ -38,3 +38,7 @@ public/sw.js.map
 .env
 .idea
 .env
+
+**/public/sw*
+**/public/workbox-*
+**/public/fallback*
