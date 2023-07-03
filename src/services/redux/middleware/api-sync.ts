@@ -29,7 +29,8 @@ const useSyncMiddleware: Middleware<{}, RootState> =
                 id: structure.synced_id || undefined,
                 data: {
                   title: structure.title,
-                  parentId: structure.parentId,
+                  parentId: getState().fileExplorerReducer.structure.find((f) => f.id === structure.parentId)
+                    .synced_id,
                   data: structure.content as unknown as Record<string, string>,
                 },
               })
@@ -48,8 +49,6 @@ const useSyncMiddleware: Middleware<{}, RootState> =
           return { fe_data: structure }
         })
       )
-
-      console.log(responses)
 
       const updatedStructure = responses.map((response) => {
         const res = response?.data?.note

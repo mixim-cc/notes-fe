@@ -25,7 +25,7 @@ export const NoteSidebar = () => {
 
   const individualFiles = structure?.filter((f) => !f?.parentId && f?.type === "FILE")
   const journalFolderId = structure?.find((f) => f?.title === "Journal")?.id
-const journalFiles = structure?.filter((f) => f?.parentId === journalFolderId && f?.type === "FILE")
+  const journalFiles = structure?.filter((f) => f?.parentId === journalFolderId && f?.type === "FILE")
 
   return (
     <AnimatePresence>
