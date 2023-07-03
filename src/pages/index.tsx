@@ -30,6 +30,10 @@ export default function Home() {
 
   return (
     <div>
+      <head>
+        <title>Drafts</title>
+      </head>
+
       <motion.div layout className="flex h-screen gap-4 bg-base-hover p-4">
         <NoteSidebar />
         <NoteEditor />
