@@ -160,47 +160,118 @@ export default function Page() {
         </section>
 
         <section id="services">
-          <div className="md:sapce-y-12 space-y-10">
+          <div className="md:sapce-y-24 mt-24 space-y-10">
             <div className="mx-auto max-w-3xl space-y-4 text-center">
-              <div className="text-heading-1 text-2xl font-semibold sm:text-3xl md:text-4xl">Features</div>
+              <div className="text-heading-1 text-2xl font-semibold sm:text-3xl md:text-4xl">
+                Unveiling Our Powerful Features
+              </div>
               <div>
-                This project is an attempt to provide seemless user experience, with features like auth,
-                drafts, offile application etc.
+                Experience the perfect harmony of simplicity and functionality with Drafts innovative
+                features.
               </div>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-              <div className="border-box-border bg-box-bg shadow-box-shadow relative overflow-hidden rounded-3xl border p-5 shadow-lg sm:p-6 lg:p-8">
-                <div className="text-heading-1 relative w-max rounded-xl bg-gray-300 p-3 dark:bg-gray-950">
-                  tt
-                </div>
+              <div className="border-box-border bg-box-bg shadow-box-shadow relative overflow-hidden rounded-3xl border p-5 shadow-lg dark:border-gray-600 sm:p-6 lg:p-8">
+                {/* <div className="relative p-3 bg-gray-100 text-heading-1 w-max rounded-xl dark:bg-gray-900">
+                  <svg
+                    width="80"
+                    height="80"
+                    viewBox="0 0 80 80"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M45.1278 12.4948C49.0214 7.45823 56.4524 6.98459 60.9538 11.4861C65.4548 15.987 64.9819 23.417 59.9466 27.3109L35.9375 45.8781C35.4853 46.2278 34.8436 46.187 34.4393 45.7827L26.6612 38.0046C26.2569 37.6003 26.216 36.9586 26.5657 36.5063L45.1278 12.4948Z"
+                      stroke="#C2CCDE"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M39.0328 41.8909L30.5475 33.4056"
+                      stroke="#C2CCDE"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M26.7291 38.0725L34.3658 45.7092C34.6309 45.9743 34.7459 46.3543 34.6724 46.7218L33.7797 51.1856C33.094 54.6139 30.6036 57.4009 27.2738 58.4665L13.1699 62.9797C12.1172 63.3166 10.9644 63.0371 10.1828 62.2555C9.40117 61.4739 9.12169 60.3211 9.45858 59.2684L13.9718 45.1645C15.0374 41.8347 17.8244 39.3443 21.2527 38.6586L25.7165 37.7659C26.084 37.6924 26.464 37.8074 26.7291 38.0725Z"
+                      stroke="#C2CCDE"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M10.1827 62.2555L21.2136 51.2246"
+                      stroke="#C2CCDE"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M20.5925 48.9065C20.1143 50.6911 21.7473 52.324 23.5319 51.8459V51.8459C25.3165 51.3677 25.9142 49.137 24.6078 47.8306V47.8306C23.3014 46.5242 21.0707 47.1219 20.5925 48.9065V48.9065Z"
+                      stroke="#C2CCDE"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M8.55566 72H21.5641C23.4206 72 25.2197 71.3562 26.6548 70.1784L30.4354 67.0754C31.197 66.4503 32.2941 66.4503 33.0557 67.0754L36.8408 70.1821C38.2729 71.3576 40.0683 72 41.921 72H42.6311C45.5851 72 48.221 70.1452 49.2184 67.3646L55.2676 50.5C55.4487 49.9952 56.1626 49.9952 56.3437 50.5L61.5234 64.9404C63.0424 69.1751 67.0568 72 71.5557 72H72.5557"
+                      stroke="#C2CCDE"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div> */}
                 <div className="relative mt-6 space-y-4">
-                  <h2 className="text-heading-2 text-lg font-semibold md:text-xl">Offine First</h2>
+                  <h2 className="text-heading-2 text-lg font-semibold md:text-xl"> Effortless Note-taking</h2>
                   <div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti qui soluta cupiditate
+                    Experience the joy of capturing your thoughts effortlessly with our intuitive block-based
+                    note-taking system. From jotting down ideas to organizing your daily tasks, Drafts makes
+                    it seamless and enjoyable.
                   </div>
                 </div>
                 <span className="bg-primary/10 absolute -bottom-16 -right-16 aspect-square w-32 rounded-full"></span>
               </div>
-              <div className="border-box-border bg-box-bg shadow-box-shadow relative overflow-hidden rounded-3xl border p-5 shadow-lg sm:p-6 lg:p-8">
-                <div className="text-heading-1 relative w-max rounded-xl bg-gray-300 p-3 dark:bg-gray-950">
-                  tt
-                </div>
+              <div className="border-box-border bg-box-bg shadow-box-shadow relative overflow-hidden rounded-3xl border p-5 shadow-lg dark:border-gray-600 sm:p-6 lg:p-8">
+                {/* <div className="relative p-3 bg-gray-300 text-heading-1 w-max rounded-xl dark:bg-gray-600">
+                  <svg
+                    fill="none"
+                    width="80"
+                    height="80"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z"
+                    ></path>
+                  </svg>
+                </div> */}
                 <div className="relative mt-6 space-y-4">
-                  <h2 className="text-heading-2 text-lg font-semibold md:text-xl">Enhanced UX</h2>
+                  <h2 className="text-heading-2 text-lg font-semibold md:text-xl">
+                    Offline Accessibility with PWA
+                  </h2>
                   <div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti qui soluta cupiditate
+                    Stay productive even when you are offline with Drafts powerful Progressive Web App (PWA)
+                    functionality. Access your notes, create new drafts, and edit existing ones seamlessly,
+                    anytime and anywhere, without the need for an internet connection.
                   </div>
                 </div>
                 <span className="bg-primary/10 absolute -bottom-16 -right-16 aspect-square w-32 rounded-full"></span>
               </div>
-              <div className="border-box-border bg-box-bg shadow-box-shadow relative overflow-hidden rounded-3xl border p-5 shadow-lg sm:p-6 lg:p-8">
-                <div className="text-heading-1 relative w-max rounded-xl bg-gray-300 p-3 dark:bg-gray-950">
+              <div className="border-box-border bg-box-bg shadow-box-shadow relative overflow-hidden rounded-3xl border p-5 shadow-lg dark:border-gray-600 sm:p-6 lg:p-8">
+                {/* <div className="relative p-3 bg-gray-300 text-heading-1 w-max rounded-xl dark:bg-gray-950">
                   tt
-                </div>
+                </div> */}
                 <div className="relative mt-6 space-y-4">
-                  <h2 className="text-heading-2 text-lg font-semibold md:text-xl">Free for Everyone</h2>
+                  <h2 className="text-heading-2 text-lg font-semibold md:text-xl">
+                    Free to Use and Grow with You
+                  </h2>
                   <div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti qui soluta cupiditate
+                    Experience the freedom of using Drafts at no cost, with unlimited access to our core
+                    features. As your note-taking needs evolve, unlock additional premium features that cater
+                    to your specific requirements. Drafts grows with you, ensuring you have the tools you need
+                    at every stage of your personal and professional journey.
                   </div>
                 </div>
                 <span className="bg-primary/10 absolute -bottom-16 -right-16 aspect-square w-32 rounded-full"></span>
@@ -208,7 +279,7 @@ export default function Page() {
             </div>
           </div>
         </section>
-        <div className="w-full border-t border-gray-200 bg-white py-12 text-center ">
+        <div className="mt-12 w-full border-t py-12 text-center dark:border-gray-600 ">
           <p className="text-gray-500">
             Project by:{" "}
             <a
