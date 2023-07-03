@@ -19,7 +19,7 @@ export const NoteEditor = () => {
 
   const selectedNote = structure.find((files) => files.id === selectedFile)
 
-  const { data: noteData, isLoading } = useGetNoteQuery(
+  const { data: noteData, isInitialLoading } = useGetNoteQuery(
     { id: selectedNote?.synced_id },
     { enabled: !!selectedNote?.synced_id }
   )
@@ -35,6 +35,8 @@ export const NoteEditor = () => {
     }
   }, [noteData, dispatch, selectedNote?.id])
 
+  console.log(isInitialLoading)
+
   return (
     <div
       key={selectedNote?.id}
@@ -43,7 +45,7 @@ export const NoteEditor = () => {
       <div className="sticky top-0 z-50">
         <EditorHeader />
       </div>
-      {isLoading ? (
+      {isInitialLoading ? (
         <div className="flex min-h-screen items-center justify-center">
           <Loader2 className="h-10 w-10 animate-spin text-gray-800" />
         </div>
