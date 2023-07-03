@@ -12,7 +12,7 @@ import { PersistGate } from "redux-persist/integration/react"
 const persister = persistStore(store)
 export const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { staleTime: 0, refetchOnWindowFocus: false, retry: false },
+    queries: { staleTime: 0 },
   },
 })
 
