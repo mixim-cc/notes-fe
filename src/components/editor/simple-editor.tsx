@@ -9,9 +9,10 @@ type EditorProps = {
   data?: OutputData
   onChange?: (val: OutputData) => void
   holder?: string
+  isPreview?: boolean
 }
 
-export const SimpleEditor = ({ holder, onChange, data }: EditorProps) => {
+export const SimpleEditor = ({ holder, onChange, data, isPreview }: EditorProps) => {
   const ref = useRef<EditorJS>()
 
   const initalizeEditor = useCallback(async () => {
@@ -32,6 +33,7 @@ export const SimpleEditor = ({ holder, onChange, data }: EditorProps) => {
         inlineToolbar: true,
         data: data,
         tools: EDITOR_TOOLS,
+        readOnly: isPreview,
       })
     }
   }, [data, holder, onChange])
