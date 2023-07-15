@@ -35,8 +35,6 @@ export const NoteEditor = () => {
     }
   }, [noteData, dispatch, selectedNote?.id])
 
-  console.log(isInitialLoading)
-
   return (
     <div
       key={selectedNote?.id}

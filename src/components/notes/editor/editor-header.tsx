@@ -1,5 +1,10 @@
 import { useMakeNotePublicMutation } from "@/services/graphql/generated/graphql"
-import { toggleSidebarVisibility } from "@/services/redux/reducers/file-explorer-reducer"
+import {
+  copyFile,
+  deleteFile,
+  toggleSidebarVisibility,
+  triggerSync,
+} from "@/services/redux/reducers/file-explorer-reducer"
 import { useAppSelector } from "@/services/redux/store"
 import { FolderIcon, Link, MoreHorizontal, PanelLeftClose, PanelLeftOpen, Star } from "lucide-react"
 import { useDispatch } from "react-redux"
@@ -8,7 +13,14 @@ import { IconButton } from "@/components/ui/icon-button"
 import { ToastAction } from "@/components/ui/toast"
 import { useToast } from "@/components/ui/useToast"
 
-export const EditorHeader = () => {
+import { NotesTripleDotsMenu } from "../context-menu"
+
+interface EditorHeaderProps {
+  title?: string
+  isPreview?: boolean
+}
+
+export const EditorHeader = ({ title, isPreview }: EditorHeaderProps) => {
   const { toast } = useToast()
   const dispatch = useDispatch()
   const { mutateAsync } = useMakeNotePublicMutation()
@@ -32,7 +44,7 @@ export const EditorHeader = () => {
         <div className="h-3 w-0.5 rounded-xl bg-stroke-back"></div>
 
         <div className="flex items-center gap-3">
-          {hasParentFolder ? (
+          {hasParentFolder && !title ? (
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
                 <FolderIcon className="text-shade-seondary h-5 w-5" />
@@ -44,7 +56,7 @@ export const EditorHeader = () => {
             </div>
           ) : null}
 
-          <p className="text-sm text-shade-primary">{file?.title}</p>
+          <p className="text-sm text-shade-primary">{title || file?.title}</p>
         </div>
       </div>
       <div className="flex items-center gap-2">
@@ -71,9 +83,32 @@ export const EditorHeader = () => {
         >
           <Link className="text-shade-seondary h-4 w-4" />
         </IconButton>
-        <IconButton size="sm" variant="ghost">
-          <MoreHorizontal className="text-shade-seondary h-4 w-4" />
-        </IconButton>
+        {!isPreview && (
+          <NotesTripleDotsMenu
+            id="1"
+            onRename={() => {
+              const element = document.getElementById("title")
+
+              if (element) {
+                element?.focus()
+              }
+            }}
+            onCopy={() => {
+              dispatch(copyFile(file))
+              dispatch(triggerSync())
+            }}
+            onDelete={() => {
+              dispatch(deleteFile({ id: file.id }))
+              dispatch(triggerSync())
+            }}
+            onStar={() => {}}
+            trigger={
+              <IconButton size="sm" variant="ghost">
+                <MoreHorizontal className="text-shade-seondary h-4 w-4" />
+              </IconButton>
+            }
+          />
+        )}
       </div>
     </div>
   )

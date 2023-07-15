@@ -4,6 +4,8 @@ import { get } from "http"
 import { useEffect, useState } from "react"
 import dynamic from "next/dynamic"
 import { OutputData } from "@editorjs/editorjs"
+import edjsHTML from "editorjs-html"
+import parse from "html-react-parser"
 import { MoveHorizontal } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import TextareaAutosize from "react-textarea-autosize"
@@ -23,9 +25,10 @@ interface EditorProps {
   id?: string
   onChange?: (data?: EditorData) => void
   holder: string
+  isPreview?: boolean
 }
 
-export const Editor = ({ data, onChange, holder, id }: EditorProps) => {
+export const Editor = ({ data, onChange, holder, isPreview = false }: EditorProps) => {
   const [editorWidth, setEditorWidth] = useState<"default" | "full">("default")
   const { register, control, watch, reset, getValues } = useForm<EditorData>({
     defaultValues: {
@@ -81,6 +84,7 @@ export const Editor = ({ data, onChange, holder, id }: EditorProps) => {
 
       <TextareaAutosize
         autoFocus
+        disabled={isPreview}
         id="title"
         defaultValue={data?.title}
         placeholder="Untitled"
@@ -93,15 +97,30 @@ export const Editor = ({ data, onChange, holder, id }: EditorProps) => {
         className="min-h-12 w-full resize-none appearance-none overflow-hidden bg-transparent py-4 text-5xl font-bold leading-[3.75rem] focus:outline-none"
         {...register("title")}
       />
+      {/* {isPreview ? (
+        <Preview data={data} />
+      ) : ( */}
       <Controller
         name="content"
         control={control}
         render={({ field: { value, onChange: editorOnChange } }) => (
-          <SimpleEditor onChange={editorOnChange} data={value} holder={holder} />
+          <SimpleEditor isPreview={isPreview} onChange={editorOnChange} data={value} holder={holder} />
         )}
       />
+      {/* )} */}
     </div>
   )
 }
 
 export default Editor
+
+interface PreviewProps {
+  data: EditorData
+}
+
+const Preview = ({ data }: PreviewProps) => {
+  const edjsParser = edjsHTML()
+
+  let html = edjsParser.parse(data?.content || { blocks: [] })
+  return <div>{parse(html.join(""))}</div>
+}

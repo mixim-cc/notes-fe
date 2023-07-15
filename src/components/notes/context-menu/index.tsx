@@ -12,9 +12,12 @@ interface NotesContextMenuProps {
   onDelete?: () => void
   onStar?: () => void
   onCopy?: () => void
+
+  trigger?: React.ReactNode
 }
 
-const CONTEXT_MENU_ITEMS = [
+const 
+CONTEXT_MENU_ITEMS = [
   {
     title: "Rename",
     type: "RENAME",
@@ -91,20 +94,23 @@ export const NotesTripleDotsMenu = ({
   onCopy,
   onDelete,
   onStar,
+  trigger,
 }: NotesContextMenuProps) => {
   return (
     <DropdownMenu.Root modal={false}>
       <DropdownMenu.Trigger>
-        <IconButton
-          variant="ghost"
-          size="sm"
-          onClick={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
-          }}
-        >
-          <MoreHorizontal className="h-3 w-3" />
-        </IconButton>
+        {trigger || (
+          <IconButton
+            variant="ghost"
+            size="sm"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+            }}
+          >
+            <MoreHorizontal className="h-3 w-3" />
+          </IconButton>
+        )}
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content
