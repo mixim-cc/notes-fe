@@ -151,6 +151,13 @@ export type UpsertNoteMutationVariables = Exact<{
 
 export type UpsertNoteMutation = { note: { upsertNote?: { data?: Record<string, unknown> | null, title?: string | null, parentId?: string | null, id?: string | null, containerId?: string | null } | null } };
 
+export type MakeNotePublicMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type MakeNotePublicMutation = { note: { switchPublic?: string | null } };
+
 export type GetNoteFolderStructureQueryVariables = Exact<{
   search?: InputMaybe<Scalars['String']>;
 }>;
@@ -269,6 +276,24 @@ export const useUpsertNoteMutation = <
       options
     );
 useUpsertNoteMutation.getKey = () => ['upsertNote'];
+
+export const MakeNotePublicDocument = `
+    mutation makeNotePublic($id: String!) {
+  note {
+    switchPublic(id: $id)
+  }
+}
+    `;
+export const useMakeNotePublicMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<MakeNotePublicMutation, TError, MakeNotePublicMutationVariables, TContext>) =>
+    useMutation<MakeNotePublicMutation, TError, MakeNotePublicMutationVariables, TContext>(
+      ['makeNotePublic'],
+      useAxios<MakeNotePublicMutation, MakeNotePublicMutationVariables>(MakeNotePublicDocument),
+      options
+    );
+useMakeNotePublicMutation.getKey = () => ['makeNotePublic'];
 
 export const GetNoteFolderStructureDocument = `
     query getNoteFolderStructure($search: String) {

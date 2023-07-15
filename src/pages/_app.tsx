@@ -9,6 +9,8 @@ import { ClerkProvider } from "@clerk/nextjs"
 import { Analytics } from "@vercel/analytics/react"
 import { useDispatch } from "react-redux"
 
+import { Toaster } from "@/components/ui/toaster"
+
 // export const metadata = {
 //   title: "Drafts",
 //   manifest: "/manifest.json",
@@ -20,8 +22,6 @@ import { useDispatch } from "react-redux"
 // }
 
 export default function App({ Component, pageProps }) {
-  
-
   return (
     <main className={fontSans.className}>
       <ClerkProvider>
@@ -29,6 +29,7 @@ export default function App({ Component, pageProps }) {
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             <Component {...pageProps} />
             <Analytics />
+            <Toaster />
           </ThemeProvider>
         </Providers>
       </ClerkProvider>
