@@ -11,9 +11,9 @@ export default function Page() {
         <title>Drafts | Welcome</title>
       </head>
 
-      <div className="mx-auto flex max-w-7xl flex-col overflow-hidden ">
-        <div className="bg-body/20 backdrop-brightness-20 z-10 p-4 backdrop-blur-sm">
-          <nav className="relative flex w-full justify-between gap-6 ">
+      <div className="flex flex-col mx-auto overflow-hidden max-w-7xl ">
+        <div className="z-10 p-4 bg-body/20 backdrop-brightness-20 backdrop-blur-sm">
+          <nav className="relative flex justify-between w-full gap-6 ">
             <div className="relative inline-flex min-w-max">
               <a href="/" className="relative flex items-center gap-3">
                 <svg
@@ -87,14 +87,14 @@ export default function Page() {
             <div
               data-nav-overlay
               aria-hidden="true"
-              className="bg-box-bg bg-opacity/50 fixed inset-0 hidden backdrop-blur-xl lg:hidden"
+              className="fixed inset-0 hidden bg-box-bg bg-opacity/50 backdrop-blur-xl lg:hidden"
             ></div>
             <div
               data-navbar
               className="bg-body border-x-box-border absolute top-full flex h-0 w-full flex-col gap-x-4 gap-y-6 overflow-hidden border-x duration-300 ease-linear lg:relative lg:top-0 lg:!h-auto lg:scale-y-100 lg:flex-row lg:items-center lg:justify-between lg:border-x-0 lg:bg-transparent"
             ></div>
 
-            <div className="flex min-w-max items-center gap-x-3">
+            <div className="flex items-center min-w-max gap-x-3">
               {/* <SignInButton mode="modal">
               <Button
                 className="border-box-border flex w-full items-center rounded-full border px-4 py-3.5  focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-1"
@@ -104,6 +104,16 @@ export default function Page() {
                 Sign In With Google
               </Button>
             </SignInButton> */}
+             <a
+                href="https://www.producthunt.com/posts/mixim-drafts?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-mixim&#0045;drafts"
+                target="_blank"
+              >
+                <img
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=402641&theme=light"
+                  alt="Mixim&#0032;Drafts - Simple&#0032;yet&#0032;powerful&#0032;note&#0045;taking&#0032;app&#0032;for&#0032;productive&#0032;minds | Product Hunt"
+                  className="h-[48px] w-[250px]"
+                />
+              </a>
               <ThemeToggle />
             </div>
           </nav>
@@ -111,33 +121,33 @@ export default function Page() {
 
         <section className="relative p-4 pt-32 lg:pt-16">
           <div className="flex flex-col gap-10 lg:flex-row lg:gap-12">
-            <div className="mx-auto flex flex-col items-center text-center lg:flex-1 lg:items-start lg:py-7 xl:py-8">
-              <div className="text-heading-3 dark:ring-primary border-box-border hover:border-border relative mx-auto mb-4 rounded-full border px-3 py-1 text-sm leading-6">
+            <div className="flex flex-col items-center mx-auto text-center lg:flex-1 lg:items-start lg:py-7 xl:py-8">
+              <div className="relative px-3 py-1 mx-auto mb-4 text-sm leading-6 border rounded-full text-heading-3 dark:ring-primary border-box-border hover:border-border">
                 <a
                   href="https://youtu.be/cY_0OmK3gaU"
                   target="_blank"
-                  className="text-heading-1 font-semibold"
+                  className="font-semibold text-heading-1"
                   rel="noreferrer"
                 >
-                  <span className="text-heading-3 block lg:inline">
+                  <span className="block text-heading-3 lg:inline">
                     🥳 Introducing Mixim Drafts <span aria-hidden="true"> &rarr;</span>
                   </span>
                 </a>
               </div>
-              <h1 className="text-heading-1 mx-auto text-3xl/tight font-semibold tracking-tighter sm:text-4xl/tight md:text-5xl/tight xl:text-5xl/tight">
+              <h1 className="mx-auto font-semibold tracking-tighter text-heading-1 text-3xl/tight sm:text-4xl/tight md:text-5xl/tight xl:text-5xl/tight">
                 Simple yet powerful
               </h1>
-              <h1 className="text-heading-1 mx-auto text-3xl/tight font-semibold tracking-tighter sm:text-4xl/tight md:text-5xl/tight xl:text-6xl/tight">
+              <h1 className="mx-auto font-semibold tracking-tighter text-heading-1 text-3xl/tight sm:text-4xl/tight md:text-5xl/tight xl:text-6xl/tight">
                 Note-taking app for productive minds.
               </h1>
-              <div className="mx-auto mt-8 max-w-3xl">
+              <div className="max-w-3xl mx-auto mt-8">
                 Simplify your note-taking experience with Drafts, the minimalistic app designed to help you
                 focus on what matters most: <strong>your ideas.</strong>
               </div>
-              <div className="mx-auto mt-10 flex">
+              <div className="flex mx-auto mt-10">
                 <SignInButton mode="modal">
                   <Button
-                    className="border-box-border flex w-full items-center rounded-full border px-8 py-6 shadow-xl focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-1"
+                    className="flex items-center w-full px-8 py-6 border rounded-full shadow-xl border-box-border focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-1"
                     variant="outline"
                   >
                     <img src="/images/google.svg" alt="google" />
@@ -146,11 +156,11 @@ export default function Page() {
                 </SignInButton>
               </div>
 
-              <div className="relative mx-auto w-full max-w-7xl items-center p-8 py-12">
-                <div className="bg-box-bg rounded-3xl p-4">
+              <div className="relative items-center w-full p-8 py-12 mx-auto max-w-7xl">
+                <div className="p-4 bg-box-bg rounded-3xl">
                   <img
                     alt=""
-                    className="relative w-full rounded object-cover shadow-2xl lg:rounded-2xl"
+                    className="relative object-cover w-full rounded shadow-2xl lg:rounded-2xl"
                     src="/images/MiximDraftScreenshot.png"
                   />
                 </div>
@@ -160,9 +170,9 @@ export default function Page() {
         </section>
 
         <section id="services">
-          <div className="md:sapce-y-24 mt-24 space-y-10 p-4">
-            <div className="mx-auto max-w-3xl space-y-4 text-center">
-              <div className="text-heading-1 text-2xl font-semibold sm:text-3xl md:text-4xl">
+          <div className="p-4 mt-24 space-y-10 md:sapce-y-24">
+            <div className="max-w-3xl mx-auto space-y-4 text-center">
+              <div className="text-2xl font-semibold text-heading-1 sm:text-3xl md:text-4xl">
                 Unveiling Our Powerful Features
               </div>
               <div>
@@ -171,7 +181,7 @@ export default function Page() {
               </div>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-              <div className="border-box-border bg-box-bg shadow-box-shadow relative overflow-hidden rounded-3xl border p-5 shadow-lg dark:border-gray-600 sm:p-6 lg:p-8">
+              <div className="relative p-5 overflow-hidden border shadow-lg border-box-border bg-box-bg shadow-box-shadow rounded-3xl dark:border-gray-600 sm:p-6 lg:p-8">
                 {/* <div className="relative p-3 bg-gray-100 text-heading-1 w-max rounded-xl dark:bg-gray-900">
                   <svg
                     width="80"
@@ -219,16 +229,16 @@ export default function Page() {
                   </svg>
                 </div> */}
                 <div className="relative mt-6 space-y-4">
-                  <h2 className="text-heading-2 text-lg font-semibold md:text-xl"> Effortless Note-taking</h2>
+                  <h2 className="text-lg font-semibold text-heading-2 md:text-xl"> Effortless Note-taking</h2>
                   <div>
                     Experience the joy of capturing your thoughts effortlessly with our intuitive block-based
                     note-taking system. From jotting down ideas to organizing your daily tasks, Drafts makes
                     it seamless and enjoyable.
                   </div>
                 </div>
-                <span className="bg-primary/10 absolute -bottom-16 -right-16 aspect-square w-32 rounded-full"></span>
+                <span className="absolute w-32 rounded-full bg-primary/10 -bottom-16 -right-16 aspect-square"></span>
               </div>
-              <div className="border-box-border bg-box-bg shadow-box-shadow relative overflow-hidden rounded-3xl border p-5 shadow-lg dark:border-gray-600 sm:p-6 lg:p-8">
+              <div className="relative p-5 overflow-hidden border shadow-lg border-box-border bg-box-bg shadow-box-shadow rounded-3xl dark:border-gray-600 sm:p-6 lg:p-8">
                 {/* <div className="relative p-3 bg-gray-300 text-heading-1 w-max rounded-xl dark:bg-gray-600">
                   <svg
                     fill="none"
@@ -248,7 +258,7 @@ export default function Page() {
                   </svg>
                 </div> */}
                 <div className="relative mt-6 space-y-4">
-                  <h2 className="text-heading-2 text-lg font-semibold md:text-xl">
+                  <h2 className="text-lg font-semibold text-heading-2 md:text-xl">
                     Offline Accessibility with PWA
                   </h2>
                   <div>
@@ -257,14 +267,14 @@ export default function Page() {
                     anytime and anywhere, without the need for an internet connection.
                   </div>
                 </div>
-                <span className="bg-primary/10 absolute -bottom-16 -right-16 aspect-square w-32 rounded-full"></span>
+                <span className="absolute w-32 rounded-full bg-primary/10 -bottom-16 -right-16 aspect-square"></span>
               </div>
-              <div className="border-box-border bg-box-bg shadow-box-shadow relative overflow-hidden rounded-3xl border p-5 shadow-lg dark:border-gray-600 sm:p-6 lg:p-8">
+              <div className="relative p-5 overflow-hidden border shadow-lg border-box-border bg-box-bg shadow-box-shadow rounded-3xl dark:border-gray-600 sm:p-6 lg:p-8">
                 {/* <div className="relative p-3 bg-gray-300 text-heading-1 w-max rounded-xl dark:bg-gray-950">
                   tt
                 </div> */}
                 <div className="relative mt-6 space-y-4">
-                  <h2 className="text-heading-2 text-lg font-semibold md:text-xl">
+                  <h2 className="text-lg font-semibold text-heading-2 md:text-xl">
                     Free to Use and Grow with You
                   </h2>
                   <div>
@@ -274,12 +284,12 @@ export default function Page() {
                     at every stage of your personal and professional journey.
                   </div>
                 </div>
-                <span className="bg-primary/10 absolute -bottom-16 -right-16 aspect-square w-32 rounded-full"></span>
+                <span className="absolute w-32 rounded-full bg-primary/10 -bottom-16 -right-16 aspect-square"></span>
               </div>
             </div>
           </div>
         </section>
-        <div className="mt-12 w-full border-t py-12 text-center dark:border-gray-600 ">
+        <div className="w-full py-12 mt-12 text-center border-t dark:border-gray-600 ">
           <p className="text-gray-500">
             Project by:{" "}
             <a
