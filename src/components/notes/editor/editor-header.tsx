@@ -1,12 +1,17 @@
+import { useMakeNotePublicMutation } from "@/services/graphql/generated/graphql"
 import { toggleSidebarVisibility } from "@/services/redux/reducers/file-explorer-reducer"
 import { useAppSelector } from "@/services/redux/store"
 import { FolderIcon, Link, MoreHorizontal, PanelLeftClose, PanelLeftOpen, Star } from "lucide-react"
 import { useDispatch } from "react-redux"
 
 import { IconButton } from "@/components/ui/icon-button"
+import { ToastAction } from "@/components/ui/toast"
+import { useToast } from "@/components/ui/useToast"
 
 export const EditorHeader = () => {
+  const { toast } = useToast()
   const dispatch = useDispatch()
+  const { mutateAsync } = useMakeNotePublicMutation()
   const { structure, selectedFile, isSidebarVisible } = useAppSelector((state) => state.fileExplorerReducer)
 
   const file = structure.find((files) => files.id === selectedFile)
@@ -46,7 +51,24 @@ export const EditorHeader = () => {
         <IconButton size="sm" variant="ghost">
           <Star className="text-shade-seondary h-4 w-4" />
         </IconButton>
-        <IconButton size="sm" variant="ghost">
+        <IconButton
+          size="sm"
+          variant="ghost"
+          onClick={async () => {
+            const response = await mutateAsync({ id: file.synced_id })
+
+            if (response) {
+              const link = `${location.origin}/preview?id=${file.synced_id}`
+
+              navigator.clipboard.writeText(link)
+
+              toast({
+                title: "Link Copied to Clipboard",
+                description: link,
+              })
+            }
+          }}
+        >
           <Link className="text-shade-seondary h-4 w-4" />
         </IconButton>
         <IconButton size="sm" variant="ghost">

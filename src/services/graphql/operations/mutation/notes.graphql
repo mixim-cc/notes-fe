@@ -1,6 +1,6 @@
 mutation addNote($data: NoteInput!) {
   note {
-    upsertNote(data: $data){
+    upsertNote(data: $data) {
       data
       title
       parentId
@@ -10,7 +10,7 @@ mutation addNote($data: NoteInput!) {
   }
 }
 
-mutation addFolder($id: String, $containerId: String, $title:String! ){
+mutation addFolder($id: String, $containerId: String, $title: String!) {
   note {
     upsertFolder(title: $title, id: $id, containerId: $containerId) {
       id
@@ -22,9 +22,9 @@ mutation addFolder($id: String, $containerId: String, $title:String! ){
   }
 }
 
-mutation addFiles($id: String, $data: NoteInput!){
+mutation addFiles($id: String, $data: NoteInput!) {
   note {
-    upsertNote(id: $id, data: $data ){
+    upsertNote(id: $id, data: $data) {
       data
       id
       parentId
@@ -34,14 +34,20 @@ mutation addFiles($id: String, $data: NoteInput!){
   }
 }
 
-mutation upsertNote($id:String, $data: NoteInput!) {
+mutation upsertNote($id: String, $data: NoteInput!) {
   note {
-    upsertNote(id: $id,data: $data){
+    upsertNote(id: $id, data: $data) {
       data
       title
       parentId
       id
       containerId
     }
+  }
+}
+
+mutation makeNotePublic($id: String!) {
+  note {
+    switchPublic(id: $id)
   }
 }
