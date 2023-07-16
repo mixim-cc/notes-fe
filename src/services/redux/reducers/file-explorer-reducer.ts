@@ -19,6 +19,7 @@ interface FileExplorerState {
   selectedFile: string | null
   isSidebarVisible: boolean
   networkStatus: "offline" | "online"
+  publicFileIds: string[]
 }
 
 const initialState: FileExplorerState = {
@@ -26,6 +27,7 @@ const initialState: FileExplorerState = {
   selectedFile: null,
   isSidebarVisible: true,
   networkStatus: "online",
+  publicFileIds: [],
 }
 
 type InitalLoadData = {
@@ -218,6 +220,10 @@ export const fileExplorerSlice = createSlice({
     setNetworkStatus: (state, action: PayloadAction<{ status: "offline" | "online" }>) => {
       state.networkStatus = action.payload.status
     },
+
+    setPublic: (state, action: PayloadAction<{ id: string }>) => {
+      state.publicFileIds = [...state.publicFileIds, action.payload.id]
+    },
   },
 })
 
@@ -239,6 +245,7 @@ export const {
   setSelectedFileWithSyncedId,
   clear,
   setNetworkStatus,
+  setPublic,
 } = fileExplorerSlice.actions
 
 export default fileExplorerSlice.reducer
