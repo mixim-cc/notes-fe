@@ -109,9 +109,9 @@ export const EditorHeader = ({ title, isPreview }: EditorHeaderProps) => {
               <Input
                 disabled
                 className="text-ellipsis whitespace-nowrap overflow-hidden"
-                value={`${location.origin}/preview?id=${file.synced_id}`}
+                value={`${location.origin}/preview?id=${file?.synced_id}`}
               />
-              {publicFileIds.includes(file.id) ? (
+              {publicFileIds.includes(file?.id) ? (
                 <Button
                   isLoading={isLoading}
                   leftIcon={isCopied ? <CheckCircle className="h-4 w-4" /> : null}
@@ -119,7 +119,7 @@ export const EditorHeader = ({ title, isPreview }: EditorHeaderProps) => {
                     const response = await mutateAsync({ id: file.synced_id })
 
                     if (response) {
-                      const link = `${location.origin}/preview?id=${file.synced_id}`
+                      const link = `${location.origin}/preview?id=${file?.synced_id}`
 
                       navigator.clipboard.writeText(link)
                       setIsCopied(true)
