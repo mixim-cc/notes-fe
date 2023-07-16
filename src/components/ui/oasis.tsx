@@ -82,6 +82,7 @@ export const Oasis = () => {
   useHotkeys("alt + 0", () => setCurrentMenu("none"), [currentMenu], { enableOnContentEditable: true })
   useHotkeys("alt + 1", () => setCurrentMenu("add"), [currentMenu], { enableOnContentEditable: true })
   useHotkeys("alt + s", () => setCurrentMenu("search"), [currentMenu], { enableOnContentEditable: true })
+  useHotkeys("alt + t", () => setCurrentMenu("menu"), [currentMenu], { enableOnContentEditable: true })
   useHotkeys("alt + q", () => setCurrentMenu("avatar"), [currentMenu], { enableOnContentEditable: true })
 
   if (!user) {
