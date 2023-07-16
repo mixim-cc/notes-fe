@@ -21,6 +21,7 @@ import {
   Share2,
   Star,
 } from "lucide-react"
+import { useHotkeys } from "react-hotkeys-hook"
 import { useDispatch } from "react-redux"
 
 import { Button } from "@/components/ui/button"
@@ -47,6 +48,8 @@ export const EditorHeader = ({ title, isPreview }: EditorHeaderProps) => {
 
   const file = structure.find((files) => files.id === selectedFile)
   const hasParentFolder = !!file?.parentId
+
+  useHotkeys("m", () => dispatch(toggleSidebarVisibility()), [isSidebarVisible])
 
   return (
     <div className="flex h-12 items-center justify-between gap-4 border-b border-stroke-base bg-base px-4">
