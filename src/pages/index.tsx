@@ -10,6 +10,8 @@ import {
 import { useAppDispatch, useAppSelector } from "@/services/redux/store"
 import { motion } from "framer-motion"
 import { Loader2 } from "lucide-react"
+import { useTheme } from "next-themes"
+import { useHotkeys } from "react-hotkeys-hook"
 
 import { Oasis } from "@/components/ui/oasis"
 import { NoteEditor } from "@/components/notes/editor"
@@ -19,6 +21,14 @@ export default function Home() {
   const dispatch = useAppDispatch()
   const { data, isFetching } = useGetNoteFolderStructureQuery()
   const { selectedFile, structure } = useAppSelector((state) => state.fileExplorerReducer)
+  const { setTheme, theme } = useTheme()
+
+  useHotkeys("alt + t", () => setTheme(theme === "light" ? "dark" : "light"), {
+    enabled: true,
+    enableOnContentEditable: true,
+    enableOnFormTags: true,
+    preventDefault: true,
+  })
 
   useEffect(() => {
     if (data?.note?.listAll && !structure.length) dispatch(loadInitalData({ data: data?.note?.listAll }))

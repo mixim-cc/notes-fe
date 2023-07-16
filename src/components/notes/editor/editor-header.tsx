@@ -49,7 +49,16 @@ export const EditorHeader = ({ title, isPreview }: EditorHeaderProps) => {
   const file = structure.find((files) => files.id === selectedFile)
   const hasParentFolder = !!file?.parentId
 
-  useHotkeys("m", () => dispatch(toggleSidebarVisibility()), [isSidebarVisible])
+  useHotkeys(["m"], () => dispatch(toggleSidebarVisibility()), [isSidebarVisible], {
+    enabled: true,
+  })
+
+  useHotkeys(["shift + m", "g + f"], () => dispatch(toggleSidebarVisibility()), [isSidebarVisible], {
+    enabled: true,
+    enableOnContentEditable: true,
+    enableOnFormTags: true,
+    preventDefault: true,
+  })
 
   return (
     <div className="flex h-12 items-center justify-between gap-4 border-b border-stroke-base bg-base px-4">

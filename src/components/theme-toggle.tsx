@@ -13,7 +13,12 @@ import { IconButton } from "./ui/icon-button"
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme()
 
-  useHotkeys("alt + t", () => setTheme(theme === "light" ? "dark" : "light"), [theme])
+  // useHotkeys("alt + t", () => setTheme(theme === "light" ? "dark" : "light"), {
+  //   enabled: true,
+  //   enableOnContentEditable: true,
+  //   enableOnFormTags: true,
+  //   preventDefault: true,
+  // })
 
   return (
     <IconButton variant="outline" size="lg" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
