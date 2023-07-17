@@ -25,7 +25,12 @@ const WhatsNewModal: React.FC = () => {
     markWhatsNewModalAsSeen()
   }
 
-  const images = ["/images/whatsnew/1.png", "/images/whatsnew/1.png", "/images/whatsnew/1.png"]
+  const images = [
+    "/images/Whatsnew/July 17 - 1.png",
+    "/images/whatsnew/July 17 - 2.png",
+    "/images/whatsnew/July 17 - 3.png",
+    "/images/whatsnew/July 17 - 4.png",
+  ]
 
   const handlePrevious = (): void => {
     setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1))
