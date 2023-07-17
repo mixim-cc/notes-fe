@@ -110,10 +110,10 @@ export const EditorHeader = ({ title, isPreview }: EditorHeaderProps) => {
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2 font-medium text-shade-primary">
                 <Share2 className="h-4 w-4" />
-                <p>Share Note</p>
+                <p>Share your Draft</p>
               </div>
 
-              <p className="text-sm text-shade-secondary">Share your note to anyone with public url.</p>
+              <p className="text-sm text-shade-secondary">Share your draft to anyone with public url.</p>
               <hr />
               <Input
                 disabled
@@ -148,7 +148,7 @@ export const EditorHeader = ({ title, isPreview }: EditorHeaderProps) => {
                     }
                   }}
                 >
-                  Share Note
+                  Share your Draft
                 </Button>
               )}
 

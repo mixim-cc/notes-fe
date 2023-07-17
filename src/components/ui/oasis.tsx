@@ -103,7 +103,7 @@ export const Oasis = () => {
     enableOnFormTags: true,
     preventDefault: true,
   })
-  useHotkeys("alt + q", () => setCurrentMenu("avatar"), [currentMenu], {
+  useHotkeys("alt + p", () => setCurrentMenu("avatar"), [currentMenu], {
     enabled: true,
     enableOnContentEditable: true,
     enableOnFormTags: true,
