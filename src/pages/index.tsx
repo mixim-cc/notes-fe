@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import Image from "next/image"
 import { useGetNoteFolderStructureQuery } from "@/services/graphql/generated/graphql"
 import {
   loadInitalData,
@@ -71,8 +72,16 @@ export default function Home() {
       <head>
         <title>Drafts</title>
       </head>
+      <div>
+        <div className="flex flex-col items-center justify-center gap-8 px-8 py-32 text-2xl font-semibold md:hidden">
+          <Image src="/images/error.png" height={200} width={200} alt="Reponsive Error" />
+          <p className="">Unfortunately Mixim Drafts is not Mobile Responsive.</p>
+          <p className="">We recommend using Big Screens(Tablet, Laptop or Desktop) for Better Experience.</p>
+        </div>
+        <div></div>
+      </div>
 
-      <motion.div layout className="flex h-screen gap-4 bg-base-hover p-4">
+      <motion.div layout className="hidden h-screen gap-4 bg-base-hover p-4 md:flex">
         <NoteSidebar />
         <NoteEditor />
       </motion.div>
