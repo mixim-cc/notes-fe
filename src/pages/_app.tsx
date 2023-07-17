@@ -7,6 +7,7 @@ import { triggerSync } from "@/services/redux/reducers/file-explorer-reducer"
 import { fontSans } from "@/utils/fonts"
 import { ClerkProvider } from "@clerk/nextjs"
 import { Analytics } from "@vercel/analytics/react"
+import { HotkeysProvider } from "react-hotkeys-hook"
 import { useDispatch } from "react-redux"
 
 import { Toaster } from "@/components/ui/toaster"
@@ -28,6 +29,7 @@ export default function App({ Component, pageProps }) {
         <Providers>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             <Component {...pageProps} />
+
             <Analytics />
             <Toaster />
           </ThemeProvider>

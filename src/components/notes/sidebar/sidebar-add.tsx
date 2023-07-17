@@ -3,32 +3,34 @@ import { useAppDispatch } from "@/services/redux/store"
 import { syncAfterDelay } from "@/services/redux/utils/syncAfterDelay"
 import { FilePlus, FolderPlus } from "lucide-react"
 
+import { Button } from "@/components/ui/button"
 import { IconButton } from "@/components/ui/icon-button"
 
 export const SidebarAdd = () => {
   const dispatch = useAppDispatch()
 
   return (
-    <div className="flex h-10 items-center gap-2 border-b border-stroke-base">
-      <IconButton
-        variant="ghost"
+    <div className="flex items-center justify-between gap-2 border-b border-stroke-base pb-4">
+      <Button
+        variant="outline"
         onClick={() => {
-          dispatch(addNewFile({ parentId: null, title: "Untitled", }))
+          dispatch(addNewFile({ parentId: null, title: "Untitled Draft" }))
           dispatch(triggerSync())
         }}
       >
-        <FilePlus className="text-shade-seondary h-5 w-5" />
-      </IconButton>
-
-      <IconButton
-        variant="ghost"
+        <FilePlus className="h-5 w-5 text-shade-secondary" />
+        New Draft
+      </Button>
+      <Button
+        variant="outline"
         onClick={() => {
-          dispatch(addNewFolder({ parentId: null, title: "Untitled" }))
+          dispatch(addNewFolder({ parentId: null, title: "Untitled Folder" }))
           dispatch(triggerSync())
         }}
       >
-        <FolderPlus className="text-shade-seondary h-5 w-5" />
-      </IconButton>
+        <FolderPlus className="h-5 w-5 text-shade-secondary" />
+        New Folder
+      </Button>
     </div>
   )
 }

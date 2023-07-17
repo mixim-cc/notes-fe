@@ -16,7 +16,8 @@ import { cn } from "@/utils/cn"
 import { SignOutButton, SignedIn, UserButton, useUser } from "@clerk/nextjs"
 import dayjs from "dayjs"
 import { motion } from "framer-motion"
-import { ChevronLeft, ChevronRight, FileText, LogOut, Plus, Search, User } from "lucide-react"
+import { ChevronLeft, ChevronRight, FileText, LogOut, Plus, Search, Sparkles, User } from "lucide-react"
+import { useHotkeys } from "react-hotkeys-hook"
 import { useDispatch } from "react-redux"
 
 import { ThemeToggle } from "../theme-toggle"
@@ -78,6 +79,37 @@ export const Oasis = () => {
     }
   }, [])
 
+  useHotkeys(["alt + 0", "g + f"], () => setCurrentMenu("none"), [currentMenu], {
+    enabled: true,
+    enableOnContentEditable: true,
+    enableOnFormTags: true,
+    preventDefault: true,
+  })
+  useHotkeys("alt + 1", () => setCurrentMenu("add"), [currentMenu], {
+    enabled: true,
+    enableOnContentEditable: true,
+    enableOnFormTags: true,
+    preventDefault: true,
+  })
+  useHotkeys("alt + s", () => setCurrentMenu("search"), [currentMenu], {
+    enabled: true,
+    enableOnContentEditable: true,
+    enableOnFormTags: true,
+    preventDefault: true,
+  })
+  useHotkeys("alt + t", () => setCurrentMenu("menu"), [currentMenu], {
+    enabled: true,
+    enableOnContentEditable: true,
+    enableOnFormTags: true,
+    preventDefault: true,
+  })
+  useHotkeys("alt + p", () => setCurrentMenu("avatar"), [currentMenu], {
+    enabled: true,
+    enableOnContentEditable: true,
+    enableOnFormTags: true,
+    preventDefault: true,
+  })
+
   if (!user) {
     return null
   }
@@ -86,7 +118,7 @@ export const Oasis = () => {
     <div className="absolute bottom-[52px] left-[50%] z-20 translate-x-[-50%]">
       <motion.div
         layout
-        className="z-20 flex max-w-[670px] flex-col gap-4 rounded-2xl bg-base p-3 shadow-2xl dark:border dark:border-stroke-base"
+        className="z-20 flex w-auto max-w-[670px] flex-col gap-4 rounded-2xl bg-base p-3 shadow-2xl dark:border dark:border-stroke-base"
       >
         {searchTerm && currentMenu === "search" && (
           <motion.div

@@ -61,7 +61,7 @@ export const Editor = ({ data, onChange, holder, isPreview = false }: EditorProp
       className={
         editorWidth === "default"
           ? "prose prose-neutral mx-auto w-[720px] max-w-none p-4 transition-all dark:prose-invert"
-          : "prose prose-neutral mx-auto w-full max-w-none p-4 transition-all dark:prose-invert"
+          : "prose prose-neutral mx-auto w-full max-w-none px-12 py-4 transition-all dark:prose-invert"
       }
     >
       {editorWidth === "default" ? (
@@ -70,7 +70,7 @@ export const Editor = ({ data, onChange, holder, isPreview = false }: EditorProp
           onClick={() => setEditorWidth("full")}
         >
           <MoveHorizontal className="h-4 w-4 text-shade-secondary" />
-          <p className="text-[13px] font-medium">Wide Layout</p>
+          <p className="text-[13px] font-medium text-shade-primary">Wide Layout</p>
         </div>
       ) : (
         <div
@@ -87,14 +87,14 @@ export const Editor = ({ data, onChange, holder, isPreview = false }: EditorProp
         disabled={isPreview}
         id="title"
         defaultValue={data?.title}
-        placeholder="Untitled"
+        placeholder="Untitled drafts"
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             e.preventDefault()
             return false
           }
         }}
-        className="min-h-12 w-full resize-none appearance-none overflow-hidden bg-transparent py-4 text-5xl font-bold leading-[3.75rem] focus:outline-none"
+        className="min-h-12 w-full resize-none appearance-none overflow-hidden bg-transparent py-4 text-4xl font-bold leading-[3.75rem] focus:outline-none"
         {...register("title")}
       />
       {/* {isPreview ? (

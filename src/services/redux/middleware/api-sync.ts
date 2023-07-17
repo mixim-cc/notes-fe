@@ -34,7 +34,7 @@ const useSyncMiddleware: Middleware<{}, RootState> =
                 data: {
                   title: structure.title,
                   parentId: getState().fileExplorerReducer.structure.find((f) => f.id === structure.parentId)
-                    .synced_id,
+                    ?.synced_id,
                   data: structure.content as unknown as Record<string, string>,
                 },
               })

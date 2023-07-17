@@ -11,7 +11,7 @@ export const SidebarHeader = ({ onTabChange, tab }: SidebarHeaderProps) => {
   return (
     <div className="flex h-12 items-center justify-between border-b border-stroke-base px-4">
       <h1 className="text-xl font-semibold leading-none text-shade-primary">
-        {tab === "default" ? "Notes" : "Journal"}
+        {tab === "default" ? "Drafts" : "Journal"}
       </h1>
       <div className="flex items-center gap-2">
         <IconButton variant="ghost" onClick={() => onTabChange("default")}>
