@@ -87,14 +87,14 @@ export const Editor = ({ data, onChange, holder, isPreview = false }: EditorProp
         disabled={isPreview}
         id="title"
         defaultValue={data?.title}
-        placeholder="Untitled"
+        placeholder="Untitled drafts"
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             e.preventDefault()
             return false
           }
         }}
-        className="min-h-12 w-full resize-none appearance-none overflow-hidden bg-transparent py-4 text-5xl font-bold leading-[3.75rem] focus:outline-none"
+        className="min-h-12 w-full resize-none appearance-none overflow-hidden bg-transparent py-4 text-4xl font-bold leading-[3.75rem] focus:outline-none"
         {...register("title")}
       />
       {/* {isPreview ? (
