@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "@/services/redux/store"
 import { syncAfterDelay } from "@/services/redux/utils/syncAfterDelay"
 import { cn } from "@/utils/cn"
 import { AnimatePresence, motion } from "framer-motion"
+import { useHotkeys } from "react-hotkeys-hook"
 
 import { SidebarAdd } from "./sidebar-add"
 import { SidebarFile } from "./sidebar-file"
@@ -26,6 +27,9 @@ export const NoteSidebar = () => {
   const individualFiles = structure?.filter((f) => !f?.parentId && f?.type === "FILE")
   const journalFolderId = structure?.find((f) => f?.title === "Journal")?.id
   const journalFiles = structure?.filter((f) => f?.parentId === journalFolderId && f?.type === "FILE")
+
+  useHotkeys("g + n", () => setSelectedTab("default"), [selectedTab])
+  useHotkeys("g + h", () => setSelectedTab("journal"), [selectedTab])
 
   return (
     <AnimatePresence>
