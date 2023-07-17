@@ -53,7 +53,7 @@ export const EditorHeader = ({ title, isPreview }: EditorHeaderProps) => {
     enabled: true,
   })
 
-  useHotkeys(["shift + m", "g + f"], () => dispatch(toggleSidebarVisibility()), [isSidebarVisible], {
+  useHotkeys(["alt + m", "g + f"], () => dispatch(toggleSidebarVisibility()), [isSidebarVisible], {
     enabled: true,
     enableOnContentEditable: true,
     enableOnFormTags: true,
