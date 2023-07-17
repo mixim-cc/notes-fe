@@ -9,12 +9,14 @@ import {
   triggerSync,
 } from "@/services/redux/reducers/file-explorer-reducer"
 import { useAppDispatch, useAppSelector } from "@/services/redux/store"
+import { hasSeenWhatsNewModal } from "@/utils/userPreferences"
 import { motion } from "framer-motion"
 import { Loader2 } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useHotkeys } from "react-hotkeys-hook"
 
 import { Oasis } from "@/components/ui/oasis"
+import WhatsNewModal from "@/components/global/WhatsNew"
 import { NoteEditor } from "@/components/notes/editor"
 import { NoteSidebar } from "@/components/notes/sidebar"
 
@@ -80,6 +82,8 @@ export default function Home() {
         </div>
         <div></div>
       </div>
+
+      {!hasSeenWhatsNewModal() && <WhatsNewModal />}
 
       <motion.div layout className="hidden h-screen gap-4 bg-base-hover p-4 md:flex">
         <NoteSidebar />

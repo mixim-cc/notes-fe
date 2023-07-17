@@ -61,7 +61,7 @@ export const Editor = ({ data, onChange, holder, isPreview = false }: EditorProp
       className={
         editorWidth === "default"
           ? "prose prose-neutral mx-auto w-[720px] max-w-none p-4 transition-all dark:prose-invert"
-          : "prose prose-neutral mx-auto w-full max-w-none p-4 transition-all dark:prose-invert"
+          : "prose prose-neutral mx-auto w-full max-w-none px-12 py-4 transition-all dark:prose-invert"
       }
     >
       {editorWidth === "default" ? (
@@ -70,7 +70,7 @@ export const Editor = ({ data, onChange, holder, isPreview = false }: EditorProp
           onClick={() => setEditorWidth("full")}
         >
           <MoveHorizontal className="h-4 w-4 text-shade-secondary" />
-          <p className="text-[13px] font-medium">Wide Layout</p>
+          <p className="text-[13px] font-medium text-shade-primary">Wide Layout</p>
         </div>
       ) : (
         <div
