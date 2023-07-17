@@ -16,7 +16,7 @@ import { cn } from "@/utils/cn"
 import { SignOutButton, SignedIn, UserButton, useUser } from "@clerk/nextjs"
 import dayjs from "dayjs"
 import { motion } from "framer-motion"
-import { ChevronLeft, ChevronRight, FileText, LogOut, Plus, Search, User } from "lucide-react"
+import { ChevronLeft, ChevronRight, FileText, LogOut, Plus, Search, Sparkles, User } from "lucide-react"
 import { useHotkeys } from "react-hotkeys-hook"
 import { useDispatch } from "react-redux"
 
@@ -308,6 +308,25 @@ export const Oasis = () => {
               </Button>
             </motion.div>
           )}
+
+          <motion.div
+            animate={{
+              scale: [1, 1, 1, 1, 1],
+            }}
+            transition={{
+              layout: { duration: 0.3 },
+            }}
+            className="flex items-center justify-center gap-4"
+          >
+            <Button
+              variant="outline"
+              leftIcon={<Sparkles className="h-4 w-4" />}
+              onClick={() => {
+                dispatch(addNewFile({ parentId: null, title: "Untitled" }))
+                dispatch(triggerSync())
+              }}
+            ></Button>
+          </motion.div>
 
           {currentMenu === "search" && (
             <motion.div className="w-[1000px]">
