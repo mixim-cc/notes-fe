@@ -118,7 +118,7 @@ export const Oasis = () => {
     <div className="absolute bottom-[52px] left-[50%] z-20 translate-x-[-50%]">
       <motion.div
         layout
-        className="z-20 flex max-w-[670px] flex-col gap-4 rounded-2xl bg-base p-3 shadow-2xl dark:border dark:border-stroke-base"
+        className="z-20 flex w-auto max-w-[670px] flex-col gap-4 rounded-2xl bg-base p-3 shadow-2xl dark:border dark:border-stroke-base"
       >
         {searchTerm && currentMenu === "search" && (
           <motion.div
@@ -308,25 +308,6 @@ export const Oasis = () => {
               </Button>
             </motion.div>
           )}
-
-          <motion.div
-            animate={{
-              scale: [1, 1, 1, 1, 1],
-            }}
-            transition={{
-              layout: { duration: 0.3 },
-            }}
-            className="flex items-center justify-center gap-4"
-          >
-            <Button
-              variant="outline"
-              leftIcon={<Sparkles className="h-4 w-4" />}
-              onClick={() => {
-                dispatch(addNewFile({ parentId: null, title: "Untitled" }))
-                dispatch(triggerSync())
-              }}
-            ></Button>
-          </motion.div>
 
           {currentMenu === "search" && (
             <motion.div className="w-[1000px]">
