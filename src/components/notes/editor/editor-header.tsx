@@ -104,12 +104,12 @@ export const EditorHeader = ({ title, isPreview }: EditorHeaderProps) => {
             align="end"
             side="bottom"
             className={cn(
-              "z-50 w-[320px] rounded-md border border-stroke-base bg-base p-3 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
+              "text-popover-foreground z-50 w-[320px] rounded-md border border-stroke-base bg-base p-3 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
             )}
           >
             <div className="flex flex-col gap-2">
-              <div className="flex gap-2 items-center  font-medium text-shade-primary">
-                <Share2 className="w-4 h-4" />
+              <div className="flex items-center gap-2 font-medium text-shade-primary">
+                <Share2 className="h-4 w-4" />
                 <p>Share Note</p>
               </div>
 
@@ -117,7 +117,7 @@ export const EditorHeader = ({ title, isPreview }: EditorHeaderProps) => {
               <hr />
               <Input
                 disabled
-                className="text-ellipsis whitespace-nowrap overflow-hidden"
+                className="overflow-hidden text-ellipsis whitespace-nowrap"
                 value={`${location.origin}/preview?id=${file?.synced_id}`}
               />
               {publicFileIds.includes(file?.id) ? (
