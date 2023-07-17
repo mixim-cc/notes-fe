@@ -18,8 +18,10 @@ import { Button } from "../ui/button"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 
 const WhatsNewModal: React.FC = () => {
+  const [open, setOpen] = useState(!hasSeenWhatsNewModal())
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const closeModal = (): void => {
+    setOpen(false)
     markWhatsNewModalAsSeen()
   }
 
@@ -35,7 +37,7 @@ const WhatsNewModal: React.FC = () => {
 
   return (
     <>
-      <Dialog open={true} modal={true}>
+      <Dialog open={open} modal={true} onOpenChange={(newValue) => setOpen(newValue)}>
         <DialogContent className="bg-base sm:max-w-[500px]">
           <DialogHeader>
             <DialogTitle>What&apos;s New / July 17</DialogTitle>
