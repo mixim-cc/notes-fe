@@ -26,7 +26,7 @@ const WhatsNewModal: React.FC = () => {
   }
 
   const images = [
-    "/images/Whatsnew/July 17 - 1.png",
+    "/images/whatsnew/July 17 - 1.png",
     "/images/whatsnew/July 17 - 2.png",
     "/images/whatsnew/July 17 - 3.png",
     "/images/whatsnew/July 17 - 4.png",
