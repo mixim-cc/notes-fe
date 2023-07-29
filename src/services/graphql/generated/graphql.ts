@@ -44,6 +44,7 @@ export type NoteMutation = {
   changeParent?: Maybe<Note>;
   delete?: Maybe<Scalars['String']>;
   switchPublic?: Maybe<Scalars['String']>;
+  upsertAny?: Maybe<Note>;
   upsertFolder?: Maybe<Note>;
   upsertNote?: Maybe<Note>;
 };
@@ -65,6 +66,13 @@ export type NoteMutationSwitchPublicArgs = {
 };
 
 
+export type NoteMutationUpsertAnyArgs = {
+  data: NoteInput;
+  id?: InputMaybe<Scalars['String']>;
+  noteType: NoteType;
+};
+
+
 export type NoteMutationUpsertFolderArgs = {
   containerId?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
@@ -80,6 +88,7 @@ export type NoteMutationUpsertNoteArgs = {
 export type NoteQuery = {
   get?: Maybe<Note>;
   getFiles?: Maybe<Array<Maybe<Note>>>;
+  getTotalCount: Scalars['Int'];
   listAll?: Maybe<Array<Maybe<Note>>>;
 };
 
@@ -126,30 +135,14 @@ export type AddNoteMutationVariables = Exact<{
 
 export type AddNoteMutation = { note: { upsertNote?: { data?: Record<string, unknown> | null, title?: string | null, parentId?: string | null, id?: string | null, containerId?: string | null } | null } };
 
-export type AddFolderMutationVariables = Exact<{
-  id?: InputMaybe<Scalars['String']>;
-  containerId?: InputMaybe<Scalars['String']>;
-  title: Scalars['String'];
-}>;
-
-
-export type AddFolderMutation = { note: { upsertFolder?: { id?: string | null, containerId?: string | null, title?: string | null, data?: Record<string, unknown> | null, parentId?: string | null } | null } };
-
-export type AddFilesMutationVariables = Exact<{
-  id?: InputMaybe<Scalars['String']>;
+export type UpsertAnyMutationVariables = Exact<{
   data: NoteInput;
-}>;
-
-
-export type AddFilesMutation = { note: { upsertNote?: { data?: Record<string, unknown> | null, id?: string | null, parentId?: string | null, title?: string | null, containerId?: string | null } | null } };
-
-export type UpsertNoteMutationVariables = Exact<{
   id?: InputMaybe<Scalars['String']>;
-  data: NoteInput;
+  noteType: NoteType;
 }>;
 
 
-export type UpsertNoteMutation = { note: { upsertNote?: { data?: Record<string, unknown> | null, title?: string | null, parentId?: string | null, id?: string | null, containerId?: string | null } | null } };
+export type UpsertAnyMutation = { note: { upsertAny?: { data?: Record<string, unknown> | null, id?: string | null, parentId?: string | null, title?: string | null, type?: NoteType | null } | null } };
 
 export type MakeNotePublicMutationVariables = Exact<{
   id: Scalars['String'];
@@ -158,12 +151,17 @@ export type MakeNotePublicMutationVariables = Exact<{
 
 export type MakeNotePublicMutation = { note: { switchPublic?: string | null } };
 
-export type GetNoteFolderStructureQueryVariables = Exact<{
-  search?: InputMaybe<Scalars['String']>;
+export type GetStructureRootQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetStructureRootQuery = { note: { listAll?: Array<{ id?: string | null, title?: string | null, type?: NoteType | null, parentId?: string | null } | null> | null } };
+
+export type GetStructureChildQueryVariables = Exact<{
+  parentId: Scalars['String'];
 }>;
 
 
-export type GetNoteFolderStructureQuery = { note: { listAll?: Array<{ id?: string | null, title?: string | null, type?: NoteType | null, children?: Array<{ id?: string | null, title?: string | null, type?: NoteType | null } | null> | null } | null> | null } };
+export type GetStructureChildQuery = { note: { getFiles?: Array<{ id?: string | null, parentId?: string | null, title?: string | null, type?: NoteType | null } | null> | null } };
 
 export type GetNoteQueryVariables = Exact<{
   id: Scalars['String'];
@@ -171,14 +169,6 @@ export type GetNoteQueryVariables = Exact<{
 
 
 export type GetNoteQuery = { note: { get?: { id?: string | null, title?: string | null, data?: Record<string, unknown> | null } | null } };
-
-export type SubscribeNoteSubscriptionVariables = Exact<{
-  noteId: Scalars['String'];
-  subscriberId: Scalars['String'];
-}>;
-
-
-export type SubscribeNoteSubscription = { getNote: { containerId?: string | null, id?: string | null, parentId?: string | null, title?: string | null, data?: Record<string, unknown> | null } };
 
 
 export const AddNoteDocument = `
@@ -205,77 +195,29 @@ export const useAddNoteMutation = <
     );
 useAddNoteMutation.getKey = () => ['addNote'];
 
-export const AddFolderDocument = `
-    mutation addFolder($id: String, $containerId: String, $title: String!) {
+export const UpsertAnyDocument = `
+    mutation upsertAny($data: NoteInput!, $id: String, $noteType: NoteType!) {
   note {
-    upsertFolder(title: $title, id: $id, containerId: $containerId) {
-      id
-      containerId
-      title
-      data
-      parentId
-    }
-  }
-}
-    `;
-export const useAddFolderMutation = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<AddFolderMutation, TError, AddFolderMutationVariables, TContext>) =>
-    useMutation<AddFolderMutation, TError, AddFolderMutationVariables, TContext>(
-      ['addFolder'],
-      useAxios<AddFolderMutation, AddFolderMutationVariables>(AddFolderDocument),
-      options
-    );
-useAddFolderMutation.getKey = () => ['addFolder'];
-
-export const AddFilesDocument = `
-    mutation addFiles($id: String, $data: NoteInput!) {
-  note {
-    upsertNote(id: $id, data: $data) {
+    upsertAny(data: $data, id: $id, noteType: $noteType) {
       data
       id
       parentId
       title
-      containerId
+      type
     }
   }
 }
     `;
-export const useAddFilesMutation = <
+export const useUpsertAnyMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<AddFilesMutation, TError, AddFilesMutationVariables, TContext>) =>
-    useMutation<AddFilesMutation, TError, AddFilesMutationVariables, TContext>(
-      ['addFiles'],
-      useAxios<AddFilesMutation, AddFilesMutationVariables>(AddFilesDocument),
+    >(options?: UseMutationOptions<UpsertAnyMutation, TError, UpsertAnyMutationVariables, TContext>) =>
+    useMutation<UpsertAnyMutation, TError, UpsertAnyMutationVariables, TContext>(
+      ['upsertAny'],
+      useAxios<UpsertAnyMutation, UpsertAnyMutationVariables>(UpsertAnyDocument),
       options
     );
-useAddFilesMutation.getKey = () => ['addFiles'];
-
-export const UpsertNoteDocument = `
-    mutation upsertNote($id: String, $data: NoteInput!) {
-  note {
-    upsertNote(id: $id, data: $data) {
-      data
-      title
-      parentId
-      id
-      containerId
-    }
-  }
-}
-    `;
-export const useUpsertNoteMutation = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<UpsertNoteMutation, TError, UpsertNoteMutationVariables, TContext>) =>
-    useMutation<UpsertNoteMutation, TError, UpsertNoteMutationVariables, TContext>(
-      ['upsertNote'],
-      useAxios<UpsertNoteMutation, UpsertNoteMutationVariables>(UpsertNoteDocument),
-      options
-    );
-useUpsertNoteMutation.getKey = () => ['upsertNote'];
+useUpsertAnyMutation.getKey = () => ['upsertAny'];
 
 export const MakeNotePublicDocument = `
     mutation makeNotePublic($id: String!) {
@@ -295,35 +237,57 @@ export const useMakeNotePublicMutation = <
     );
 useMakeNotePublicMutation.getKey = () => ['makeNotePublic'];
 
-export const GetNoteFolderStructureDocument = `
-    query getNoteFolderStructure($search: String) {
+export const GetStructureRootDocument = `
+    query getStructureRoot {
   note {
-    listAll(search: $search) {
+    listAll {
       id
       title
       type
-      children {
-        id
-        title
-        type
-      }
+      parentId
     }
   }
 }
     `;
-export const useGetNoteFolderStructureQuery = <
-      TData = GetNoteFolderStructureQuery,
+export const useGetStructureRootQuery = <
+      TData = GetStructureRootQuery,
       TError = unknown
     >(
-      variables?: GetNoteFolderStructureQueryVariables,
-      options?: UseQueryOptions<GetNoteFolderStructureQuery, TError, TData>
+      variables?: GetStructureRootQueryVariables,
+      options?: UseQueryOptions<GetStructureRootQuery, TError, TData>
     ) =>
-    useQuery<GetNoteFolderStructureQuery, TError, TData>(
-      variables === undefined ? ['getNoteFolderStructure'] : ['getNoteFolderStructure', variables],
-      useAxios<GetNoteFolderStructureQuery, GetNoteFolderStructureQueryVariables>(GetNoteFolderStructureDocument).bind(null, variables),
+    useQuery<GetStructureRootQuery, TError, TData>(
+      variables === undefined ? ['getStructureRoot'] : ['getStructureRoot', variables],
+      useAxios<GetStructureRootQuery, GetStructureRootQueryVariables>(GetStructureRootDocument).bind(null, variables),
       options
     );
-useGetNoteFolderStructureQuery.document = GetNoteFolderStructureDocument;
+useGetStructureRootQuery.document = GetStructureRootDocument;
+
+export const GetStructureChildDocument = `
+    query getStructureChild($parentId: String!) {
+  note {
+    getFiles(id: $parentId) {
+      id
+      parentId
+      title
+      type
+    }
+  }
+}
+    `;
+export const useGetStructureChildQuery = <
+      TData = GetStructureChildQuery,
+      TError = unknown
+    >(
+      variables: GetStructureChildQueryVariables,
+      options?: UseQueryOptions<GetStructureChildQuery, TError, TData>
+    ) =>
+    useQuery<GetStructureChildQuery, TError, TData>(
+      ['getStructureChild', variables],
+      useAxios<GetStructureChildQuery, GetStructureChildQueryVariables>(GetStructureChildDocument).bind(null, variables),
+      options
+    );
+useGetStructureChildQuery.document = GetStructureChildDocument;
 
 export const GetNoteDocument = `
     query getNote($id: String!) {
@@ -349,15 +313,3 @@ export const useGetNoteQuery = <
       options
     );
 useGetNoteQuery.document = GetNoteDocument;
-
-export const SubscribeNoteDocument = `
-    subscription subscribeNote($noteId: String!, $subscriberId: String!) {
-  getNote(noteId: $noteId, subscriberId: $subscriberId) {
-    containerId
-    id
-    parentId
-    title
-    data
-  }
-}
-    `;

@@ -10,38 +10,14 @@ mutation addNote($data: NoteInput!) {
   }
 }
 
-mutation addFolder($id: String, $containerId: String, $title: String!) {
+mutation upsertAny($data: NoteInput!, $id: String, $noteType: NoteType!) {
   note {
-    upsertFolder(title: $title, id: $id, containerId: $containerId) {
-      id
-      containerId
-      title
-      data
-      parentId
-    }
-  }
-}
-
-mutation addFiles($id: String, $data: NoteInput!) {
-  note {
-    upsertNote(id: $id, data: $data) {
+    upsertAny(data: $data, id: $id, noteType: $noteType) {
       data
       id
       parentId
       title
-      containerId
-    }
-  }
-}
-
-mutation upsertNote($id: String, $data: NoteInput!) {
-  note {
-    upsertNote(id: $id, data: $data) {
-      data
-      title
-      parentId
-      id
-      containerId
+      type
     }
   }
 }
