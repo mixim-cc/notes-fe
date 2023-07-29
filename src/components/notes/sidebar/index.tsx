@@ -64,6 +64,7 @@ export const NoteSidebar = () => {
                 {individualFiles?.map((file) => (
                   <React.Fragment key={file?.id}>
                     <SidebarFile
+                      id={String(file?.id)}
                       title={file?.title}
                       isSelected={file?.id === selectedFileId}
                       onCopy={() => {
@@ -113,6 +114,7 @@ const Journals = () => {
         {journalFiles?.map((file) => (
           <React.Fragment key={file?.id}>
             <SidebarFile
+              id={String(file?.id)}
               title={file?.title}
               isSelected={file?.id === selectedFileId}
               onCopy={() => {
