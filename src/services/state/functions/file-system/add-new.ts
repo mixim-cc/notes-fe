@@ -21,6 +21,7 @@ export const addNew = ({ title, type, parentId, depth = 0 }: AddNewArgs) => {
     parentId,
     type,
     synced: false,
+    open: true,
     synced_parent_id: parentSyncId?.get(),
     synced_id: undefined,
     depth,
