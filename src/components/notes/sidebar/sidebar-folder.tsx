@@ -8,11 +8,13 @@ import { FilePlus, FolderPlus } from "lucide-react";
 interface SidebarFolderProps {
   folderTitle: string;
   folderId: string;
+  depth: number;
 }
 
 export const SidebarFolder = ({
   folderTitle,
   folderId,
+  depth,
 }: SidebarFolderProps) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -32,6 +34,7 @@ export const SidebarFolder = ({
           parentId: folderId,
           title: "📜  Untitled File",
           type: "FILE",
+          depth,
         });
       },
     },
@@ -67,6 +70,7 @@ export const SidebarFolder = ({
             addNew({
               parentId: folderId,
               title: "📜  Untitled File",
+              depth,
               type: "FILE",
             });
           }}
@@ -78,6 +82,7 @@ export const SidebarFolder = ({
             addNew({
               parentId: folderId,
               title: "📂 Untitled Folder",
+              depth,
               type: "FOLDER",
             });
           }}

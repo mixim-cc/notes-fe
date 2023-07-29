@@ -7,9 +7,10 @@ type AddNewArgs = {
   title: string;
   type: NoteType;
   parentId: string;
+  depth?: number;
 };
 
-export const addNew = ({ title, type, parentId }: AddNewArgs) => {
+export const addNew = ({ title, type, parentId, depth = 0 }: AddNewArgs) => {
   const parentSyncId = state.fs.fileSystem?.find(
     (fs) => fs?.id.get() === parentId
   )?.synced_id;
@@ -22,6 +23,7 @@ export const addNew = ({ title, type, parentId }: AddNewArgs) => {
     synced: false,
     synced_parent_id: parentSyncId?.get(),
     synced_id: undefined,
+    depth,
   });
   startImmediateSync();
 };
