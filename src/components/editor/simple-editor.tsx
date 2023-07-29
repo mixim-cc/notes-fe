@@ -1,19 +1,24 @@
-"use client"
+"use client";
 
-import { useCallback, useEffect, useRef } from "react"
-import EditorJS, { LogLevels, OutputData } from "@editorjs/editorjs"
+import { useCallback, useEffect, useRef } from "react";
+import EditorJS, { LogLevels, OutputData } from "@editorjs/editorjs";
 
-import { EDITOR_TOOLS } from "@/components/editor/editor-tools"
+import { EDITOR_TOOLS } from "@/components/editor/editor-tools";
 
 type EditorProps = {
-  data?: OutputData
-  onChange?: (val: OutputData) => void
-  holder?: string
-  isPreview?: boolean
-}
+  data?: OutputData;
+  onChange?: (val: OutputData) => void;
+  holder?: string;
+  isPreview?: boolean;
+};
 
-export const SimpleEditor = ({ holder, onChange, data, isPreview }: EditorProps) => {
-  const ref = useRef<EditorJS>()
+export const SimpleEditor = ({
+  holder,
+  onChange,
+  data,
+  isPreview,
+}: EditorProps) => {
+  const ref = useRef<EditorJS>();
 
   const initalizeEditor = useCallback(async () => {
     // const EditorJS = (await import("@editorjs/editorjs")).default
@@ -22,37 +27,39 @@ export const SimpleEditor = ({ holder, onChange, data, isPreview }: EditorProps)
       const editor = new EditorJS({
         holder,
         onReady() {
-          ref.current = editor
+          ref.current = editor;
         },
         async onChange(api, event) {
-          let content = await api.saver.save()
+          let content = await api.saver.save();
 
-          onChange(content)
+          console.log(event, "EVENT");
+
+          onChange?.(content);
         },
         placeholder: "Press Tab for controls",
         inlineToolbar: true,
         data: data,
         tools: EDITOR_TOOLS,
         readOnly: isPreview,
-      })
+      });
     }
-  }, [data, holder, onChange])
+  }, [data, holder, onChange]);
 
   useEffect(() => {
     if (ref.current) {
-      ref?.current?.destroy?.()
+      ref?.current?.destroy?.();
     }
 
-    initalizeEditor()
+    initalizeEditor();
 
     return () => {
       if (ref.current) {
-        ref?.current?.destroy?.()
+        ref?.current?.destroy?.();
       }
-    }
-  }, [holder])
+    };
+  }, [holder]);
 
-  return <div id={holder} className="w-[1000pz]" />
-}
+  return <div id={holder} />;
+};
 
-export default SimpleEditor
+export default SimpleEditor;

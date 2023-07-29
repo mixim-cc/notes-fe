@@ -1,111 +1,120 @@
-import { cn } from "@/utils/cn"
-import * as ContextMenu from "@radix-ui/react-context-menu"
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
-import { Copy, Edit3, MoreHorizontal, Star, Trash2 } from "lucide-react"
+import { cn } from "@/utils/cn";
+import * as ContextMenu from "@radix-ui/react-context-menu";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import {
+  Copy,
+  Edit3,
+  FilePlus2,
+  MoreHorizontal,
+  Star,
+  Trash2,
+} from "lucide-react";
 
-import { IconButton } from "@/components/ui/icon-button"
+import { IconButton } from "@/components/ui/icon-button";
+
+type ContextMenuType = "RENAME" | "COPY" | "STAR" | "DELETE" | "MAKE_DRAFT";
+
+const checkValidMenu = (menu: string) => {
+  return !["RENAME", "COPY", "STAR", "DELETE", "MAKE_DRAFT"].includes(menu);
+};
 
 interface NotesContextMenuProps {
-  id: string
-  children?: React.ReactNode
-  onRename?: () => void
-  onDelete?: () => void
-  onStar?: () => void
-  onCopy?: () => void
+  id: string;
+  children?: React.ReactNode;
 
-  trigger?: React.ReactNode
+  options: {
+    type: ContextMenuType | string;
+    handler?: () => void;
+  }[];
 }
 
-const 
-CONTEXT_MENU_ITEMS = [
-  {
+const CONTEXT_MENU_ITEMS = {
+  RENAME: {
     title: "Rename",
     type: "RENAME",
     icon: <Edit3 className="h-4 w-4" />,
     divider: false,
   },
-  {
+  COPY: {
     title: "Make a Copy",
     type: "COPY",
     icon: <Copy className="h-4 w-4" />,
     divider: false,
   },
-  {
+  STAR: {
     title: "Star",
     type: "STAR",
     icon: <Star className="h-4 w-4" />,
     divider: false,
   },
-  {
+  DELETE: {
     title: "Delete",
     type: "DELETE",
     icon: <Trash2 className="h-4 w-4" />,
     divider: true,
     isDanger: true,
   },
-]
+  MAKE_DRAFT: {
+    title: "Make a Draft",
+    type: "MAKE_DRAFT",
+    icon: <FilePlus2 className="h-4 w-4" />,
+    divider: false,
+    isDanger: false,
+  },
+};
 
 export const NotesContextMenu = ({
-  id,
   children,
-  onRename,
-  onCopy,
-  onDelete,
-  onStar,
+  options,
 }: NotesContextMenuProps) => {
   return (
     <ContextMenu.Root modal={false}>
       <ContextMenu.Trigger className="w-full">{children}</ContextMenu.Trigger>
       <ContextMenu.Portal>
         <ContextMenu.Content className="z-[999] min-w-[240px] overflow-hidden rounded-md border border-stroke-base bg-front shadow-xl">
-          {CONTEXT_MENU_ITEMS.map((item, index) => {
-            const onClickFn = {
-              RENAME: onRename,
-              COPY: onCopy,
-              DELETE: onDelete,
-              STAR: onStar,
+          {options.map((item, index) => {
+            const type = item.type;
+            if (checkValidMenu(type)) {
+              throw new Error("Menu is not valid");
             }
+            const menu = CONTEXT_MENU_ITEMS[type as ContextMenuType];
 
             return (
               <ContextMenu.Item
-                onClick={onClickFn[item.type]}
+                key={menu.type}
+                onClick={item.handler}
                 className={cn(
                   "flex cursor-pointer items-center gap-2 rounded-md p-1.5 text-shade-secondary focus:shadow-none focus-visible:outline-none data-[highlighted]:rounded-none data-[highlighted]:bg-back ",
                   {
-                    "border-t border-stroke-base": item.divider,
-                    "rounded-t-none": index + 1 === CONTEXT_MENU_ITEMS.length,
+                    "border-t border-stroke-base": menu.divider,
+                    "rounded-t-none": index + 1 === options.length,
                   }
                 )}
               >
-                {item.icon} <p className="text-sm">{item.title}</p>
+                {menu.icon} <p className="text-sm">{menu.title}</p>
               </ContextMenu.Item>
-            )
+            );
           })}
         </ContextMenu.Content>
       </ContextMenu.Portal>
     </ContextMenu.Root>
-  )
-}
+  );
+};
 
 export const NotesTripleDotsMenu = ({
-  id,
   children,
-  onRename,
-  onCopy,
-  onDelete,
-  onStar,
-  trigger,
+  options,
 }: NotesContextMenuProps) => {
   return (
     <DropdownMenu.Root modal={false}>
       <DropdownMenu.Trigger>
-        {trigger || (
+        {children || (
           <IconButton
             variant="ghost"
             size="sm"
             onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
+              e.preventDefault();
+              e.stopPropagation();
             }}
           >
             <MoreHorizontal className="h-3 w-3" />
@@ -117,38 +126,35 @@ export const NotesTripleDotsMenu = ({
           align="end"
           className="z-[999] min-w-[240px] overflow-hidden rounded-md border border-stroke-base bg-front shadow-xl"
         >
-          {CONTEXT_MENU_ITEMS.map((item, index) => {
-            const onClickFn = {
-              RENAME: onRename,
-              COPY: onCopy,
-              DELETE: onDelete,
-              STAR: onStar,
+          {options.map((item, index) => {
+            const type = item.type;
+            if (checkValidMenu(type)) {
+              throw new Error("Menu is not valid");
             }
-
+            const menu = CONTEXT_MENU_ITEMS[type as ContextMenuType];
             return (
               <DropdownMenu.Item
+                key={menu.title}
                 onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
+                  e.preventDefault();
+                  e.stopPropagation();
 
-                  console.log(item)
-
-                  onClickFn[item.type]()
+                  item.handler?.();
                 }}
                 className={cn(
                   "flex cursor-pointer items-center gap-2 rounded-md p-1.5 text-shade-secondary focus:shadow-none focus-visible:outline-none data-[highlighted]:rounded-none data-[highlighted]:bg-back ",
                   {
-                    "border-t border-stroke-base": item.divider,
-                    "rounded-t-none": index + 1 === CONTEXT_MENU_ITEMS.length,
+                    "border-t border-stroke-base": menu.divider,
+                    "rounded-t-none": index + 1 === options.length,
                   }
                 )}
               >
-                {item.icon} <p className="text-sm">{item.title}</p>
+                {menu.icon} <p className="text-sm">{menu.title}</p>
               </DropdownMenu.Item>
-            )
+            );
           })}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
-  )
-}
+  );
+};

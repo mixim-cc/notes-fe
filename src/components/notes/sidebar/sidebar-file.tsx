@@ -1,24 +1,27 @@
-import { ChangeEventHandler, KeyboardEventHandler, useRef, useState } from "react"
-import { cn } from "@/utils/cn"
-import { FileText } from "lucide-react"
-
-import InlineEditor from "@/components/inline-editor"
-
-import { NotesContextMenu, NotesTripleDotsMenu } from "../context-menu"
+import {
+  ChangeEventHandler,
+  KeyboardEventHandler,
+  useRef,
+  useState,
+} from "react";
+import { NotesContextMenu, NotesTripleDotsMenu } from "../context-menu";
+import { cn } from "@/utils/cn";
+import { FileText } from "lucide-react";
+import InlineEditor from "../../inline-editor";
 
 interface SidebarFileProps {
-  isSelected?: boolean
-  title?: string
-  onTitleChange?: ChangeEventHandler<HTMLTextAreaElement>
-  onTitleBlur?: () => void
-  onTitleKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>
-  onFileClick?: () => void
+  isSelected?: boolean;
+  title?: string;
+  onTitleChange?: ChangeEventHandler<HTMLTextAreaElement>;
+  onTitleBlur?: () => void;
+  onTitleKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
+  onFileClick?: () => void;
 
-  onStar?: () => void
-  onCopy?: () => void
-  onDelete?: () => void
+  onStar?: () => void;
+  onCopy?: () => void;
+  onDelete?: () => void;
 
-  hasParent?: boolean
+  hasParent?: boolean;
 }
 
 export const SidebarFile = ({
@@ -33,21 +36,35 @@ export const SidebarFile = ({
   onStar,
   hasParent,
 }: SidebarFileProps) => {
-  const ref = useRef<HTMLTextAreaElement>(undefined)
-  const [isEditing, setIsEditing] = useState(false)
+  const ref = useRef<HTMLTextAreaElement>(null);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const menuOptions = [
+    {
+      type: "RENAME",
+      handler: () => {
+        setIsEditing(true);
+        if (ref.current) ref.current.focus({ preventScroll: true });
+      },
+    },
+    {
+      type: "COPY",
+      handler: onCopy,
+    },
+    {
+      type: "STAR",
+      handler: onStar,
+    },
+    {
+      type: "DELETE",
+      handler: onDelete,
+    },
+  ];
 
   return (
-    <NotesContextMenu
-      id="1"
-      onCopy={onCopy}
-      onDelete={onDelete}
-      onStar={onStar}
-      onRename={() => {
-        setIsEditing(true)
-        if (ref.current) ref.current.focus({ preventScroll: true })
-      }}
-    >
+    <NotesContextMenu id="1" options={menuOptions}>
       <div
+        tabIndex={0}
         onClick={onFileClick}
         className={cn(
           "min-h-7 text-primary group flex flex-1 cursor-pointer items-center justify-between gap-2 rounded-md  px-1 text-sm font-medium transition-all hover:bg-el",
@@ -76,18 +93,8 @@ export const SidebarFile = ({
           />
         </div>
 
-        <NotesTripleDotsMenu
-          id="1"
-          onCopy={onCopy}
-          onDelete={onDelete}
-          onStar={onStar}
-          onRename={() => {
-            setIsEditing(true)
-
-            if (ref.current) ref.current.focus({ preventScroll: true })
-          }}
-        />
+        <NotesTripleDotsMenu id="1" options={menuOptions} />
       </div>
     </NotesContextMenu>
-  )
-}
+  );
+};

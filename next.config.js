@@ -1,14 +1,17 @@
-const withPWAInit = require("next-pwa")
+/** @type {import('next').NextConfig} */
 
-/** @type {import('next-pwa').PWAConfig} */
-const withPWA = withPWAInit({
+const withPWA = require("next-pwa")({
   dest: "public",
-  reloadOnOnline: false,
-})
+  offlineGoogleAnalytics: true,
+});
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: false,
-}
+const nextConfig = withPWA({
+  experimental: {
+    appDir: true,
+  },
 
-module.exports = withPWA(nextConfig)
+  reactStrictMode: false,
+});
+
+module.exports = nextConfig;

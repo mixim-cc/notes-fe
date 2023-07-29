@@ -1,110 +1,89 @@
-import { useRef, useState } from "react"
-import {
-  addNewFile,
-  copyFile,
-  deleteFile,
-  deleteFolder,
-  editFileTitle,
-  setSelectedFile,
-  triggerSync,
-} from "@/services/redux/reducers/file-explorer-reducer"
-import { useAppSelector } from "@/services/redux/store"
-import { syncAfterDelay } from "@/services/redux/utils/syncAfterDelay"
-import { cn } from "@/utils/cn"
-import { FilePlus } from "lucide-react"
-import { useDispatch } from "react-redux"
+import { addNew } from "@/services/state/functions/file-system/add-new";
+import { rename } from "@/services/state/functions/file-system/rename";
+import { useRef, useState } from "react";
+import { NotesContextMenu } from "../context-menu";
+import InlineEditor from "../../inline-editor";
+import { FilePlus, FolderPlus } from "lucide-react";
 
-import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import InlineEditor from "@/components/inline-editor"
-
-import { NotesContextMenu } from "../context-menu"
-import { SidebarFile } from "./sidebar-file"
-
-interface EditorFolderProps {
-  folderId: string
-  folderTitle?: string
-  files: { id: string; title?: string; isSelected?: boolean }[]
+interface SidebarFolderProps {
+  folderTitle: string;
+  folderId: string;
 }
 
-export const EditorFolder = ({ files, folderId, folderTitle }: EditorFolderProps) => {
-  const dispatch = useDispatch()
-  const selectedFileId = useAppSelector((state) => state.fileExplorerReducer.selectedFile)
+export const SidebarFolder = ({
+  folderTitle,
+  folderId,
+}: SidebarFolderProps) => {
+  const ref = useRef<HTMLTextAreaElement>(null);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const menuOptions = [
+    {
+      type: "RENAME",
+      handler: () => {
+        setIsEditing(true);
+        if (ref.current) ref.current.focus({ preventScroll: true });
+      },
+    },
+    {
+      type: "MAKE_DRAFT",
+      handler: () => {
+        addNew({
+          parentId: folderId,
+          title: "📜  Untitled File",
+          type: "FILE",
+        });
+      },
+    },
+    {
+      type: "STAR",
+      handler: () => {},
+    },
+    {
+      type: "DELETE",
+      handler: () => {},
+    },
+  ];
 
   return (
-    <AccordionItem value={folderId}>
-      <AccordionTrigger>
-        <Folder folderId={folderId} folderTitle={folderTitle} />
-      </AccordionTrigger>
-      <AccordionContent className="pl-2">
-        {files.map((file) => (
-          <SidebarFile
-            hasParent={true}
-            isSelected={selectedFileId === file.id}
-            title={file.title}
-            onFileClick={() => {
-              dispatch(setSelectedFile({ id: file.id }))
-            }}
-            onTitleChange={(e) => {
-              dispatch(editFileTitle({ id: file.id, title: e.target.value }))
-              syncAfterDelay()
-            }}
-            onCopy={() => {
-              dispatch(copyFile(file))
-              syncAfterDelay()
-            }}
-            onDelete={() => {
-              dispatch(deleteFile({ id: file.id, parentId: folderId }))
-              syncAfterDelay()
-            }}
-          />
-        ))}
-      </AccordionContent>
-    </AccordionItem>
-  )
-}
-
-interface FolderProps {
-  folderTitle: string
-  folderId: string
-}
-
-const Folder = ({ folderId, folderTitle }: FolderProps) => {
-  const ref = useRef<HTMLTextAreaElement>(undefined)
-  const [isEditing, setIsEditing] = useState(false)
-
-  const dispatch = useDispatch()
-
-  return (
-    <NotesContextMenu
-      id="1"
-      onCopy={() => {}}
-      onDelete={() => dispatch(deleteFolder({ id: folderId }))}
-      onStar={() => {}}
-      onRename={() => {
-        setIsEditing(true)
-        if (ref.current) ref.current.focus({ preventScroll: true })
-      }}
-    >
+    <NotesContextMenu id="2" options={menuOptions}>
       <div className="group flex h-7 w-full flex-1 items-center gap-2 rounded-md px-1 py-4 text-sm font-medium text-shade-primary transition-all hover:bg-el [&[data-state=open]>svg:first-child]:rotate-90">
         <InlineEditor
           isEditing={isEditing}
           setIsEditing={setIsEditing}
           value={folderTitle}
           onChange={(e) => {
-            dispatch(editFileTitle({ id: folderId, title: e.target.value }))
-            syncAfterDelay()
+            rename({
+              id: folderId,
+              title: e.target.value,
+            });
           }}
-          className="w-full resize-none appearance-none overflow-hidden bg-transparent py-2 text-sm text-shade-primary focus:outline-none"
+          className="w-full resize-none appearance-none  bg-transparent text-ellipsis overflow-hidden text-sm text-shade-primary focus:outline-none"
         />
+
         <FilePlus
           onClick={(e) => {
-            e.preventDefault()
-            dispatch(addNewFile({ parentId: folderId, title: "Untitled File" }))
-            dispatch(triggerSync())
+            e.preventDefault();
+            addNew({
+              parentId: folderId,
+              title: "📜  Untitled File",
+              type: "FILE",
+            });
+          }}
+          className="hidden h-4 w-4 shrink-0 cursor-pointer hover:text-shade-primary group-hover:block"
+        />
+        <FolderPlus
+          onClick={(e) => {
+            e.preventDefault();
+            addNew({
+              parentId: folderId,
+              title: "📂 Untitled Folder",
+              type: "FOLDER",
+            });
           }}
           className="hidden h-4 w-4 shrink-0 cursor-pointer hover:text-shade-primary group-hover:block"
         />
       </div>
     </NotesContextMenu>
-  )
-}
+  );
+};

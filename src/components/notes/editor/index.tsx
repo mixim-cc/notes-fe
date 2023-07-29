@@ -1,76 +1,90 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useGetNoteQuery } from "@/services/graphql/generated/graphql"
-import { editFile, loadInitialContent, triggerSync } from "@/services/redux/reducers/file-explorer-reducer"
-import { useAppDispatch, useAppSelector } from "@/services/redux/store"
-import { syncAfterDelay } from "@/services/redux/utils/syncAfterDelay"
-import { cn } from "@/utils/cn"
-import { OutputData } from "@editorjs/editorjs"
-import { Loader2 } from "lucide-react"
+import { useEffect, useState } from "react";
+import { useGetNoteQuery } from "@/services/graphql/generated/graphql";
 
-import Editor from "@/components/editor/editor"
+import { cn } from "@/utils/cn";
+import { OutputData } from "@editorjs/editorjs";
+import { Loader2 } from "lucide-react";
 
-import { EditorHeader } from "./editor-header"
+import Editor from "@/components/editor/editor";
+
+import { EditorHeader } from "./editor-header";
+import { useSelector } from "@legendapp/state/react";
+import { state } from "@/services/state";
+import { loadFileContent } from "@/services/state/functions/file-system/load-file-content";
+import { editFileContent } from "@/services/state/functions/file-system/edit-file-content";
+import _ from "lodash";
 
 export const NoteEditor = () => {
-  const dispatch = useAppDispatch()
-  const { structure, selectedFile } = useAppSelector((state) => state.fileExplorerReducer)
+  const fileSystem = useSelector(state.fs.fileSystem);
+  const selectedNoteId = useSelector(state.fs.selectedFileId);
 
-  const selectedNote = structure.find((files) => files.id === selectedFile)
+  const selectedNote = fileSystem.find((files) => files?.id === selectedNoteId);
 
-  const { data: noteData, isInitialLoading } = useGetNoteQuery(
-    { id: selectedNote?.synced_id },
+  const { data: noteData, isLoading } = useGetNoteQuery(
+    { id: String(selectedNote?.synced_id) },
     { enabled: !!selectedNote?.synced_id }
-  )
+  );
 
   useEffect(() => {
     if (noteData && selectedNote?.id) {
-      dispatch(
-        loadInitialContent({
-          id: selectedNote.id,
-          content: noteData.note.get.data as unknown as OutputData,
-        })
-      )
+      loadFileContent({
+        id: selectedNote.id,
+        content: noteData?.note?.get?.data as unknown as OutputData,
+      });
     }
-  }, [noteData, dispatch, selectedNote?.id])
+  }, [isLoading, selectedNote?.id]);
 
   return (
     <div
       key={selectedNote?.id}
-      className={cn("auto h-full w-full overflow-hidden rounded-lg border border-stroke-base bg-base")}
+      className={cn(
+        "auto h-full w-full m-4 overflow-hidden rounded-lg border border-stroke-base bg-base"
+      )}
     >
       <div className="sticky top-0 z-50">
         <EditorHeader />
       </div>
-      {isInitialLoading ? (
+
+      {isLoading ? (
         <div className="flex min-h-screen items-center justify-center">
           <Loader2 className="h-10 w-10 animate-spin text-gray-800" />
         </div>
       ) : (
-        <div className="flex h-full w-full justify-center overflow-y-auto" key={selectedNote?.id}>
+        <div
+          className="flex h-full w-full justify-center overflow-y-auto"
+          key={selectedNote?.id}
+        >
           <Editor
             id={selectedNote?.id}
             data={{
               title: selectedNote?.title,
-              content: selectedNote?.content,
+              content: (selectedNote?.content ||
+                noteData?.note?.get?.data) as OutputData,
             }}
             holder={`editor-${selectedNote?.id}`}
             onChange={(data) => {
-              if (data.content) {
-                dispatch(
-                  editFile({
-                    id: selectedNote?.id,
-                    content: data?.content,
-                    title: data?.title,
-                  })
-                )
-                syncAfterDelay()
+              if (
+                data?.content &&
+                (!_.isEqual(
+                  data.content?.blocks,
+                  fileSystem.find((f) => f?.id === selectedNoteId)?.content
+                    ?.blocks
+                ) ||
+                  data?.title !==
+                    fileSystem.find((f) => f?.id === selectedNoteId)?.title)
+              ) {
+                editFileContent({
+                  title: data.title,
+                  content: data?.content as OutputData,
+                  id: selectedNoteId,
+                });
               }
             }}
           />
         </div>
       )}
     </div>
-  )
-}
+  );
+};

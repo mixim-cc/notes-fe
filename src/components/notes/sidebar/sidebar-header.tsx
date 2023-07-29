@@ -1,15 +1,15 @@
-import { Calendar, FolderIcon, Search, Star } from "lucide-react"
+import { Calendar, FolderIcon, Star } from "lucide-react";
 
-import { IconButton } from "@/components/ui/icon-button"
+import { IconButton } from "@/components/ui/icon-button";
 
 interface SidebarHeaderProps {
-  tab: "default" | "journal"
-  onTabChange: (newTab: "default" | "journal") => void
+  tab: "default" | "journal";
+  onTabChange: (newTab: "default" | "journal") => void;
 }
 
 export const SidebarHeader = ({ onTabChange, tab }: SidebarHeaderProps) => {
   return (
-    <div className="flex h-12 items-center justify-between border-b border-stroke-base px-4">
+    <div className="flex h-12 shrink-0 items-center justify-between border-b border-stroke-base px-4">
       <h1 className="text-xl font-semibold leading-none text-shade-primary">
         {tab === "default" ? "Drafts" : "Journal"}
       </h1>
@@ -25,5 +25,5 @@ export const SidebarHeader = ({ onTabChange, tab }: SidebarHeaderProps) => {
         </IconButton>
       </div>
     </div>
-  )
-}
+  );
+};
