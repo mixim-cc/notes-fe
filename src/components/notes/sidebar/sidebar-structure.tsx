@@ -114,6 +114,7 @@ export const SidebarStructure = ({
           <React.Fragment key={folder.id}>
             <SidebarFile
               hasParent
+              id={folder?.id}
               isSelected={selectedFileId === folder?.id}
               title={folder?.title}
               onCopy={() => {

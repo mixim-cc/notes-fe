@@ -43,26 +43,26 @@ export const EditorHeader = React.memo(
     const file = fileSystem.find((files) => files?.id === selectedFile);
     const hasParentFolder = !!file?.parentId;
 
-    // useHotkeys(
-    //   ["m"],
-    //   () => toggleSidebar(!isSidebarVisible),
-    //   [isSidebarVisible],
-    //   {
-    //     enabled: true,
-    //   }
-    // );
+    useHotkeys(
+      ["m"],
+      () => toggleSidebar(!isSidebarVisible),
+      [isSidebarVisible],
+      {
+        enabled: true,
+      }
+    );
 
-    // useHotkeys(
-    //   ["alt + m", "g + f"],
-    //   () => toggleSidebar(!isSidebarVisible),
-    //   [isSidebarVisible],
-    //   {
-    //     enabled: true,
-    //     enableOnContentEditable: true,
-    //     enableOnFormTags: true,
-    //     preventDefault: true,
-    //   }
-    // );
+    useHotkeys(
+      ["alt + m", "g + f"],
+      () => toggleSidebar(!isSidebarVisible),
+      [isSidebarVisible],
+      {
+        enabled: true,
+        enableOnContentEditable: true,
+        enableOnFormTags: true,
+        preventDefault: true,
+      }
+    );
 
     return (
       <div className="flex h-12 items-center justify-between gap-4 border-b border-stroke-base bg-base px-4">
