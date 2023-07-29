@@ -1,37 +1,54 @@
-"use client"
+"use client";
 
-import React from "react"
-import { store } from "@/services/redux/store"
-import { GoogleOAuthProvider } from "@react-oauth/google"
-import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-import { Provider } from "react-redux"
-import { persistStore } from "redux-persist"
-import { PersistGate } from "redux-persist/integration/react"
+import React, { useEffect } from "react";
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { enableReactUse } from "@legendapp/state/config/enableReactUse";
 
-const persister = persistStore(store)
+enableReactUse();
 export const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { staleTime: 0, networkMode: "offlineFirst" },
+    queries: {
+      staleTime: 1000 * 60 * 5,
+      cacheTime: 1000 * 60 * 60 * 24,
+      refetchOnWindowFocus: false,
+    },
   },
-})
+});
 
+import {
+  configureObservablePersistence,
+  persistObservable,
+} from "@legendapp/state/persist";
+// Web
+import { ObservablePersistIndexedDB } from "@legendapp/state/persist-plugins/indexeddb";
+import { state } from "@/services/state";
+import { when } from "@legendapp/state";
+
+// Global configuration
+configureObservablePersistence({
+  persistLocal: ObservablePersistIndexedDB,
+  persistLocalOptions: {
+    indexedDB: {
+      databaseName: "Drafts",
+      version: 1,
+      tableNames: ["filesystem", "selectedFileId", "test"],
+    },
+  },
+});
 function Providers({ children }: React.PropsWithChildren) {
-  const [client] = React.useState(queryClient)
+  const [client] = React.useState(queryClient);
 
   return (
     <QueryClientProvider client={client}>
-      <GoogleOAuthProvider clientId="482628090719-gcv02c5cpjo0gj6jqkbq3paau6jn7638.apps.googleusercontent.com">
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persister}>
-            <Hydrate>{children}</Hydrate>
-          </PersistGate>
-        </Provider>
-
-        <ReactQueryDevtools initialIsOpen={false} />
-      </GoogleOAuthProvider>
+      <Hydrate>{children}</Hydrate>
+      <ReactQueryDevtools position="bottom-right" />
     </QueryClientProvider>
-  )
+  );
 }
 
-export default Providers
+export default Providers;

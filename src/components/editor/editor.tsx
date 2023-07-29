@@ -1,60 +1,69 @@
-"use client"
+"use client";
 
-import { get } from "http"
-import { useEffect, useState } from "react"
-import dynamic from "next/dynamic"
-import { OutputData } from "@editorjs/editorjs"
-import edjsHTML from "editorjs-html"
-import parse from "html-react-parser"
-import { MoveHorizontal } from "lucide-react"
-import { Controller, useForm } from "react-hook-form"
-import TextareaAutosize from "react-textarea-autosize"
-import { useDeepCompareEffect } from "react-use"
+import { get } from "http";
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { OutputData } from "@editorjs/editorjs";
+``;
+import { MoveHorizontal } from "lucide-react";
+import { Controller, useForm } from "react-hook-form";
+import TextareaAutosize from "react-textarea-autosize";
+import { useDeepCompareEffect } from "react-use";
 
-const SimpleEditor = dynamic(() => import("./simple-editor").then((mod) => mod.SimpleEditor), {
-  ssr: false,
-})
+const SimpleEditor = dynamic(
+  () => import("./simple-editor").then((mod) => mod.SimpleEditor),
+  {
+    ssr: false,
+  }
+);
 
 type EditorData = {
-  title?: string
-  content?: OutputData
-}
+  title?: string;
+  content?: OutputData;
+};
 
 interface EditorProps {
-  data?: EditorData
-  id?: string
-  onChange?: (data?: EditorData) => void
-  holder: string
-  isPreview?: boolean
+  data?: EditorData;
+  id?: string;
+  onChange?: (data?: EditorData) => void;
+  holder: string;
+  isPreview?: boolean;
 }
 
-export const Editor = ({ data, onChange, holder, isPreview = false }: EditorProps) => {
-  const [editorWidth, setEditorWidth] = useState<"default" | "full">("default")
+export const Editor = ({
+  data,
+  onChange,
+  holder,
+  isPreview = false,
+}: EditorProps) => {
+  const [editorWidth, setEditorWidth] = useState<"default" | "full">("default");
   const { register, control, watch, reset, getValues } = useForm<EditorData>({
     defaultValues: {
       content: data?.content,
       title: data?.title,
     },
-  })
+  });
+
+  console.log(watch("content"), "content");
 
   useEffect(() => {
     const { unsubscribe } = watch((formData) => {
       onChange?.({
         content: formData.content as OutputData,
         title: formData.title,
-      })
-    })
-    return () => unsubscribe()
-  }, [onChange, watch])
+      });
+    });
+    return () => unsubscribe();
+  }, [onChange, watch]);
 
   useDeepCompareEffect(() => {
-    if (data.content)
+    if (data?.content)
       reset({
         ...getValues(),
         content: data?.content,
         title: data?.title,
-      })
-  }, [data?.title, data?.content, reset, holder])
+      });
+  }, [data?.title, data?.content, reset, holder]);
 
   return (
     <div
@@ -70,7 +79,9 @@ export const Editor = ({ data, onChange, holder, isPreview = false }: EditorProp
           onClick={() => setEditorWidth("full")}
         >
           <MoveHorizontal className="h-4 w-4 text-shade-secondary" />
-          <p className="text-[13px] font-medium text-shade-primary">Wide Layout</p>
+          <p className="text-[13px] font-medium text-shade-primary">
+            Wide Layout
+          </p>
         </div>
       ) : (
         <div
@@ -90,8 +101,8 @@ export const Editor = ({ data, onChange, holder, isPreview = false }: EditorProp
         placeholder="Untitled drafts"
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            e.preventDefault()
-            return false
+            e.preventDefault();
+            return false;
           }
         }}
         className="min-h-12 w-full resize-none appearance-none overflow-hidden bg-transparent py-4 text-4xl font-bold leading-[3.75rem] focus:outline-none"
@@ -104,23 +115,20 @@ export const Editor = ({ data, onChange, holder, isPreview = false }: EditorProp
         name="content"
         control={control}
         render={({ field: { value, onChange: editorOnChange } }) => (
-          <SimpleEditor isPreview={isPreview} onChange={editorOnChange} data={value} holder={holder} />
+          <SimpleEditor
+            isPreview={isPreview}
+            onChange={(e) => {
+              console.log(e);
+              editorOnChange(e);
+            }}
+            data={value}
+            holder={holder}
+          />
         )}
       />
       {/* )} */}
     </div>
-  )
-}
+  );
+};
 
-export default Editor
-
-interface PreviewProps {
-  data: EditorData
-}
-
-const Preview = ({ data }: PreviewProps) => {
-  const edjsParser = edjsHTML()
-
-  let html = edjsParser.parse(data?.content || { blocks: [] })
-  return <div>{parse(html.join(""))}</div>
-}
+export default Editor;
