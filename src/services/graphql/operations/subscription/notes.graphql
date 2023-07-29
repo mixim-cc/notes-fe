@@ -1,9 +1,0 @@
-subscription subscribeNote($noteId: String!, $subscriberId: String!) {
-  getNote(noteId: $noteId, subscriberId: $subscriberId){
-    containerId
-    id
-    parentId
-    title
-    data
-  }
-}

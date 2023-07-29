@@ -1,5 +1,5 @@
-import * as process from "process"
-import type { CodegenConfig } from "@graphql-codegen/cli"
+import * as process from "process";
+import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   overwrite: true,
@@ -8,8 +8,8 @@ const config: CodegenConfig = {
       [`https://mygpt-be.onrender.com/query` as string]: {
         headers: {
           schema: "true",
-          Authorization:
-            "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Imluc18yUmVQdXZSZENIQnpsTG5lVGowTERLUWs0WnciLCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJleHAiOjE2ODkzODkzMjUsImlhdCI6MTY4OTM4OTI2NSwiaXNzIjoiaHR0cHM6Ly9ib2xkLWNhdHRsZS03MS5jbGVyay5hY2NvdW50cy5kZXYiLCJuYmYiOjE2ODkzODkyNTUsInNpZCI6InNlc3NfMlNhYmd0ZEFQQmt3NlVVNGlrOExubEVPcHZEIiwic3ViIjoidXNlcl8yUmVUSnBaeGFzRW5Pc2dPRXVYclRuTUVTc0kifQ.jhcoKYwH3pvr7vMvHpP922oZTC4NUWreoNRQt97f5G8PAeFBRnKEnTYMqnp-3eo55c_XjRsD_UG_SzUTcCQHHBponB4JxZt_86M9ZZiIf2_YRg9LPrBejIGVx8xzbzKCEBFfcEJNNL8dmJsIr_JJgK4MjZBNExZZTkR9r66YWE1VgHNQQQACbwMgaE44SNI4QdnayBDMnTRwyg3CFw2ouHcKieggEK-jsUeb8V6ZO9_g6r27P1XW6r6fMYAJMr9hqXeLOOJHFOa353oA9jzzbgKPOhKKbTPqo9sWGC7Oz2AqsBfXFJHqRIgOSBGMAji_Zo0Ek_9YDc2y-u0KFnunqA",
+          authorization:
+            "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Imluc18yUmVQdXZSZENIQnpsTG5lVGowTERLUWs0WnciLCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwczovL2RyYWZ0cy5taXhpbS5jYyIsImV4cCI6MTY5MDEyMDkzNCwiaWF0IjoxNjkwMTIwODc0LCJpc3MiOiJodHRwczovL2JvbGQtY2F0dGxlLTcxLmNsZXJrLmFjY291bnRzLmRldiIsIm5iZiI6MTY5MDEyMDg2NCwic2lkIjoic2Vzc18yU3VxVndwZXNZd1JRUExpd1ZyUzZxVFVtSmkiLCJzdWIiOiJ1c2VyXzJSZVRKcFp4YXNFbk9zZ09FdVhyVG5NRVNzSSJ9.jGGLjV1M6oXa1G6TZ-ameKUa5oVFOqwkfNBymtQ6CxfBoc0JVG1XeZThceZg3n-fndvvdzpBKuGpAS4minvdkHbD5_i5Y91lTcOQHvsuWf-ilE64mSQtjI9I8TmDLQvZWaHzlTjAgd56yRC9CartkVmQvWtXeP0owoVTbQUchUdr5CCzPlMuTA027OMXj0c07Nyi1GuJCaUnLrSbckgqrPsY59fWwb22MeZBsgLyNk-tjTECHo3zBTijpRVi7vsO3IZMkKgovbYcGlM5QzS8eI2qme69TfgHL3jZSM5BJlrSSgaMtL8W5vzYqkc9aiYIqMTGlkOS4rnwbdTCwgwbXQ",
         },
       },
     },
@@ -55,6 +55,6 @@ const config: CodegenConfig = {
       plugins: ["introspection"],
     },
   },
-}
+};
 
-export default config
+export default config;

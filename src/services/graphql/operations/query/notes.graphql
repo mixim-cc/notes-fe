@@ -1,21 +1,28 @@
-query getNoteFolderStructure($search: String) {
+query getStructureRoot {
   note {
-    listAll(search: $search){
+    listAll {
       id
       title
       type
-      children {
-        id
-        title
-        type
-      }
+      parentId
+    }
+  }
+}
+
+query getStructureChild($parentId: String!) {
+  note {
+    getFiles(id: $parentId) {
+      id
+      parentId
+      title
+      type
     }
   }
 }
 
 query getNote($id: String!) {
   note {
-    get(id: $id){
+    get(id: $id) {
       id
       title
       data
