@@ -38,7 +38,11 @@ const NestedChildFolder = ({
   return (
     <AccordionItem value={parentId} key={parentId}>
       <AccordionTrigger isLoading={isLoading}>
-        <SidebarFolder folderId={parentId} folderTitle={parentTitle} />
+        <SidebarFolder
+          depth={depth}
+          folderId={parentId}
+          folderTitle={parentTitle}
+        />
       </AccordionTrigger>
 
       <AccordionContent>
@@ -78,6 +82,7 @@ export const SidebarStructure = ({
         ?.filter((f) => f.depth === depth && f.open)
         ?.map((f) => f.id)}
       onValueChange={(e) => {
+        console.log(e, state.fs.fileSystem.get(), parentId);
         state.fs.fileSystem.set((prev) =>
           prev.map((p) => {
             if (parentId && p.id === parentId) {
