@@ -31,8 +31,6 @@ export const useNestedLoad = ({ parentId, enabled }: UseNestedLoadProps) => {
     }
   );
 
-  console.log(selectedNoteId, "id");
-
   useEffect(() => {
     if (data) {
       const nested = data?.note?.getFiles?.reduce((acc, curr, index) => {

@@ -5,6 +5,7 @@ import {
   Copy,
   Edit3,
   FilePlus2,
+  FolderPlusIcon,
   MoreHorizontal,
   Star,
   Trash2,
@@ -12,10 +13,23 @@ import {
 
 import { IconButton } from "@/components/ui/icon-button";
 
-type ContextMenuType = "RENAME" | "COPY" | "STAR" | "DELETE" | "MAKE_DRAFT";
+type ContextMenuType =
+  | "RENAME"
+  | "COPY"
+  | "STAR"
+  | "DELETE"
+  | "MAKE_DRAFT"
+  | "MAKE_FOLDER";
 
 const checkValidMenu = (menu: string) => {
-  return !["RENAME", "COPY", "STAR", "DELETE", "MAKE_DRAFT"].includes(menu);
+  return ![
+    "RENAME",
+    "COPY",
+    "STAR",
+    "DELETE",
+    "MAKE_DRAFT",
+    "MAKE_FOLDER",
+  ].includes(menu);
 };
 
 interface NotesContextMenuProps {
@@ -61,6 +75,13 @@ const CONTEXT_MENU_ITEMS = {
     divider: false,
     isDanger: false,
   },
+  MAKE_FOLDER: {
+    title: "Make Folder",
+    type: "MAKE_FOLDER",
+    icon: <FolderPlusIcon className="h-4 w-4" />,
+    divider: false,
+    isDanger: false,
+  },
 };
 
 export const NotesContextMenu = ({
@@ -75,7 +96,7 @@ export const NotesContextMenu = ({
           {options.map((item, index) => {
             const type = item.type;
             if (checkValidMenu(type)) {
-              throw new Error("Menu is not valid");
+              throw new Error(`${type} Menu is not valid`);
             }
             const menu = CONTEXT_MENU_ITEMS[type as ContextMenuType];
 

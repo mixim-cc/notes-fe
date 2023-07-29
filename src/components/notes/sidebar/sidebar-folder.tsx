@@ -39,6 +39,17 @@ export const SidebarFolder = ({
       },
     },
     {
+      type: "MAKE_FOLDER",
+      handler: () => {
+        addNew({
+          parentId: folderId,
+          title: "📂  Untitled Folder",
+          type: "FOLDER",
+          depth,
+        });
+      },
+    },
+    {
       type: "STAR",
       handler: () => {},
     },
