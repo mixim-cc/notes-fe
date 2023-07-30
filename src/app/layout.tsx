@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     default: "Mixim Drafts",
     template: "%s | Mixim Drafts",
   },
+  manifest: "./manifest.json",
+  metadataBase: new URL("https://drafts.mixim.cc"),
   description:
     "Simple yet powerful Note-taking app for productive minds. Simplify your note-taking experience with Drafts, the minimalistic app designed to help you focus on what matters most: your ideas.",
   robots: {
