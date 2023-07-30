@@ -13,7 +13,10 @@ export default function Page() {
 
   return (
     <>
-      <motion.div layout className="hidden h-screen bg-base-hover  md:flex">
+      <motion.div
+        layout
+        className="hidden h-screen bg-base-hover md:flex md:gap-4 md:p-4"
+      >
         <NoteSidebar />
         <NoteEditor />
       </motion.div>
