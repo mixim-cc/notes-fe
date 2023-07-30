@@ -48,7 +48,7 @@ export const NoteSidebar = () => {
           animate={{ width: "320px", opacity: 1 }}
           exit={{ width: 0, opacity: 0 }}
           className={cn(
-            "flex h-full shrink-0 flex-col my-4 ml-4 gap-4 overflow-y-auto no-scrollbar rounded-lg border border-stroke-base bg-base"
+            "flex h-full shrink-0 flex-col  gap-4 overflow-y-auto no-scrollbar rounded-lg border border-stroke-base bg-base"
           )}
         >
           <SidebarHeader

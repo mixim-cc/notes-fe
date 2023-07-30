@@ -3,12 +3,6 @@ import { SignInButton } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Drafts | Welcome",
-  description: "Simple yet powerful Note-taking app for productive minds.",
-};
 
 export default function Page() {
   return (

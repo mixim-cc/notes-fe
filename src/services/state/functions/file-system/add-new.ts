@@ -11,13 +11,14 @@ type AddNewArgs = {
 };
 
 export const addNew = ({ title, type, parentId, depth = 0 }: AddNewArgs) => {
+  const id = nanoid();
   const parentSyncId = state.fs.fileSystem?.find(
     (fs) => fs?.id.get() === parentId
   )?.synced_id;
 
   state.fs.fileSystem.push({
-    id: nanoid(),
-    title: title,
+    id,
+    title,
     parentId,
     type,
     synced: false,
@@ -26,5 +27,9 @@ export const addNew = ({ title, type, parentId, depth = 0 }: AddNewArgs) => {
     synced_id: undefined,
     depth,
   });
+
+  if (type === "FILE") {
+    state.fs.selectedFileId.set(id);
+  }
   startImmediateSync();
 };

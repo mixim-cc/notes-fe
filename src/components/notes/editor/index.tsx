@@ -40,7 +40,7 @@ export const NoteEditor = () => {
     <div
       key={selectedNote?.id}
       className={cn(
-        "auto h-full w-full m-4 overflow-hidden rounded-lg border border-stroke-base bg-base"
+        "auto h-full w-full  overflow-hidden rounded-lg border border-stroke-base bg-base"
       )}
     >
       <div className="sticky top-0 z-50">
