@@ -34,16 +34,12 @@ import { Button } from "./button";
 import { IconButton } from "./icon-button";
 import { Input } from "./input";
 import { clear } from "@/services/state/functions/file-system/clear";
+import { useSelector } from "@legendapp/state/react";
+import { state } from "@/services/state";
+import { selectFile } from "@/services/state/functions/file-system/select-file";
+import { addNew } from "@/services/state/functions/file-system/add-new";
 
 type OasisMenu = "none" | "menu" | "add" | "search" | "avatar";
-
-const searchItems = [
-  {
-    id: 1,
-    title: "Stop using todo list",
-    description: "todo list i graveyard...",
-  },
-];
 
 export const Oasis = () => {
   const { user } = useUser();
@@ -52,33 +48,27 @@ export const Oasis = () => {
   const [currentMenu, setCurrentMenu] = useState<OasisMenu>("menu");
   const [currentTime, setCurrentTime] = useState(dayjs());
 
-  //   const { data } = useGetNoteFolderStructureQuery(
-  //     { search: searchTerm },
-  //     { enabled: !!searchTerm }
-  //   );
+  const fileSystem = useSelector(state.fs.fileSystem);
 
-  //   const flatStrucuture = data?.note?.listAll?.reduce((output, item) => {
-  //     const newItem = {
-  //       id: item.id,
-  //       title: item.title,
-  //       type: item.type,
-  //     };
+  const searchItems = fileSystem.filter((obj) => {
+    if (obj?.type === "FILE") {
+      const blocks = obj?.content?.blocks;
+      if (blocks) {
+        for (const block of blocks) {
+          if (block?.data?.text?.includes(searchTerm)) {
+            return true; // If any block contains the search word, include the object in the result
+          }
+        }
+      }
+    }
 
-  //     output.push(newItem);
+    return (
+      obj?.type === "FILE" &&
+      obj.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
 
-  //     if (item.children && item.children.length > 0) {
-  //       const children = item.children.map((child) => ({
-  //         id: child?.id,
-  //         title: child.title,
-  //         parentId: item.id,
-  //         type: child.type,
-  //       }));
-
-  //       output.push(...children);
-  //     }
-
-  //     return output;
-  //   }, []);
+  console.log(searchItems);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -148,12 +138,10 @@ export const Oasis = () => {
           >
             {searchItems?.map((searchItem) => (
               <div
-                key={searchItem.id}
+                key={searchItem?.id}
                 className="flex gap-2 rounded-md p-2 hover:bg-base-hover "
                 onClick={() => {
-                  // dispatch(
-                  //   setSelectedFileWithSyncedId({ id: searchItem?.id })
-                  // );
+                  selectFile({ id: String(searchItem?.id) });
                   setCurrentMenu("menu");
                   setSearchTerm("");
                 }}
@@ -161,9 +149,17 @@ export const Oasis = () => {
                 <FileText className="h-4 w-4" />
                 <div className="">
                   <p className="text-xs text-shade-primary">
-                    {searchItem.title}
+                    {searchItem?.title}
                   </p>
-                  {/* <p className="text-sm text-shade-primary">{searchItem.description}</p> */}
+                  <p className="text-sm text-shade-primary">
+                    {searchItem?.content?.blocks
+                      ?.filter((f) =>
+                        f?.data?.text?.toLowerCase().includes(searchTerm)
+                      )
+                      .map((a, index) => (
+                        <p key={index}>{a.data.text}</p>
+                      ))}
+                  </p>
                 </div>
               </div>
             ))}
@@ -171,8 +167,14 @@ export const Oasis = () => {
             <div
               className="flex cursor-pointer items-center gap-2 rounded-md p-2 hover:bg-base-hover"
               onClick={() => {
-                // dispatch(addNewFile({ parentId: null, title: searchTerm }));
-                // dispatch(triggerSync());
+                const id = addNew({
+                  parentId: "",
+                  title: searchTerm,
+                  type: "FILE",
+                  depth: 0,
+                });
+                selectFile(id);
+
                 setCurrentMenu("menu");
                 setSearchTerm("");
               }}
