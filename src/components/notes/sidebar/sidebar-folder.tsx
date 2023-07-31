@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { NotesContextMenu } from "../context-menu";
 import InlineEditor from "../../inline-editor";
 import { FilePlus, FolderPlus } from "lucide-react";
+import { remove } from "@/services/state/functions/file-system/remove";
 
 interface SidebarFolderProps {
   folderTitle: string;
@@ -55,7 +56,13 @@ export const SidebarFolder = ({
     },
     {
       type: "DELETE",
-      handler: () => {},
+      handler: () => {
+        try {
+          remove({ id: folderId });
+        } catch (e) {
+          window.alert(e);
+        }
+      },
     },
   ];
 

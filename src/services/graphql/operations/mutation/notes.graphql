@@ -27,3 +27,9 @@ mutation makeNotePublic($id: String!) {
     switchPublic(id: $id)
   }
 }
+
+mutation deleteNote($id: String!) {
+  note {
+    delete(id: $id)
+  }
+}

@@ -14,6 +14,7 @@ import { copyFile } from "@/services/state/functions/file-system/copy-file";
 import { rename } from "@/services/state/functions/file-system/rename";
 import { startImmediateSync } from "@/services/state/functions/sync";
 import { selectFile } from "@/services/state/functions/file-system/select-file";
+import { remove } from "@/services/state/functions/file-system/remove";
 
 interface NestedFolderProps {
   parentId: string;
@@ -118,6 +119,9 @@ export const SidebarStructure = ({
               id={folder?.id}
               isSelected={selectedFileId === folder?.id}
               title={folder?.title}
+              onDelete={() => {
+                remove({ id: folder.id });
+              }}
               onCopy={() => {
                 copyFile({ id: folder.id });
               }}

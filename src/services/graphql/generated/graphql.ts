@@ -152,7 +152,16 @@ export type MakeNotePublicMutationVariables = Exact<{
 
 export type MakeNotePublicMutation = { note: { switchPublic?: string | null } };
 
-export type GetStructureRootQueryVariables = Exact<{ [key: string]: never; }>;
+export type DeleteNoteMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type DeleteNoteMutation = { note: { delete?: string | null } };
+
+export type GetStructureRootQueryVariables = Exact<{
+  search?: InputMaybe<Scalars['String']>;
+}>;
 
 
 export type GetStructureRootQuery = { note: { listAll?: Array<{ id?: string | null, title?: string | null, type?: NoteType | null, parentId?: string | null, isPublic?: boolean | null } | null> | null } };
@@ -238,10 +247,28 @@ export const useMakeNotePublicMutation = <
     );
 useMakeNotePublicMutation.getKey = () => ['makeNotePublic'];
 
-export const GetStructureRootDocument = `
-    query getStructureRoot {
+export const DeleteNoteDocument = `
+    mutation deleteNote($id: String!) {
   note {
-    listAll {
+    delete(id: $id)
+  }
+}
+    `;
+export const useDeleteNoteMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<DeleteNoteMutation, TError, DeleteNoteMutationVariables, TContext>) =>
+    useMutation<DeleteNoteMutation, TError, DeleteNoteMutationVariables, TContext>(
+      ['deleteNote'],
+      useAxios<DeleteNoteMutation, DeleteNoteMutationVariables>(DeleteNoteDocument),
+      options
+    );
+useDeleteNoteMutation.getKey = () => ['deleteNote'];
+
+export const GetStructureRootDocument = `
+    query getStructureRoot($search: String) {
+  note {
+    listAll(search: $search) {
       id
       title
       type
