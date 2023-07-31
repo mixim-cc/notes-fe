@@ -34,4 +34,6 @@ export const addNew = ({ title, type, parentId, depth = 0 }: AddNewArgs) => {
     state.fs.selectedFileId.set(id);
   }
   startImmediateSync();
+
+  return { id };
 };
