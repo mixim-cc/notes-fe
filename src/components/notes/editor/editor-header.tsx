@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { NotesTripleDotsMenu } from "../context-menu";
 import { copyFile } from "@/services/state/functions/file-system/copy-file";
 import { useMakeNotePublicMutation } from "@/services/graphql";
+import { makePublic } from "@/services/state/functions/file-system/make-public";
 
 interface EditorHeaderProps {
   title?: string;
@@ -124,44 +125,48 @@ export const EditorHeader = React.memo(
                   Share your draft to anyone with public url.
                 </p>
                 <hr />
-                {/* <Input
-                disabled
-                className="overflow-hidden text-ellipsis whitespace-nowrap"
-                value={`${location?.origin}/preview?id=${file?.synced_id}`}
-              /> */}
-                {/* {publicFileIds.includes(file?.id) ? ( */}
-                {/* <Button
-                isLoading={isLoading}
-                leftIcon={isCopied ? <CheckCircle className="h-4 w-4" /> : null}
-                onClick={async () => {
-                  const response = await mutateAsync({
-                    id: String(file?.synced_id),
-                  });
-
-                  if (response) {
-                    const link = `${location?.origin}/preview?id=${file?.synced_id}`;
-
-                    navigator.clipboard.writeText(link);
-                    setIsCopied(true);
-                  }
-                }}
-              >
-                {!isCopied ? "Copy To Clipboard" : "Copied To Clipboard"}
-              </Button> */}
-                {/* ) : (
-                <Button
-                  isLoading={isLoading}
-                  onClick={async () => {
-                    const response = await mutateAsync({ id: file?.synced_id });
-
-                    if (response) {
-                      dispatch(setPublic({ id: file.id }));
+                <Input
+                  disabled
+                  className="overflow-hidden text-ellipsis whitespace-nowrap"
+                  value={`${location?.origin}/preview?id=${file?.synced_id}`}
+                />
+                {file?.isPublic ? (
+                  <Button
+                    isLoading={isLoading}
+                    leftIcon={
+                      isCopied ? <CheckCircle className="h-4 w-4" /> : null
                     }
-                  }}
-                >
-                  Share your Draft
-                </Button>
-              )} */}
+                    onClick={async () => {
+                      const response = await mutateAsync({
+                        id: String(file?.synced_id),
+                      });
+
+                      if (response) {
+                        const link = `${location?.origin}/preview?id=${file?.synced_id}`;
+
+                        navigator.clipboard.writeText(link);
+                        setIsCopied(true);
+                      }
+                    }}
+                  >
+                    {!isCopied ? "Copy To Clipboard" : "Copied To Clipboard"}
+                  </Button>
+                ) : (
+                  <Button
+                    isLoading={isLoading}
+                    onClick={async () => {
+                      const response = await mutateAsync({
+                        id: String(file?.synced_id),
+                      });
+
+                      if (response?.note?.switchPublic) {
+                        makePublic({ id: String(file?.id) });
+                      }
+                    }}
+                  >
+                    Share your Draft
+                  </Button>
+                )}
 
                 <p></p>
               </div>

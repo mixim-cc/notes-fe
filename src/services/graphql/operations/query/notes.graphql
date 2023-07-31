@@ -5,6 +5,7 @@ query getStructureRoot {
       title
       type
       parentId
+      isPublic
     }
   }
 }
@@ -16,6 +17,7 @@ query getStructureChild($parentId: String!) {
       parentId
       title
       type
+      isPublic
     }
   }
 }
@@ -26,6 +28,7 @@ query getNote($id: String!) {
       id
       title
       data
+      isPublic
     }
   }
 }

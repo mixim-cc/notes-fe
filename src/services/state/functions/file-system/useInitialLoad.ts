@@ -29,6 +29,7 @@ export const useInitalLoad = () => {
           isJournal: n?.title === "Journal",
           depth: 0,
           open: index === 0 ? true : false,
+          isPublic: n?.isPublic || false,
         })) || []
       );
     }
