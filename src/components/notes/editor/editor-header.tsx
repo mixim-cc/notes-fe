@@ -128,7 +128,11 @@ export const EditorHeader = React.memo(
                 <Input
                   disabled
                   className="overflow-hidden text-ellipsis whitespace-nowrap"
-                  value={`${location?.origin}/preview?id=${file?.synced_id}`}
+                  value={
+                    typeof window == "undefined"
+                      ? ""
+                      : `${location?.origin}/preview?id=${file?.synced_id}`
+                  }
                 />
                 {file?.isPublic ? (
                   <Button
@@ -142,7 +146,10 @@ export const EditorHeader = React.memo(
                       });
 
                       if (response) {
-                        const link = `${location?.origin}/preview?id=${file?.synced_id}`;
+                        const link =
+                          typeof window == "undefined"
+                            ? ""
+                            : `${location?.origin}/preview?id=${file?.synced_id}`;
 
                         navigator.clipboard.writeText(link);
                         setIsCopied(true);

@@ -15,6 +15,7 @@ import { rename } from "@/services/state/functions/file-system/rename";
 import { startImmediateSync } from "@/services/state/functions/sync";
 import { useNestedLoad } from "@/services/state/functions/file-system/useNestedLoad";
 import { selectFile } from "@/services/state/functions/file-system/select-file";
+import { remove } from "@/services/state/functions/file-system/remove";
 
 export const NoteSidebar = () => {
   const [selectedTab, setSelectedTab] = useState<"default" | "journal">(
@@ -67,6 +68,9 @@ export const NoteSidebar = () => {
                       id={String(file?.id)}
                       title={file?.title}
                       isSelected={file?.id === selectedFileId}
+                      onDelete={() => {
+                        remove({ id: String(file?.id) });
+                      }}
                       onCopy={() => {
                         copyFile({ id: String(file?.id) });
                       }}

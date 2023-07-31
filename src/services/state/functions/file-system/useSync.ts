@@ -1,10 +1,15 @@
-import { useUpsertAnyMutation } from "@/services/graphql";
+import {
+  useDeleteNoteMutation,
+  useUpsertAnyMutation,
+} from "@/services/graphql";
 import { FileSystem, state } from "@/services/state";
 import { useObserve, useSelector } from "@legendapp/state/react";
 import _ from "lodash";
 
 export const useSync = () => {
   const { mutateAsync, isLoading } = useUpsertAnyMutation();
+  const { mutateAsync: deleteNote, isLoading: isDeleteLoading } =
+    useDeleteNoteMutation();
 
   const syncWithAPI = async (fileSystem: FileSystem[]) => {
     const responses = await Promise.all(
@@ -58,5 +63,16 @@ export const useSync = () => {
     }
   });
 
-  return { isLoading };
+  useObserve(async () => {
+    const responses = await Promise.all(
+      state.fs.deletedIds.get().map(async (id) => {
+        const response = await deleteNote({ id });
+        if (response) {
+          state.fs.deletedIds.set((prev) => prev.filter((p) => p !== id));
+        }
+      })
+    );
+  });
+
+  return { isLoading, isDeleteLoading };
 };

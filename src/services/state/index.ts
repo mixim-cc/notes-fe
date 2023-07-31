@@ -25,6 +25,7 @@ export type State = {
   startSync: boolean;
   isSidebarVisible: boolean;
   fs: {
+    deletedIds: string[];
     fileSystem: FileSystem[];
     selectedFileId: string | undefined;
   };
@@ -34,6 +35,7 @@ export const initialState = {
   fs: {
     fileSystem: [],
     selectedFileId: undefined,
+    deletedIds: [],
   },
   isSidebarVisible: true,
   startSync: false,
