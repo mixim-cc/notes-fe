@@ -28,6 +28,7 @@ export type Note = {
   containerId?: Maybe<Scalars['String']>;
   data?: Maybe<Scalars['Map']>;
   id?: Maybe<Scalars['String']>;
+  isPublic?: Maybe<Scalars['Boolean']>;
   parentId?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   type?: Maybe<NoteType>;
@@ -154,21 +155,21 @@ export type MakeNotePublicMutation = { note: { switchPublic?: string | null } };
 export type GetStructureRootQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetStructureRootQuery = { note: { listAll?: Array<{ id?: string | null, title?: string | null, type?: NoteType | null, parentId?: string | null } | null> | null } };
+export type GetStructureRootQuery = { note: { listAll?: Array<{ id?: string | null, title?: string | null, type?: NoteType | null, parentId?: string | null, isPublic?: boolean | null } | null> | null } };
 
 export type GetStructureChildQueryVariables = Exact<{
   parentId: Scalars['String'];
 }>;
 
 
-export type GetStructureChildQuery = { note: { getFiles?: Array<{ id?: string | null, parentId?: string | null, title?: string | null, type?: NoteType | null } | null> | null } };
+export type GetStructureChildQuery = { note: { getFiles?: Array<{ id?: string | null, parentId?: string | null, title?: string | null, type?: NoteType | null, isPublic?: boolean | null } | null> | null } };
 
 export type GetNoteQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetNoteQuery = { note: { get?: { id?: string | null, title?: string | null, data?: Record<string, unknown> | null } | null } };
+export type GetNoteQuery = { note: { get?: { id?: string | null, title?: string | null, data?: Record<string, unknown> | null, isPublic?: boolean | null } | null } };
 
 
 export const AddNoteDocument = `
@@ -245,6 +246,7 @@ export const GetStructureRootDocument = `
       title
       type
       parentId
+      isPublic
     }
   }
 }
@@ -271,6 +273,7 @@ export const GetStructureChildDocument = `
       parentId
       title
       type
+      isPublic
     }
   }
 }
@@ -296,6 +299,7 @@ export const GetNoteDocument = `
       id
       title
       data
+      isPublic
     }
   }
 }

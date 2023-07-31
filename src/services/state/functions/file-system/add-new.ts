@@ -26,6 +26,8 @@ export const addNew = ({ title, type, parentId, depth = 0 }: AddNewArgs) => {
     synced_parent_id: parentSyncId?.get(),
     synced_id: undefined,
     depth,
+    isJournal: false,
+    isPublic: false,
   });
 
   if (type === "FILE") {

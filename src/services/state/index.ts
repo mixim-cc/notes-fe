@@ -15,6 +15,7 @@ export type FileSystem = {
   synced?: boolean;
   content?: OutputData | null;
   isJournal?: boolean;
+  isPublic?: boolean;
 
   depth?: number;
   open?: boolean;
