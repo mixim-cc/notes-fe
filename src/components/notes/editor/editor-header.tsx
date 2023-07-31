@@ -26,6 +26,7 @@ import { NotesTripleDotsMenu } from "../context-menu";
 import { copyFile } from "@/services/state/functions/file-system/copy-file";
 import { useMakeNotePublicMutation } from "@/services/graphql";
 import { makePublic } from "@/services/state/functions/file-system/make-public";
+import { remove } from "@/services/state/functions/file-system/remove";
 
 interface EditorHeaderProps {
   title?: string;
@@ -204,7 +205,9 @@ export const EditorHeader = React.memo(
                 },
                 {
                   type: "DELETE",
-                  handler: () => {},
+                  handler: () => {
+                    remove({ id: String(file?.id) });
+                  },
                 },
               ]}
             >
