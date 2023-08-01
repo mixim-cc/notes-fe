@@ -47,11 +47,12 @@ export const NoteEditor = () => {
         <EditorHeader />
       </div>
 
-      {isLoading ? (
+      {/* {isInitialLoading && networkStatus === "online" ? (
         <div className="flex min-h-screen items-center justify-center">
           <Loader2 className="h-10 w-10 animate-spin text-gray-800" />
         </div>
-      ) : (
+      ) : ( */}
+      {selectedNote?.content || noteData?.note?.get?.data ? (
         <div
           className="flex h-full w-full justify-center overflow-y-auto"
           key={selectedNote?.id}
@@ -84,7 +85,12 @@ export const NoteEditor = () => {
             }}
           />
         </div>
+      ) : (
+        <div className="flex min-h-screen items-center justify-center">
+          <Loader2 className="h-10 w-10 animate-spin text-gray-800" />
+        </div>
       )}
+      {/* )} */}
     </div>
   );
 };

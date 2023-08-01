@@ -50,6 +50,8 @@ export const useNestedLoad = ({ parentId, enabled }: UseNestedLoadProps) => {
             synced: true,
             synced_id: String(curr?.id),
             open: false,
+            isSyncing: false,
+            lastSyncedDate: new Date(),
             depth: (parentDepth || 0) + 1,
           });
         }

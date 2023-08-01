@@ -4,8 +4,11 @@ import { toggleSidebar } from "@/services/state/functions/file-system/toggle-sid
 import { useSelector } from "@legendapp/state/react";
 import {
   CheckCircle,
+  Cloud,
+  CloudOff,
   FolderIcon,
   Link,
+  Loader2,
   MoreHorizontal,
   PanelLeftClose,
   PanelLeftOpen,
@@ -27,6 +30,7 @@ import { copyFile } from "@/services/state/functions/file-system/copy-file";
 import { useMakeNotePublicMutation } from "@/services/graphql";
 import { makePublic } from "@/services/state/functions/file-system/make-public";
 import { remove } from "@/services/state/functions/file-system/remove";
+import dayjs from "dayjs";
 
 interface EditorHeaderProps {
   title?: string;
@@ -39,6 +43,7 @@ export const EditorHeader = React.memo(
     const isSidebarVisible = useSelector(state.isSidebarVisible);
     const fileSystem = useSelector(state.fs.fileSystem);
     const selectedFile = useSelector(state.fs.selectedFileId);
+    const status = useSelector(state.networkStatus);
 
     const { mutateAsync, isLoading } = useMakeNotePublicMutation();
 
@@ -100,6 +105,27 @@ export const EditorHeader = React.memo(
           </div>
         </div>
         <div className="flex items-center gap-2">
+          {status === "offline" ? (
+            <p className="text-xs text-shade-subtle inline-flex items-center gap-2">
+              <CloudOff className="h-4 w-4" /> Offline -{" "}
+              {file?.lastSyncedDate
+                ? dayjs(file?.lastSyncedDate).format("MMM DD, hh:mm a")
+                : "Never"}
+            </p>
+          ) : file?.isSyncing ? (
+            <p className="text-xs text-shade-subtle inline-flex items-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin text-gray-400" />{" "}
+              <span>Syncing</span>
+            </p>
+          ) : (
+            <p className="text-xs text-shade-subtle inline-flex items-center gap-2">
+              <Cloud className="h-4 w-4 text-green-600" /> Online -{" "}
+              {file?.lastSyncedDate
+                ? dayjs(file?.lastSyncedDate).format("MMM DD, hh:mm a")
+                : "Never"}
+            </p>
+          )}
+
           <IconButton size="sm" variant="ghost">
             <Star className="text-shade-seondary h-4 w-4" />
           </IconButton>

@@ -16,14 +16,18 @@ export type FileSystem = {
   content?: OutputData | null;
   isJournal?: boolean;
   isPublic?: boolean;
+  isSyncing?: boolean;
 
   depth?: number;
   open?: boolean;
+  lastSyncedDate?: Date;
 };
 
 export type State = {
   startSync: boolean;
   isSidebarVisible: boolean;
+  networkStatus: "online" | "offline";
+
   fs: {
     deletedIds: string[];
     fileSystem: FileSystem[];
@@ -31,13 +35,14 @@ export type State = {
   };
 };
 
-export const initialState = {
+export const initialState: State = {
   fs: {
     fileSystem: [],
     selectedFileId: undefined,
     deletedIds: [],
   },
   isSidebarVisible: true,
+  networkStatus: "online",
   startSync: false,
 };
 
@@ -45,5 +50,10 @@ export const state = observable<State>(initialState);
 
 persistObservable(state.isSidebarVisible, {
   local: "sidebar",
+  persistLocal: ObservablePersistLocalStorage,
+});
+
+persistObservable(state.networkStatus, {
+  local: "networkStatus",
   persistLocal: ObservablePersistLocalStorage,
 });

@@ -8,6 +8,16 @@ interface LoadFileContentArgs {
 
 export const loadFileContent = ({ id, content }: LoadFileContentArgs) => {
   state.fs.fileSystem.set((prev) =>
-    prev.map((fs) => (fs?.id === id ? { ...fs, content, synced: true } : fs))
+    prev.map((fs) =>
+      fs?.id === id
+        ? {
+            ...fs,
+            content,
+            synced: true,
+            lastSyncedDate: new Date(),
+            isSyncing: false,
+          }
+        : fs
+    )
   );
 };
