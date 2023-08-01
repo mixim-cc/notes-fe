@@ -25,6 +25,7 @@ export const addNew = ({ title, type, parentId, depth = 0 }: AddNewArgs) => {
     open: true,
     synced_parent_id: parentSyncId?.get(),
     synced_id: undefined,
+    isSyncing: true,
     depth,
     isJournal: false,
     isPublic: false,

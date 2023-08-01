@@ -16,7 +16,13 @@ export const editFileContent = ({
   state.fs.fileSystem.set((prev) =>
     prev.map((fs) =>
       fs?.id === id
-        ? { ...fs, title: title || fs.title, content, synced: false }
+        ? {
+            ...fs,
+            title: title || fs.title,
+            content,
+            synced: false,
+            isSyncing: true,
+          }
         : fs
     )
   );

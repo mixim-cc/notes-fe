@@ -1,9 +1,7 @@
 import { FileSystem, state } from "@/services/state";
-import { useInitalLoad } from "@/services/state/functions/file-system/useInitialLoad";
-import { useSync } from "@/services/state/functions/file-system/useSync";
+
 import { useSelector } from "@legendapp/state/react";
 import { SidebarStructure } from "./sidebar-structure";
-import { NoteType } from "@/services/graphql";
 
 export const SidebarFileSystem = () => {
   const fileSystem = useSelector(state.fs.fileSystem);

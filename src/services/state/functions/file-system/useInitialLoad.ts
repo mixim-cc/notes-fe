@@ -28,6 +28,8 @@ export const useInitalLoad = () => {
           synced: true,
           isJournal: n?.title === "Journal",
           depth: 0,
+          isSyncing: false,
+          lastSyncedDate: new Date(),
           open: index === 0 ? true : false,
           isPublic: n?.isPublic || false,
         })) || []

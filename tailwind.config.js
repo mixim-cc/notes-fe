@@ -55,7 +55,7 @@ module.exports = {
         shade: {
           primary: "var(--text-primary)",
           secondary: "var(--text-secondary)",
-          subtle: "var(--subtle)",
+          subtle: "var(--text-subtle)",
         },
       },
       keyframes: {

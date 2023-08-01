@@ -17,6 +17,8 @@ export const copyFile = ({ id }: CopyFileArgs) => {
         id: nanoid(),
         synced_id: undefined,
         synced: false,
+        isSyncing: true,
+
       },
     ]);
   }

@@ -12,6 +12,7 @@ export const useSync = () => {
     useDeleteNoteMutation();
 
   const syncWithAPI = async (fileSystem: FileSystem[]) => {
+    console.log(fileSystem, "SYNC");
     const responses = await Promise.all(
       fileSystem.map(async (fs) => {
         if (!fs.synced) {
@@ -37,6 +38,8 @@ export const useSync = () => {
 
       return {
         ...response?.fe_data,
+        isSyncing: false,
+        lastSyncedDate: new Date(),
         synced: true,
         synced_id: String(
           response?.fe_data?.synced_id || res?.note?.upsertAny?.id
@@ -53,7 +56,8 @@ export const useSync = () => {
   };
 
   useObserve(async () => {
-    if (state.startSync.get()) {
+    if (state.startSync.get() && state.networkStatus.get() === "online") {
+      console.log(state.fs.fileSystem.get(), "SYNC");
       const updatedStructure = await syncWithAPI(state.fs.fileSystem.get());
 
       if (updatedStructure) {
