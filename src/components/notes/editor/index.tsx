@@ -52,7 +52,7 @@ export const NoteEditor = () => {
           <Loader2 className="h-10 w-10 animate-spin text-gray-800" />
         </div>
       ) : ( */}
-      {selectedNote?.content || noteData?.note?.get?.data ? (
+      {(!selectedNote?.content || noteData?.note?.get?.data) && !isLoading ? (
         <div
           className="flex h-full w-full justify-center overflow-y-auto"
           key={selectedNote?.id}
