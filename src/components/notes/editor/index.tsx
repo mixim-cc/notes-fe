@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGetNoteQuery } from "@/services/graphql/generated/graphql";
 
 import { cn } from "@/utils/cn";
@@ -19,7 +19,7 @@ import _ from "lodash";
 export const NoteEditor = () => {
   const fileSystem = useSelector(state.fs.fileSystem);
   const selectedNoteId = useSelector(state.fs.selectedFileId);
-
+  const networkStatus = useSelector(state.networkStatus);
   const selectedNote = fileSystem.find((files) => files?.id === selectedNoteId);
 
   const { data: noteData, isLoading } = useGetNoteQuery(
@@ -47,12 +47,7 @@ export const NoteEditor = () => {
         <EditorHeader />
       </div>
 
-      {/* {isInitialLoading && networkStatus === "online" ? (
-        <div className="flex min-h-screen items-center justify-center">
-          <Loader2 className="h-10 w-10 animate-spin text-gray-800" />
-        </div>
-      ) : ( */}
-      {(!selectedNote?.content || noteData?.note?.get?.data) && !isLoading ? (
+      {networkStatus === "offline" ? (
         <div
           className="flex h-full w-full justify-center overflow-y-auto"
           key={selectedNote?.id}
@@ -61,8 +56,7 @@ export const NoteEditor = () => {
             id={selectedNote?.id}
             data={{
               title: selectedNote?.title,
-              content: (selectedNote?.content ||
-                noteData?.note?.get?.data) as OutputData,
+              content: selectedNote?.content as OutputData,
             }}
             holder={`editor-${selectedNote?.id}`}
             onChange={(data) => {
@@ -85,12 +79,43 @@ export const NoteEditor = () => {
             }}
           />
         </div>
-      ) : (
+      ) : isLoading ? (
         <div className="flex min-h-screen items-center justify-center">
           <Loader2 className="h-10 w-10 animate-spin text-gray-800" />
         </div>
+      ) : (
+        <div
+          className="flex h-full w-full justify-center overflow-y-auto"
+          key={selectedNote?.id}
+        >
+          <Editor
+            id={selectedNote?.id}
+            data={{
+              title: selectedNote?.title,
+              content: noteData?.note?.get?.data as unknown as OutputData,
+            }}
+            holder={`editor-${selectedNote?.id}`}
+            onChange={(data) => {
+              if (
+                data?.content &&
+                (!_.isEqual(
+                  data.content?.blocks,
+                  fileSystem.find((f) => f?.id === selectedNoteId)?.content
+                    ?.blocks
+                ) ||
+                  data?.title !==
+                    fileSystem.find((f) => f?.id === selectedNoteId)?.title)
+              ) {
+                editFileContent({
+                  title: data.title,
+                  content: data?.content as OutputData,
+                  id: selectedNoteId,
+                });
+              }
+            }}
+          />
+        </div>
       )}
-      {/* )} */}
     </div>
   );
 };
