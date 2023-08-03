@@ -23,6 +23,7 @@ const AccordionTrigger = React.forwardRef<
 >(({ className, children, isLoading, ...props }, ref) => (
   <AccordionPrimitive.Header className="flex">
     <AccordionPrimitive.Trigger
+      asChild
       ref={ref}
       className={cn(
         "group flex h-7 flex-1 items-center gap-2 rounded-md px-1 py-4 text-sm font-medium text-shade-primary transition-all hover:bg-el [&[data-state=open]>svg:first-child]:rotate-90",
@@ -30,13 +31,15 @@ const AccordionTrigger = React.forwardRef<
       )}
       {...props}
     >
-      {isLoading ? <div className="hidden" /> : null}
-      {isLoading ? (
-        <Loader2 className="h-4 w-5 shrink-0 text-shade-secondary animate-spin" />
-      ) : (
-        <ChevronRight className="h-4 w-4 shrink-0 text-shade-secondary transition-transform duration-200" />
-      )}
-      {children}
+      <div>
+        {isLoading ? <div className="hidden" /> : null}
+        {isLoading ? (
+          <Loader2 className="h-4 w-5 shrink-0 text-shade-secondary animate-spin" />
+        ) : (
+          <ChevronRight className="h-4 w-4 shrink-0 text-shade-secondary transition-transform duration-200" />
+        )}
+        {children}
+      </div>
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));

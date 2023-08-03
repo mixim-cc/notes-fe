@@ -126,7 +126,7 @@ export default function Page() {
                   rel="noreferrer"
                 >
                   <span className="block text-heading-3 lg:inline">
-                    🥳 Introducing Mixim Drafts{" "}
+                    🥳 Introducing Mixim Notes{" "}
                     <span aria-hidden="true"> &rarr;</span>
                   </span>
                 </a>
@@ -138,7 +138,7 @@ export default function Page() {
                 Note-taking app for productive minds.
               </h1>
               <div className="max-w-3xl mx-auto mt-8">
-                Simplify your note-taking experience with Drafts, the
+                Simplify your note-taking experience with Notes, the
                 minimalistic app designed to help you focus on what matters
                 most: <strong>your ideas.</strong>
               </div>
@@ -175,7 +175,7 @@ export default function Page() {
               </div>
               <div>
                 Experience the perfect harmony of simplicity and functionality
-                with Drafts innovative features.
+                with Notes innovative features.
               </div>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
@@ -234,7 +234,7 @@ export default function Page() {
                   <div>
                     Experience the joy of capturing your thoughts effortlessly
                     with our intuitive block-based note-taking system. From
-                    jotting down ideas to organizing your daily tasks, Drafts
+                    jotting down ideas to organizing your daily tasks, Notes
                     makes it seamless and enjoyable.
                   </div>
                 </div>
@@ -264,9 +264,9 @@ export default function Page() {
                     Offline Accessibility with PWA
                   </h2>
                   <div>
-                    Stay productive even when you are offline with Drafts
+                    Stay productive even when you are offline with Notes
                     powerful Progressive Web App (PWA) functionality. Access
-                    your notes, create new drafts, and edit existing ones
+                    your notes, create new notes, and edit existing ones
                     seamlessly, anytime and anywhere, without the need for an
                     internet connection.
                   </div>
@@ -282,10 +282,10 @@ export default function Page() {
                     Free to Use and Grow with You
                   </h2>
                   <div>
-                    Experience the freedom of using Drafts at no cost, with
+                    Experience the freedom of using Notes at no cost, with
                     unlimited access to our core features. As your note-taking
                     needs evolve, unlock additional premium features that cater
-                    to your specific requirements. Drafts grows with you,
+                    to your specific requirements. Notes grows with you,
                     ensuring you have the tools you need at every stage of your
                     personal and professional journey.
                   </div>

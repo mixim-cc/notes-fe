@@ -30,16 +30,17 @@ import { state } from "@/services/state";
 import { when } from "@legendapp/state";
 
 // Global configuration
-configureObservablePersistence({
+const a = configureObservablePersistence({
   persistLocal: ObservablePersistIndexedDB,
   persistLocalOptions: {
     indexedDB: {
-      databaseName: "Drafts",
+      databaseName: "Notes",
       version: 1,
       tableNames: ["filesystem", "selectedFileId", "test"],
     },
   },
 });
+
 function Providers({ children }: React.PropsWithChildren) {
   const [client] = React.useState(queryClient);
 

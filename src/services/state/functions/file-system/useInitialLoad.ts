@@ -1,5 +1,6 @@
 import { NoteType, useGetStructureRootQuery } from "@/services/graphql";
 import { state } from "@/services/state";
+import { when } from "@legendapp/state";
 import { persistObservable } from "@legendapp/state/persist";
 import { ObservablePersistIndexedDB } from "@legendapp/state/persist-plugins/indexeddb";
 import { ObservablePersistLocalStorage } from "@legendapp/state/persist-plugins/local-storage";
@@ -9,6 +10,7 @@ import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 
 export const useInitalLoad = () => {
+  const [isLocalLoaded, setIsLocalLoaded] = useState(false);
   const fs = useSelector(state.fs.fileSystem);
 
   const { data: rootData, isLoading } = useGetStructureRootQuery();
@@ -38,11 +40,20 @@ export const useInitalLoad = () => {
   }, [isLoading]);
 
   useEffect(() => {
-    persistObservable(state, {
+    const local = persistObservable(state, {
       local: "filesystem",
       persistLocal: ObservablePersistIndexedDB,
     });
+
+    const load = async () => {
+      const res = await when(local.isLoadedLocal);
+      if (res) {
+        setIsLocalLoaded(true);
+      }
+    };
+
+    load();
   }, []);
 
-  return { isLoading };
+  return { isLoading, isLocalLoaded };
 };

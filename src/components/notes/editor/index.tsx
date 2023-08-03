@@ -5,7 +5,7 @@ import { useGetNoteQuery } from "@/services/graphql/generated/graphql";
 
 import { cn } from "@/utils/cn";
 import { OutputData } from "@editorjs/editorjs";
-import { Loader2 } from "lucide-react";
+import { Loader2, Plus } from "lucide-react";
 
 import Editor from "@/components/editor/editor";
 
@@ -15,10 +15,13 @@ import { state } from "@/services/state";
 import { loadFileContent } from "@/services/state/functions/file-system/load-file-content";
 import { editFileContent } from "@/services/state/functions/file-system/edit-file-content";
 import _ from "lodash";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { addNew } from "@/services/state/functions/file-system/add-new";
 
 export const NoteEditor = () => {
   const fileSystem = useSelector(state.fs.fileSystem);
-  const selectedNoteId = useSelector(state.fs.selectedFileId);
+  const selectedNoteId = useSelector(state.selectedFileId);
   const networkStatus = useSelector(state.networkStatus);
   const selectedNote = fileSystem.find((files) => files?.id === selectedNoteId);
 
@@ -35,6 +38,51 @@ export const NoteEditor = () => {
       });
     }
   }, [isLoading, selectedNote?.id]);
+
+  if (!selectedNote) {
+    return (
+      <div
+        className={cn(
+          "auto h-full w-full  overflow-hidden rounded-lg border border-stroke-base bg-base flex flex-col gap-4 items-center justify-center"
+        )}
+      >
+        <Image src="/no-note.svg" width={400} height={200} alt="No note" />
+        <div className="text-xl text-shade-primary pt-8">
+          No Note Selected. Please Select a note or create.
+        </div>{" "}
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            leftIcon={<Plus className="h-4 w-4" />}
+            onClick={() => {
+              addNew({
+                title: "Untitled Note",
+                parentId: "",
+                type: "FILE",
+                depth: 0,
+              });
+            }}
+          >
+            New Note
+          </Button>
+          <Button
+            variant="outline"
+            leftIcon={<Plus className="h-4 w-4" />}
+            onClick={() => {
+              addNew({
+                title: "Untitled Folder",
+                parentId: "",
+                type: "FOLDER",
+                depth: 0,
+              });
+            }}
+          >
+            New Folder
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -97,17 +145,18 @@ export const NoteEditor = () => {
             holder={`editor-${selectedNote?.id}`}
             onChange={(data) => {
               if (
-                data?.content &&
-                (!_.isEqual(
-                  data.content?.blocks,
-                  fileSystem.find((f) => f?.id === selectedNoteId)?.content
-                    ?.blocks
-                ) ||
-                  data?.title !==
-                    fileSystem.find((f) => f?.id === selectedNoteId)?.title)
+                (data?.content &&
+                  !_.isEqual(
+                    data.content?.blocks,
+                    fileSystem.find((f) => f?.id === selectedNoteId)?.content
+                      ?.blocks
+                  )) ||
+                data?.title !==
+                  fileSystem.find((f) => f?.id === selectedNoteId)?.title
               ) {
+                console.log("OKAY");
                 editFileContent({
-                  title: data.title,
+                  title: data?.title,
                   content: data?.content as OutputData,
                   id: selectedNoteId,
                 });
