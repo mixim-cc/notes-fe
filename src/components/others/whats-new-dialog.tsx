@@ -62,7 +62,7 @@ const WhatsNewModal: React.FC = () => {
       >
         <DialogContent className='bg-base sm:max-w-[500px]'>
           <DialogHeader>
-            <DialogTitle>What&apos;s New / July 17</DialogTitle>
+            <DialogTitle>What&apos;s New / August 03, 2023</DialogTitle>
             <DialogDescription>
               Find new Features and Improvements in{" "}
               <span className='font-medium'>Mixim Notes</span>.
