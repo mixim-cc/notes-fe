@@ -11,20 +11,20 @@ export const SidebarAdd = () => {
         onClick={() => {
           addNew({
             parentId: "",
-            title: "📜 Untitled Draft",
+            title: "Untitled Note",
             type: "FILE",
           });
         }}
       >
         <FilePlus className="h-5 w-5 text-shade-secondary" />
-        New Draft
+        New Note
       </Button>
       <Button
         variant="outline"
         onClick={() => {
           addNew({
             parentId: "",
-            title: "📂 Untitled Folder",
+            title: "Untitled Folder",
             type: "FOLDER",
           });
         }}

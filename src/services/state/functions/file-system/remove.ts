@@ -28,7 +28,7 @@ export const remove = ({ id }: RemoveArgs) => {
   } else {
     state.fs.fileSystem.set((prev) => prev.filter((fs) => fs.id !== id));
     state.fs.deletedIds.set((prev) => [...prev, String(structure.synced_id)]);
-    state.fs.selectedFileId.set(null);
+    state.selectedFileId.set(null);
   }
 
   startImmediateSync();

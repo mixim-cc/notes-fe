@@ -24,6 +24,9 @@ export const InlineEditor = React.forwardRef<
       <TextareaAutosize
         {...props}
         ref={ref}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") e.preventDefault();
+        }}
         onFocus={(e) => {
           props?.onFocus?.(e);
           e.currentTarget.setSelectionRange(
@@ -36,6 +39,7 @@ export const InlineEditor = React.forwardRef<
           props?.onBlur?.(e);
         }}
         onChange={(e) => {
+          e.stopPropagation();
           props?.onChange?.(e);
           setText(e.target.value);
         }}

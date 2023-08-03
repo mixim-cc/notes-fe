@@ -7,13 +7,13 @@ import { ThemeProvider } from "@/providers/theme-provider";
 
 export const metadata: Metadata = {
   title: {
-    default: "Mixim Drafts",
-    template: "%s | Mixim Drafts",
+    default: "Mixim Notes",
+    template: "%s | Mixim Notes",
   },
   manifest: "./manifest.json",
-  metadataBase: new URL("https://drafts.mixim.cc"),
+  metadataBase: new URL("https://notes.mixim.cc"),
   description:
-    "Simple yet powerful Note-taking app for productive minds. Simplify your note-taking experience with Drafts, the minimalistic app designed to help you focus on what matters most: your ideas.",
+    "Simple yet powerful Note-taking app for productive minds. Simplify your note-taking experience with Notes, the minimalistic app designed to help you focus on what matters most: your ideas.",
   robots: {
     index: true,
     follow: true,
@@ -26,14 +26,14 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Mixim Drafts",
+    title: "Mixim Notes",
     description:
-      "Simple yet powerful Note-taking app for productive minds. Simplify your note-taking experience with Drafts, the minimalistic app designed to help you focus on what matters most: your ideas.",
-    url: "https://drafts.mixim.cc",
-    siteName: "Mixim Drafts",
+      "Simple yet powerful Note-taking app for productive minds. Simplify your note-taking experience with Notes, the minimalistic app designed to help you focus on what matters most: your ideas.",
+    url: "https://notes.mixim.cc",
+    siteName: "Mixim Notes",
     images: [
       {
-        url: "https://drafts.mixim.cc/og.png",
+        url: "https://notes.mixim.cc/og.png",
         width: 1920,
         height: 1080,
       },

@@ -14,7 +14,7 @@ interface UseNestedLoadProps {
 
 export const useNestedLoad = ({ parentId, enabled }: UseNestedLoadProps) => {
   const fileSystem = useSelector(state.fs.fileSystem);
-  const selectedNoteId = useSelector(state.fs.selectedFileId);
+  const selectedNoteId = useSelector(state.selectedFileId);
 
   const foundStructure = fileSystem?.find(
     (fs) => fs?.id === parentId
@@ -37,7 +37,7 @@ export const useNestedLoad = ({ parentId, enabled }: UseNestedLoadProps) => {
         const id = nanoid();
 
         if (index === 0 && !selectedNoteId) {
-          state.fs.selectedFileId.set(id);
+          state.selectedFileId.set(id);
         }
 
         if (!fileSystem.some((p) => p?.synced_id === curr?.id)) {

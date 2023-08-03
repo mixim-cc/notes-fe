@@ -68,8 +68,6 @@ export const Oasis = () => {
     );
   });
 
-  console.log(searchItems);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(dayjs());
@@ -183,7 +181,7 @@ export const Oasis = () => {
                 <Plus className="h-3 w-3 text-shade-secondary" />
               </IconButton>
               <p className="text-sm text-shade-primary">
-                Create new Draft with title &quot;{searchTerm}&quot;
+                Create new Note with title &quot;{searchTerm}&quot;
               </p>
             </div>
           </motion.div>
@@ -339,18 +337,26 @@ export const Oasis = () => {
                 variant="outline"
                 leftIcon={<Plus className="h-4 w-4" />}
                 onClick={() => {
-                  //   dispatch(addNewFile({ parentId: null, title: "Untitled" }));
-                  //   dispatch(triggerSync());
+                  addNew({
+                    title: "Untitled Note",
+                    parentId: "",
+                    type: "FILE",
+                    depth: 0,
+                  });
                 }}
               >
-                New Draft
+                New Note
               </Button>
               <Button
                 variant="outline"
                 leftIcon={<Plus className="h-4 w-4" />}
                 onClick={() => {
-                  //   dispatch(addNewFolder({ parentId: null, title: "Untitled" }));
-                  //   dispatch(triggerSync());
+                  addNew({
+                    title: "Untitled Folder",
+                    parentId: "",
+                    type: "FOLDER",
+                    depth: 0,
+                  });
                 }}
               >
                 New Folder
