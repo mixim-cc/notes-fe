@@ -149,7 +149,7 @@ export default function Page() {
                     variant="outline"
                   >
                     <img src="/images/google.svg" alt="google" />
-                    Sign In With Google
+                    Sign in with Google
                   </Button>
                 </SignInButton>
               </div>
