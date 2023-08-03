@@ -25,7 +25,10 @@ export const InlineEditor = React.forwardRef<
         {...props}
         ref={ref}
         onKeyPress={(e) => {
-          if (e.key === "Enter") e.preventDefault();
+          if (e.key === "Enter") {
+            e.preventDefault();
+            setIsEditing?.(false);
+          }
         }}
         onFocus={(e) => {
           props?.onFocus?.(e);
