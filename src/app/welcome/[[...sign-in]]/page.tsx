@@ -7,12 +7,32 @@ import { ThemeToggle } from "@/components/theme-toggle";
 export default function Page() {
   return (
     <>
-      <div className="flex flex-col mx-auto overflow-hidden max-w-7xl ">
-        <div className="z-10 p-4 bg-body/20 backdrop-brightness-20 backdrop-blur-sm">
-          <nav className="relative flex justify-between w-full gap-6 ">
-            <div className="relative inline-flex min-w-max">
-              <a href="/" className="relative flex items-center gap-3">
+      <div className='flex flex-col mx-auto overflow-hidden max-w-7xl '>
+        <div className='z-10 p-4 bg-body/20 backdrop-brightness-20 backdrop-blur-sm'>
+          <nav className='relative flex justify-between w-full gap-6 '>
+            <div className='relative inline-flex min-w-max'>
+              <a href='/' className='relative flex items-center gap-3'>
                 <svg
+                  className='text-[#1D2228] dark:text-white'
+                  width='150'
+                  height='40'
+                  viewBox='0 0 279 54'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    fill-rule='evenodd'
+                    clip-rule='evenodd'
+                    d='M13.96 40.3333V33.6667H7.29338L0.626709 27L7.29338 20.3333H13.96V13.6667L20.6267 7L27.2934 13.6667V20.3333H33.96L40.6267 27L33.96 33.6667H27.2934V40.3333L20.6267 47L13.96 40.3333ZM20.6267 37L10.6267 27L20.6267 17L30.6267 27L20.6267 37Z'
+                    fill='currentColor'
+                  />
+                  <path
+                    d='M64.8267 42H59.8667V12.76H64.8267L74.2667 36.04L83.7067 12.76H88.7467V42H83.7867V33C83.7867 27.12 83.7867 25.4 84.0667 23.32L76.6267 42H71.9067L64.5067 23.36C64.7867 25.12 64.8267 27.88 64.8267 31.52V42ZM96.1383 18.28C94.4583 18.28 93.1383 16.96 93.1383 15.32C93.1383 13.68 94.4583 12.4 96.1383 12.4C97.7383 12.4 99.0583 13.68 99.0583 15.32C99.0583 16.96 97.7383 18.28 96.1383 18.28ZM93.6983 42V22.24H98.5783V42H93.6983ZM106.26 42H100.7L107.5 32.32L100.7 22.24H106.38L110.74 28.96L114.94 22.24H120.42L113.7 32.24L120.22 42H114.62L110.42 35.48L106.26 42ZM124.968 18.28C123.288 18.28 121.968 16.96 121.968 15.32C121.968 13.68 123.288 12.4 124.968 12.4C126.568 12.4 127.888 13.68 127.888 15.32C127.888 16.96 126.568 18.28 124.968 18.28ZM122.528 42V22.24H127.408V42H122.528ZM136.53 42H131.65V22.24H136.13L136.53 24.56C137.53 22.92 139.53 21.64 142.37 21.64C145.37 21.64 147.45 23.12 148.49 25.4C149.49 23.12 151.81 21.64 154.81 21.64C159.61 21.64 162.25 24.52 162.25 29.08V42H157.41V30.36C157.41 27.52 155.89 26.04 153.57 26.04C151.21 26.04 149.41 27.56 149.41 30.8V42H144.53V30.32C144.53 27.56 143.05 26.08 140.73 26.08C138.41 26.08 136.53 27.6 136.53 30.8V42ZM181.982 42H176.942V12.76H182.022L195.742 33.48V12.76H200.782V42H195.742L181.982 21.28V42ZM204.574 32.08C204.574 25.92 209.014 21.68 215.134 21.68C221.254 21.68 225.694 25.92 225.694 32.08C225.694 38.24 221.254 42.48 215.134 42.48C209.014 42.48 204.574 38.24 204.574 32.08ZM209.454 32.08C209.454 35.68 211.774 38.12 215.134 38.12C218.494 38.12 220.814 35.68 220.814 32.08C220.814 28.48 218.494 26.04 215.134 26.04C211.774 26.04 209.454 28.48 209.454 32.08ZM235.287 42H230.407V26.32H226.607V22.24H230.407V16.08H235.287V22.24H239.127V26.32H235.287V42ZM250.005 42.52C244.125 42.52 240.005 38.24 240.005 32.12C240.005 25.92 244.045 21.64 249.845 21.64C255.765 21.64 259.525 25.6 259.525 31.76V33.24L244.645 33.28C245.005 36.76 246.845 38.52 250.085 38.52C252.765 38.52 254.525 37.48 255.085 35.6H259.605C258.765 39.92 255.165 42.52 250.005 42.52ZM249.885 25.64C247.005 25.64 245.245 27.2 244.765 30.16H254.685C254.685 27.44 252.805 25.64 249.885 25.64ZM261.111 36H265.751C265.791 37.72 267.071 38.8 269.311 38.8C271.591 38.8 272.831 37.88 272.831 36.44C272.831 35.44 272.311 34.72 270.551 34.32L266.991 33.48C263.431 32.68 261.711 31 261.711 27.84C261.711 23.96 264.991 21.64 269.551 21.64C273.991 21.64 276.991 24.2 277.031 28.04H272.391C272.351 26.36 271.231 25.28 269.351 25.28C267.431 25.28 266.311 26.16 266.311 27.64C266.311 28.76 267.191 29.48 268.871 29.88L272.431 30.72C275.751 31.48 277.431 33 277.431 36.04C277.431 40.04 274.031 42.52 269.151 42.52C264.231 42.52 261.111 39.88 261.111 36Z'
+                    fill='currentColor'
+                  />
+                </svg>
+
+                {/* <svg
                   className="text-[#1D2228] dark:text-white"
                   width="110"
                   height="24"
@@ -76,21 +96,21 @@ export default function Page() {
                     strokeWidth="6"
                     mask="url(#path-2-inside-1_171_305)"
                   ></path>
-                </svg>
+                </svg> */}
               </a>
             </div>
 
             <div
               data-nav-overlay
-              aria-hidden="true"
-              className="fixed inset-0 hidden bg-box-bg bg-opacity/50 backdrop-blur-xl lg:hidden"
+              aria-hidden='true'
+              className='fixed inset-0 hidden bg-box-bg bg-opacity/50 backdrop-blur-xl lg:hidden'
             ></div>
             <div
               data-navbar
-              className="bg-body border-x-box-border absolute top-full flex h-0 w-full flex-col gap-x-4 gap-y-6 overflow-hidden border-x duration-300 ease-linear lg:relative lg:top-0 lg:!h-auto lg:scale-y-100 lg:flex-row lg:items-center lg:justify-between lg:border-x-0 lg:bg-transparent"
+              className='bg-body border-x-box-border absolute top-full flex h-0 w-full flex-col gap-x-4 gap-y-6 overflow-hidden border-x duration-300 ease-linear lg:relative lg:top-0 lg:!h-auto lg:scale-y-100 lg:flex-row lg:items-center lg:justify-between lg:border-x-0 lg:bg-transparent'
             ></div>
 
-            <div className="flex items-center min-w-max gap-x-3">
+            <div className='flex items-center min-w-max gap-x-3'>
               {/* <SignInButton mode="modal">
               <Button
                 className="border-box-border flex w-full items-center rounded-full border px-4 py-3.5  focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-1"
@@ -101,13 +121,13 @@ export default function Page() {
               </Button>
             </SignInButton> */}
               <a
-                href="https://www.producthunt.com/posts/mixim-drafts?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-mixim&#0045;drafts"
-                target="_blank"
+                href='https://www.producthunt.com/posts/mixim-drafts?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-mixim&#0045;drafts'
+                target='_blank'
               >
                 <img
-                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=402641&theme=light"
-                  alt="Mixim&#0032;Drafts - Simple&#0032;yet&#0032;powerful&#0032;note&#0045;taking&#0032;app&#0032;for&#0032;productive&#0032;minds | Product Hunt"
-                  className="h-[48px] w-[250px]"
+                  src='https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=402641&theme=light'
+                  alt='Mixim&#0032;Drafts - Simple&#0032;yet&#0032;powerful&#0032;note&#0045;taking&#0032;app&#0032;for&#0032;productive&#0032;minds | Product Hunt'
+                  className='h-[48px] w-[250px]'
                 />
               </a>
               <ThemeToggle />
@@ -115,51 +135,51 @@ export default function Page() {
           </nav>
         </div>
 
-        <section className="relative p-4 pt-32 lg:pt-16">
-          <div className="flex flex-col gap-10 lg:flex-row lg:gap-12">
-            <div className="flex flex-col items-center mx-auto text-center lg:flex-1 lg:items-start lg:py-7 xl:py-8">
-              <div className="relative px-3 py-1 mx-auto mb-4 text-sm leading-6 border rounded-full text-heading-3 dark:ring-primary border-box-border hover:border-border">
+        <section className='relative p-4 pt-32 lg:pt-16'>
+          <div className='flex flex-col gap-10 lg:flex-row lg:gap-12'>
+            <div className='flex flex-col items-center mx-auto text-center lg:flex-1 lg:items-start lg:py-7 xl:py-8'>
+              <div className='relative px-3 py-1 mx-auto mb-4 text-sm leading-6 border rounded-full text-heading-3 dark:ring-primary border-box-border hover:border-border'>
                 <a
-                  href="https://youtu.be/cY_0OmK3gaU"
-                  target="_blank"
-                  className="font-semibold text-heading-1"
-                  rel="noreferrer"
+                  href='https://youtu.be/cY_0OmK3gaU'
+                  target='_blank'
+                  className='font-semibold text-heading-1'
+                  rel='noreferrer'
                 >
-                  <span className="block text-heading-3 lg:inline">
+                  <span className='block text-heading-3 lg:inline'>
                     🥳 Introducing Mixim Notes{" "}
-                    <span aria-hidden="true"> &rarr;</span>
+                    <span aria-hidden='true'> &rarr;</span>
                   </span>
                 </a>
               </div>
-              <h1 className="mx-auto font-semibold tracking-tighter text-heading-1 text-3xl/tight sm:text-4xl/tight md:text-5xl/tight xl:text-5xl/tight">
+              <h1 className='mx-auto font-semibold tracking-tighter text-heading-1 text-3xl/tight sm:text-4xl/tight md:text-5xl/tight xl:text-5xl/tight'>
                 Simple yet powerful
               </h1>
-              <h1 className="mx-auto font-semibold tracking-tighter text-heading-1 text-3xl/tight sm:text-4xl/tight md:text-5xl/tight xl:text-6xl/tight">
+              <h1 className='mx-auto font-semibold tracking-tighter text-heading-1 text-3xl/tight sm:text-4xl/tight md:text-5xl/tight xl:text-6xl/tight'>
                 Note-taking app for productive minds.
               </h1>
-              <div className="max-w-3xl mx-auto mt-8">
+              <div className='max-w-3xl mx-auto mt-8'>
                 Simplify your note-taking experience with Notes, the
                 minimalistic app designed to help you focus on what matters
                 most: <strong>your ideas.</strong>
               </div>
-              <div className="flex mx-auto mt-10">
-                <SignInButton mode="modal">
+              <div className='flex mx-auto mt-10'>
+                <SignInButton mode='modal'>
                   <Button
-                    className="flex items-center w-full px-8 py-6 border rounded-full shadow-xl border-box-border focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-1"
-                    variant="outline"
+                    className='flex items-center w-full px-8 py-6 border rounded-full shadow-xl border-box-border focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-1'
+                    variant='outline'
                   >
-                    <img src="/images/google.svg" alt="google" />
+                    <img src='/images/google.svg' alt='google' />
                     Sign in with Google
                   </Button>
                 </SignInButton>
               </div>
 
-              <div className="relative items-center w-full p-8 py-12 mx-auto max-w-7xl">
-                <div className="p-4 bg-box-bg rounded-3xl">
+              <div className='relative items-center w-full p-8 py-12 mx-auto max-w-7xl'>
+                <div className='p-4 bg-box-bg rounded-3xl'>
                   <img
-                    alt=""
-                    className="relative object-cover w-full rounded shadow-2xl lg:rounded-2xl"
-                    src="/images/MiximDraftScreenshot.png"
+                    alt=''
+                    className='relative object-cover w-full rounded shadow-2xl lg:rounded-2xl'
+                    src='/images/MiximDraftScreenshot.png'
                   />
                 </div>
               </div>
@@ -167,10 +187,10 @@ export default function Page() {
           </div>
         </section>
 
-        <section id="services">
-          <div className="p-4 mt-24 space-y-10 md:sapce-y-24">
-            <div className="max-w-3xl mx-auto space-y-4 text-center">
-              <div className="text-2xl font-semibold text-heading-1 sm:text-3xl md:text-4xl">
+        <section id='services'>
+          <div className='p-4 mt-24 space-y-10 md:sapce-y-24'>
+            <div className='max-w-3xl mx-auto space-y-4 text-center'>
+              <div className='text-2xl font-semibold text-heading-1 sm:text-3xl md:text-4xl'>
                 Unveiling Our Powerful Features
               </div>
               <div>
@@ -178,8 +198,8 @@ export default function Page() {
                 with Notes innovative features.
               </div>
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-              <div className="relative p-5 overflow-hidden border shadow-lg border-box-border bg-box-bg shadow-box-shadow rounded-3xl dark:border-gray-600 sm:p-6 lg:p-8">
+            <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8'>
+              <div className='relative p-5 overflow-hidden border shadow-lg border-box-border bg-box-bg shadow-box-shadow rounded-3xl dark:border-gray-600 sm:p-6 lg:p-8'>
                 {/* <div className="relative p-3 bg-gray-100 text-heading-1 w-max rounded-xl dark:bg-gray-900">
                   <svg
                     width="80"
@@ -226,8 +246,8 @@ export default function Page() {
                     />
                   </svg>
                 </div> */}
-                <div className="relative mt-6 space-y-4">
-                  <h2 className="text-lg font-semibold text-heading-2 md:text-xl">
+                <div className='relative mt-6 space-y-4'>
+                  <h2 className='text-lg font-semibold text-heading-2 md:text-xl'>
                     {" "}
                     Effortless Note-taking
                   </h2>
@@ -238,9 +258,9 @@ export default function Page() {
                     makes it seamless and enjoyable.
                   </div>
                 </div>
-                <span className="absolute w-32 rounded-full bg-primary/10 -bottom-16 -right-16 aspect-square"></span>
+                <span className='absolute w-32 rounded-full bg-primary/10 -bottom-16 -right-16 aspect-square'></span>
               </div>
-              <div className="relative p-5 overflow-hidden border shadow-lg border-box-border bg-box-bg shadow-box-shadow rounded-3xl dark:border-gray-600 sm:p-6 lg:p-8">
+              <div className='relative p-5 overflow-hidden border shadow-lg border-box-border bg-box-bg shadow-box-shadow rounded-3xl dark:border-gray-600 sm:p-6 lg:p-8'>
                 {/* <div className="relative p-3 bg-gray-300 text-heading-1 w-max rounded-xl dark:bg-gray-600">
                   <svg
                     fill="none"
@@ -259,8 +279,8 @@ export default function Page() {
                     ></path>
                   </svg>
                 </div> */}
-                <div className="relative mt-6 space-y-4">
-                  <h2 className="text-lg font-semibold text-heading-2 md:text-xl">
+                <div className='relative mt-6 space-y-4'>
+                  <h2 className='text-lg font-semibold text-heading-2 md:text-xl'>
                     Offline Accessibility with PWA
                   </h2>
                   <div>
@@ -271,14 +291,14 @@ export default function Page() {
                     internet connection.
                   </div>
                 </div>
-                <span className="absolute w-32 rounded-full bg-primary/10 -bottom-16 -right-16 aspect-square"></span>
+                <span className='absolute w-32 rounded-full bg-primary/10 -bottom-16 -right-16 aspect-square'></span>
               </div>
-              <div className="relative p-5 overflow-hidden border shadow-lg border-box-border bg-box-bg shadow-box-shadow rounded-3xl dark:border-gray-600 sm:p-6 lg:p-8">
+              <div className='relative p-5 overflow-hidden border shadow-lg border-box-border bg-box-bg shadow-box-shadow rounded-3xl dark:border-gray-600 sm:p-6 lg:p-8'>
                 {/* <div className="relative p-3 bg-gray-300 text-heading-1 w-max rounded-xl dark:bg-gray-950">
                   tt
                 </div> */}
-                <div className="relative mt-6 space-y-4">
-                  <h2 className="text-lg font-semibold text-heading-2 md:text-xl">
+                <div className='relative mt-6 space-y-4'>
+                  <h2 className='text-lg font-semibold text-heading-2 md:text-xl'>
                     Free to Use and Grow with You
                   </h2>
                   <div>
@@ -290,19 +310,19 @@ export default function Page() {
                     personal and professional journey.
                   </div>
                 </div>
-                <span className="absolute w-32 rounded-full bg-primary/10 -bottom-16 -right-16 aspect-square"></span>
+                <span className='absolute w-32 rounded-full bg-primary/10 -bottom-16 -right-16 aspect-square'></span>
               </div>
             </div>
           </div>
         </section>
-        <div className="w-full py-12 mt-12 text-center border-t dark:border-gray-600 ">
-          <p className="text-gray-500">
+        <div className='w-full py-12 mt-12 text-center border-t dark:border-gray-600 '>
+          <p className='text-gray-500'>
             Project by:{" "}
             <a
-              className="font-medium text-gray-800 transition-colors hover:underline"
-              href="/"
-              target="_blank"
-              rel="noopener noreferrer"
+              className='font-medium text-gray-800 transition-colors hover:underline'
+              href='/'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               @anjil, @anup, @bikash, @bijay
             </a>

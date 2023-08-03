@@ -29,10 +29,16 @@ const WhatsNewModal: React.FC = () => {
   };
 
   const images = [
-    "/images/whats-new/July 17 - 1.png",
-    "/images/whats-new/July 17 - 2.png",
-    "/images/whats-new/July 17 - 3.png",
-    "/images/whats-new/July 17 - 4.png",
+    // "/images/whats-new/July 17 - 1.png",
+    // "/images/whats-new/July 17 - 2.png",
+    // "/images/whats-new/July 17 - 3.png",
+    // "/images/whats-new/July 17 - 4.png",
+    "/images/whats-new/August 03 - 01.png",
+    "/images/whats-new/August 03 - 02.png",
+    "/images/whats-new/August 03 - 03.png",
+    "/images/whats-new/August 03 - 04.png",
+    "/images/whats-new/August 03 - 05.png",
+    "/images/whats-new/August 03 - 06.png",
   ];
 
   const handlePrevious = (): void => {
@@ -54,12 +60,12 @@ const WhatsNewModal: React.FC = () => {
         modal={true}
         onOpenChange={(newValue) => setOpen(newValue)}
       >
-        <DialogContent className="bg-base sm:max-w-[500px]">
+        <DialogContent className='bg-base sm:max-w-[500px]'>
           <DialogHeader>
             <DialogTitle>What&apos;s New / July 17</DialogTitle>
             <DialogDescription>
               Find new Features and Improvements in{" "}
-              <span className="font-medium">Mixim Notes</span>.
+              <span className='font-medium'>Mixim Notes</span>.
             </DialogDescription>
           </DialogHeader>
 
@@ -80,15 +86,15 @@ const WhatsNewModal: React.FC = () => {
             ))}
           </Carousel>
 
-          <DialogFooter className="flex justify-between">
-            <div className="flex-1">
-              <Button variant="ghost" onClick={closeModal}>
+          <DialogFooter className='flex justify-between'>
+            <div className='flex-1'>
+              <Button variant='ghost' onClick={closeModal}>
                 Skip
               </Button>
             </div>
 
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={handlePrevious}>
+            <div className='flex gap-2'>
+              <Button variant='outline' onClick={handlePrevious}>
                 Previous
               </Button>
 
