@@ -44,7 +44,6 @@ export const Editor = ({
     },
   });
 
-  console.log(watch("content"), "content");
 
   useEffect(() => {
     const { unsubscribe } = watch((formData) => {
@@ -98,7 +97,7 @@ export const Editor = ({
         disabled={isPreview}
         id="title"
         defaultValue={data?.title}
-        placeholder="Untitled drafts"
+        placeholder="Untitled notes"
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             e.preventDefault();
@@ -118,7 +117,6 @@ export const Editor = ({
           <SimpleEditor
             isPreview={isPreview}
             onChange={(e) => {
-              console.log(e);
               editorOnChange(e);
             }}
             data={value}

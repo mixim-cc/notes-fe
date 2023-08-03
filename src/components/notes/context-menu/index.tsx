@@ -69,7 +69,7 @@ const CONTEXT_MENU_ITEMS = {
     isDanger: true,
   },
   MAKE_DRAFT: {
-    title: "Make a Draft",
+    title: "Make a Note",
     type: "MAKE_DRAFT",
     icon: <FilePlus2 className="h-4 w-4" />,
     divider: false,
@@ -103,7 +103,11 @@ export const NotesContextMenu = ({
             return (
               <ContextMenu.Item
                 key={menu.type}
-                onClick={item.handler}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  item.handler?.();
+                }}
                 className={cn(
                   "flex cursor-pointer items-center gap-2 rounded-md p-1.5 text-shade-secondary focus:shadow-none focus-visible:outline-none data-[highlighted]:rounded-none data-[highlighted]:bg-back ",
                   {

@@ -32,8 +32,6 @@ export const SimpleEditor = ({
         async onChange(api, event) {
           let content = await api.saver.save();
 
-          console.log(event, "EVENT");
-
           onChange?.(content);
         },
         placeholder: "Press Tab for controls",

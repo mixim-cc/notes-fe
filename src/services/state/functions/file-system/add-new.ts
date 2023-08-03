@@ -31,8 +31,20 @@ export const addNew = ({ title, type, parentId, depth = 0 }: AddNewArgs) => {
     isPublic: false,
   });
 
+  state.fs.fileSystem.set((prev) =>
+    prev.map((fs) =>
+      fs.id === parentId
+        ? {
+            ...fs,
+
+            open: true,
+          }
+        : fs
+    )
+  );
+
   if (type === "FILE") {
-    state.fs.selectedFileId.set(id);
+    state.selectedFileId.set(id);
   }
   startImmediateSync();
 

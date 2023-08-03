@@ -27,26 +27,33 @@ export type State = {
   startSync: boolean;
   isSidebarVisible: boolean;
   networkStatus: "online" | "offline";
+  selectedFileId: string | undefined;
 
   fs: {
     deletedIds: string[];
     fileSystem: FileSystem[];
-    selectedFileId: string | undefined;
   };
 };
 
 export const initialState: State = {
   fs: {
     fileSystem: [],
-    selectedFileId: undefined,
     deletedIds: [],
   },
+  selectedFileId: undefined,
+
   isSidebarVisible: true,
   networkStatus: "online",
   startSync: false,
 };
 
 export const state = observable<State>(initialState);
+
+ persistObservable(state.selectedFileId, {
+  local: "selectedNote",
+  persistLocal: ObservablePersistLocalStorage,
+});
+
 
 persistObservable(state.isSidebarVisible, {
   local: "sidebar",
