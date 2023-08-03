@@ -21,6 +21,7 @@ import Table from "@editorjs/table";
 import Warning from "@editorjs/warning";
 import axios from "axios";
 import Cookie from "js-cookie";
+import { state } from "@/services/state";
 
 export const EDITOR_TOOLS: ToolConfig = {
   code: Code,
@@ -68,19 +69,17 @@ export const EDITOR_TOOLS: ToolConfig = {
     config: {
       uploader: {
         uploadByFile(file: File) {
+          const note = state.fs.fileSystem
+            .get()
+            .find((f) => f.id === state.selectedFileId.get());
+
           return new Promise(async (resolve) => {
             const formData = new FormData();
             formData.append("file", file);
             const response = await axios.put(
-              `${process.env["NEXT_PUBLIC_API_URL"]}/file/01GZTJFBMB91JT6CTXKH3JZNW1`,
-              formData,
-              {
-                headers: {
-                  Authorization: `Bearer ${Cookie.get("__session")}`,
-                },
-              }
+              `${process.env["NEXT_PUBLIC_API_URL"]}/file/${note?.synced_id}?parentId=${note?.synced_parent_id}`,
+              formData
             );
-
 
             resolve({
               success: 1,
@@ -113,10 +112,14 @@ export const EDITOR_TOOLS: ToolConfig = {
         uploadByFile(file: File) {
           return new Promise(async (resolve) => {
             try {
+              const note = state.fs.fileSystem
+                .get()
+                .find((f) => f.id === state.selectedFileId.get());
+
               const formData = new FormData();
               formData.append("file", file);
               const response = await axios.put(
-                `${process.env["NEXT_PUBLIC_API_URL"]}/file/${Router.query["id"]}`,
+                `${process.env["NEXT_PUBLIC_API_URL"]}/file/${note?.synced_id}?parentId=${note?.synced_parent_id}`,
                 formData
               );
 

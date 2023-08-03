@@ -42,7 +42,7 @@ export const EditorHeader = React.memo(
     const [isCopied, setIsCopied] = useState(false);
     const isSidebarVisible = useSelector(state.isSidebarVisible);
     const fileSystem = useSelector(state.fs.fileSystem);
-    const selectedFile = useSelector(state.fs.selectedFileId);
+    const selectedFile = useSelector(state.selectedFileId);
     const status = useSelector(state.networkStatus);
 
     const { mutateAsync, isLoading } = useMakeNotePublicMutation();
@@ -145,7 +145,7 @@ export const EditorHeader = React.memo(
               <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-2 font-medium text-shade-primary">
                   <Share2 className="h-4 w-4" />
-                  <p>Share your Draft</p>
+                  <p>Share your Note</p>
                 </div>
 
                 <p className="text-sm text-shade-secondary">
@@ -198,7 +198,7 @@ export const EditorHeader = React.memo(
                       }
                     }}
                   >
-                    Share your Draft
+                    Share your Note
                   </Button>
                 )}
 

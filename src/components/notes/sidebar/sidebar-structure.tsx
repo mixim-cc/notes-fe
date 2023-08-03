@@ -73,7 +73,7 @@ export const SidebarStructure = ({
   depth = 0,
   parentId,
 }: SidebarFolderProps) => {
-  const selectedFileId = useSelector(state.fs.selectedFileId);
+  const selectedFileId = useSelector(state.selectedFileId);
 
   const openValue = folders
     ?.filter((f) => f.depth === depth && f.open)

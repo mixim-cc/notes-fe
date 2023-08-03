@@ -24,7 +24,7 @@ export const NoteSidebar = () => {
 
   const isSidebarVisible = useSelector(state.isSidebarVisible);
   const fileSystem = useSelector(state.fs.fileSystem);
-  const selectedFileId = useSelector(state.fs.selectedFileId);
+  const selectedFileId = useSelector(state.selectedFileId);
 
   const individualFiles = fileSystem?.filter(
     (f) => !f?.parentId && f?.type === "FILE"
@@ -99,7 +99,7 @@ export const NoteSidebar = () => {
 
 const Journals = () => {
   const fileSystem = useSelector(state.fs.fileSystem);
-  const selectedFileId = useSelector(state.fs.selectedFileId);
+  const selectedFileId = useSelector(state.selectedFileId);
 
   const journalFolderId = fileSystem?.find((f) => f?.title === "Journal")?.id;
 
