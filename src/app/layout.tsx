@@ -3,6 +3,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Providers from "@/providers/provider";
 import { fontSans } from "@/utils/fonts";
+import { Analytics } from "@vercel/analytics/react";
+
 import { ThemeProvider } from "@/providers/theme-provider";
 
 export const metadata: Metadata = {
@@ -58,6 +60,7 @@ export default function RootLayout({
           <Providers>
             <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
               {children}
+              <Analytics />
             </ThemeProvider>
           </Providers>
         </body>
