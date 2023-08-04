@@ -31,9 +31,9 @@ module.exports = {
           hover: "var(--bg-el-hover)",
           active: "var(--bg-el-active)",
           subtle: {
-            DEFAULT: "var(--bg-subtle)",
-            hover: "var(--bg-subtle-hover)",
-            active: "var(--bg-subtle-active)",
+            DEFAULT: "var(--bg-el-subtle)",
+            hover: "var(--bg-el-subtle-hover)",
+            active: "var(--bg-el-subtle-active)",
           },
         },
 
