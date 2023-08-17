@@ -83,7 +83,7 @@ export const Editor = ({
             return false;
           }
         }}
-        className="w-full overflow-hidden text-[32px] text-shade-primary font-medium bg-transparent appearance-none resize-none  focus:outline-none"
+        className="w-full overflow-hidden text-3xl font-semibold bg-transparent appearance-none resize-none text-shade-primary focus:outline-none"
         {...register("title")}
       />
       {/* {isPreview ? (
