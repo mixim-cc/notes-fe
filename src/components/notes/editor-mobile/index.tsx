@@ -88,7 +88,7 @@ export const NoteEditorMobile = () => {
     <div
       key={selectedNote?.id}
       className={cn(
-        "flex flex-col  w-full h-full  overflow-hidden rounded-lg  bg-base"
+        "flex flex-col  w-full  overflow-hidden rounded-lg  bg-base"
       )}
     >
       <div className="">
@@ -132,7 +132,7 @@ export const NoteEditorMobile = () => {
         </div>
       ) : (
         <div
-          className="flex justify-center w-full h-[700px] overflow-y-auto"
+          className="flex justify-center w-full overflow-y-auto hcontainer"
           key={selectedNote?.id}
         >
           <Editor
