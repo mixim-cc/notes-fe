@@ -9,7 +9,7 @@ import { Loader2, Plus } from "lucide-react";
 
 import Editor from "@/components/editor-mobile/editor";
 
-import { EditorHeader } from "./editor-header";
+import { EditorHeaderMobile } from "./editor-header";
 import { useSelector } from "@legendapp/state/react";
 import { state } from "@/services/state";
 import { loadFileContent } from "@/services/state/functions/file-system/load-file-content";
@@ -88,13 +88,12 @@ export const NoteEditorMobile = () => {
     <div
       key={selectedNote?.id}
       className={cn(
-        "auto h-full w-full  overflow-hidden rounded-lg border border-stroke-base bg-base"
+        "flex flex-col  w-full h-full  overflow-hidden rounded-lg  bg-base"
       )}
     >
       <div className="">
-        <EditorHeader />
+        <EditorHeaderMobile />
       </div>
-
       {networkStatus === "offline" ? (
         <div
           className="flex justify-center w-full h-full overflow-y-auto"
@@ -128,12 +127,12 @@ export const NoteEditorMobile = () => {
           />
         </div>
       ) : isLoading ? (
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center justify-center ">
           <Loader2 className="w-10 h-10 text-gray-800 animate-spin" />
         </div>
       ) : (
         <div
-          className="flex justify-center w-full h-full overflow-y-auto"
+          className="flex justify-center w-full h-[700px] overflow-y-auto"
           key={selectedNote?.id}
         >
           <Editor

@@ -40,7 +40,7 @@ interface EditorHeaderProps {
   isPreview?: boolean;
 }
 
-export const EditorHeader = React.memo(
+export const EditorHeaderMobile = React.memo(
   ({ title, isPreview }: EditorHeaderProps) => {
     const [isCopied, setIsCopied] = useState(false);
     const isSidebarVisible = useSelector(state.isSidebarVisible);
@@ -97,18 +97,6 @@ export const EditorHeader = React.memo(
           <div className="h-3 w-0.5 rounded-xl bg-stroke-back"></div>
 
           <div className="flex items-center gap-3">
-            {hasParentFolder && !title ? (
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2">
-                  <FolderIcon className="w-5 h-5 text-shade-seondary" />
-                  <p className="text-sm text-shade-secondary">
-                    {fileSystem?.find((s) => s?.id === file?.parentId)?.title}
-                  </p>
-                </div>
-                <p className="text-sm text-shade-secondary">/</p>
-              </div>
-            ) : null}
-
             <p className="text-sm text-shade-primary">{title || file?.title}</p>
           </div>
         </div>
@@ -256,4 +244,4 @@ export const EditorHeader = React.memo(
   }
 );
 
-EditorHeader.displayName = "EditorHeader";
+EditorHeaderMobile.displayName = "EditorHeaderMobile";
