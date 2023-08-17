@@ -72,7 +72,7 @@ export default function Page() {
         <>
           <motion.div
             layout
-            className="flex h-screen bg-base-hover md:gap-4 md:p-4"
+            className="flex hfix bg-base-hover md:gap-4 md:p-4"
           >
             <NoteSidebar />
             <NoteEditor />
