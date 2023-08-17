@@ -79,42 +79,6 @@ export const Appbar = () => {
     };
   }, []);
 
-  useHotkeys(
-    ["alt + 0", "g + f"],
-    () => setCurrentMenu("none"),
-    [currentMenu],
-    {
-      enabled: true,
-      enableOnContentEditable: true,
-      enableOnFormTags: true,
-      preventDefault: true,
-    }
-  );
-  useHotkeys("alt + 1", () => setCurrentMenu("add"), [currentMenu], {
-    enabled: true,
-    enableOnContentEditable: true,
-    enableOnFormTags: true,
-    preventDefault: true,
-  });
-  useHotkeys("alt + s", () => setCurrentMenu("search"), [currentMenu], {
-    enabled: true,
-    enableOnContentEditable: true,
-    enableOnFormTags: true,
-    preventDefault: true,
-  });
-  useHotkeys("alt + t", () => setCurrentMenu("menu"), [currentMenu], {
-    enabled: true,
-    enableOnContentEditable: true,
-    enableOnFormTags: true,
-    preventDefault: true,
-  });
-  useHotkeys("alt + p", () => setCurrentMenu("avatar"), [currentMenu], {
-    enabled: true,
-    enableOnContentEditable: true,
-    enableOnFormTags: true,
-    preventDefault: true,
-  });
-
   if (!user) {
     return null;
   }
@@ -162,29 +126,6 @@ export const Appbar = () => {
                 </div>
               </div>
             ))}
-
-            {/* <div
-              className="flex items-center gap-2 p-2 rounded-md cursor-pointer bg-base hover:bg-base-hover"
-              onClick={() => {
-                const id = addNew({
-                  parentId: "",
-                  title: searchTerm,
-                  type: "FILE",
-                  depth: 0,
-                });
-                selectFile(id);
-
-                setCurrentMenu("menu");
-                setSearchTerm("");
-              }}
-            >
-              <IconButton size="xs" variant="outline">
-                <Plus className="w-3 h-3 text-shade-secondary" />
-              </IconButton>
-              <p className="text-sm text-shade-primary">
-                Create new Note with title &quot;{searchTerm}&quot;
-              </p>
-            </div> */}
           </motion.div>
         )}
 
@@ -196,7 +137,7 @@ export const Appbar = () => {
             transition={{
               layout: { duration: 0.3 },
             }}
-            className="flex flex-col gap-4 pb-6 cursor-pointer"
+            className="absolute left-0 right-0 z-20 flex flex-col gap-4 p-4 pb-6 m-auto shadow-lg cursor-pointer bg-base bottom-16"
           >
             <div className="flex flex-col gap-2">
               <p className="text-xs font-medium text-shade-secondary">
@@ -244,23 +185,23 @@ export const Appbar = () => {
               className="relative flex items-center cursor-pointer group"
             >
               <div className="flex items-center">
-                <Link href="/">
-                  <img
-                    src="/images/logo-dark.svg"
-                    alt="logo"
-                    className="hidden object-contain w-10 h-10 dark:block"
-                  />
-                  <img
-                    src="/images/logo.svg"
-                    alt="logo"
-                    className="object-contain w-10 h-10 dark:hidden"
-                  />
-                </Link>
+                <img
+                  src="/images/logo-dark.svg"
+                  alt="logo"
+                  className="hidden object-contain w-10 h-10 dark:block"
+                  onClick={() => setCurrentMenu("menu")}
+                />
+                <img
+                  src="/images/logo.svg"
+                  alt="logo"
+                  className="object-contain w-10 h-10 dark:hidden"
+                  onClick={() => setCurrentMenu("menu")}
+                />
               </div>
             </motion.div>
           </motion.div>
 
-          {(currentMenu === "menu" || currentMenu === "avatar") && (
+          {currentMenu === "menu" && (
             <motion.div
               layout
               className="flex items-center justify-center gap-2"
@@ -343,7 +284,7 @@ export const Appbar = () => {
               className="cursor-pointer"
               onClick={() =>
                 setCurrentMenu((prev) =>
-                  prev === "avatar" ? "none" : "avatar"
+                  prev === "avatar" ? "menu" : "avatar"
                 )
               }
             >

@@ -63,12 +63,18 @@
   width: 100%;
 }
 
+.hfix {
+  min-height: 100dvh !important;
+}
+
+.hcontainer {
+  height: calc(100dvh - 48px - 57px);
+}
 @media (min-width: 651px) {
   .codex-editor--narrow .ce-toolbar__actions {
     right: 100%;
   }
 }
-
 
 @layer utilities {
   @variants responsive {
@@ -76,7 +82,6 @@
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
-
 
     /* Hide scrollbar for IE, Edge, and Firefox */
     .no-scrollbar {
@@ -100,10 +105,9 @@
 .dark .cdx-button,
 .dark .ce-popover,
 .dark .ce-toolbar__plus:hover {
-  background: theme('colors.base.DEFAULT');
+  background: theme("colors.base.DEFAULT");
   color: inherit;
-	border-color: theme('colors.stroke.base.DEFAULT');
- 
+  border-color: theme("colors.stroke.base.DEFAULT");
 }
 
 .dark .ce-inline-tool,
@@ -115,42 +119,42 @@
 }
 
 .dark .ce-popover-item {
-  color: theme('colors.shade.primary');
+  color: theme("colors.shade.primary");
 }
 
 .dark .ce-popover-item__icon,
 .dark .ce-conversion-tool__icon {
-  color: theme('colors.shade.primary');
-	background-color: theme('colors.back.DEFAULT');
-	box-shadow: none;
+  color: theme("colors.shade.primary");
+  background-color: theme("colors.back.DEFAULT");
+  box-shadow: none;
 }
 
 .dark .cdx-search-field {
-	border-color: theme('colors.stroke.base.DEFAULT');
-	background: theme('colors.el.subtle.DEFAULT');
-	color: inherit;
+  border-color: theme("colors.stroke.base.DEFAULT");
+  background: theme("colors.el.subtle.DEFAULT");
+  color: inherit;
 }
 
 .dark ::selection {
-  background: theme('colors.el.subtle.active');
+  background: theme("colors.el.subtle.active");
 }
 
 .dark .cdx-settings-button:hover,
 .dark .ce-settings__button:hover,
 .dark .ce-toolbox__button--active,
 .dark .ce-toolbox__button:hover,
-.dark .cdx-button:hover,t
-.dark .ce-inline-toolbar__dropdown:hover,
+.dark .cdx-button:hover,
+t .dark .ce-inline-toolbar__dropdown:hover,
 .dark .ce-inline-tool:hover,
 .dark .ce-popover-item:hover,
 .dark .ce-conversion-tool:hover,
 .dark .ce-toolbar__settings-btn:hover {
-  background-color:theme('colors.el.subtle.hover');
-  color: theme('colors.shade.primary');;
+  background-color: theme("colors.el.subtle.hover");
+  color: theme("colors.shade.primary");
 }
 
 .dark .cdx-notify--error {
-  background: theme('colors.red.500') !important;
+  background: theme("colors.red.500") !important;
 }
 
 .dark .cdx-notify__cross::after,
