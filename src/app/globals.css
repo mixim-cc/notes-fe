@@ -64,7 +64,7 @@
 }
 
 .hfix {
-  min-height: 100dvh !important;
+  height: 100dvh !important;
 }
 
 .hcontainer {
