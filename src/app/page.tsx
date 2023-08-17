@@ -2,8 +2,10 @@
 
 import { NoteEditor } from "@/components/notes/editor";
 import { NoteEditorMobile } from "@/components/notes/editor-mobile";
+import { EditorHeaderMobile } from "@/components/notes/editor-mobile/editor-header";
 import { NoteSidebar } from "@/components/notes/sidebar";
 import WhatsNewModal from "@/components/others/whats-new-dialog";
+import { Appbar } from "@/components/ui/appbar";
 import { Oasis } from "@/components/ui/oasis";
 import { setNetworkStatus } from "@/services/state/functions/file-system/set-network-status";
 import { useInitalLoad } from "@/services/state/functions/file-system/useInitialLoad";
@@ -92,10 +94,11 @@ export default function Page() {
 
 function Mobile() {
   return (
-    <div>
-      <div>
+    <div className="flex flex-col h-screen">
+      <div className="h-full">
         <NoteEditorMobile />
       </div>
+      <Appbar />
     </div>
   );
 }
