@@ -84,10 +84,10 @@ export const Appbar = () => {
   }
 
   return (
-    <div className="w-screen">
+    <div className="">
       <motion.div
         layout
-        className="flex flex-col justify-between w-screen gap-4 px-3 py-2 border-t -shadow-3xl bg-base dark:border dark:border-stroke-base"
+        className="flex flex-col justify-between gap-4 px-3 py-2 border-t -shadow-3xl bg-base dark:border dark:border-stroke-base"
       >
         {searchTerm && currentMenu === "search" && (
           <motion.div
