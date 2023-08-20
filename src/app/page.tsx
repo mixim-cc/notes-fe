@@ -1,13 +1,15 @@
 "use client";
 
 import { NoteEditor } from "@/components/notes/editor";
+import { NoteEditorMobile } from "@/components/notes/editor-mobile";
+import { EditorHeaderMobile } from "@/components/notes/editor-mobile/editor-header";
 import { NoteSidebar } from "@/components/notes/sidebar";
-import WhatsNewModal from "@/components/others/whats-new-dialog";
+import { Appbar } from "@/components/ui/appbar";
 import { Oasis } from "@/components/ui/oasis";
 import { setNetworkStatus } from "@/services/state/functions/file-system/set-network-status";
 import { useInitalLoad } from "@/services/state/functions/file-system/useInitialLoad";
 import { useSync } from "@/services/state/functions/file-system/useSync";
-import { hasSeenWhatsNewModal } from "@/utils/userPreferences";
+import useIsMobile from "@/utils/useMobile";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -16,6 +18,7 @@ import { useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
 export default function Page() {
+  const isMobile = useIsMobile();
   const { isLocalLoaded } = useInitalLoad();
   useSync();
 
@@ -52,43 +55,46 @@ export default function Page() {
 
   if (!isLocalLoaded) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="h-10 w-10 animate-spin text-gray-800" />
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="w-10 h-10 text-gray-800 animate-spin" />
       </div>
     );
   }
 
   return (
     <>
-      <div>
-        <div className="flex flex-col items-center justify-center gap-8 px-8 py-32 text-2xl font-semibold md:hidden">
-          <Image
-            src="/images/error.png"
-            height={200}
-            width={200}
-            alt="Reponsive Error"
-          />
-          <p className="">
-            Unfortunately Mixim Drafts is not Mobile Responsive.
-          </p>
-          <p className="">
-            We recommend using Big Screens(Tablet, Laptop or Desktop) for Better
-            Experience.
-          </p>
-        </div>
-        <div></div>
-      </div>
-
-      {!hasSeenWhatsNewModal() && <WhatsNewModal />}
-
-      <motion.div
+      {/* {!hasSeenWhatsNewModal() && <WhatsNewModal />} */}
+      {isMobile ? (
+        <Mobile />
+      ) : (
+        <>
+          <motion.div
+            layout
+            className="flex h-screen bg-base-hover md:gap-4 md:p-4"
+          >
+            <NoteSidebar />
+            <NoteEditor />
+          </motion.div>
+          <Oasis />
+        </>
+      )}
+      {/* <motion.div
         layout
         className="hidden h-screen bg-base-hover md:flex md:gap-4 md:p-4"
       >
         <NoteSidebar />
         <NoteEditor />
       </motion.div>
-      <Oasis />
+      <Oasis /> */}
     </>
+  );
+}
+
+function Mobile() {
+  return (
+    <div className="flex flex-col hfix">
+      <NoteEditorMobile />
+      <Appbar />
+    </div>
   );
 }

@@ -26,7 +26,7 @@ const AccordionTrigger = React.forwardRef<
       asChild
       ref={ref}
       className={cn(
-        "group flex h-7 flex-1 items-center gap-2 rounded-md px-1 py-4 text-sm font-medium text-shade-primary transition-all hover:bg-el [&[data-state=open]>svg:first-child]:rotate-90",
+        "group flex h-10 flex-1 items-center gap-2 rounded-md px-1 py-4 text-sm font-medium text-shade-primary transition-all hover:bg-el [&[data-state=open]>svg:first-child]:rotate-90",
         className
       )}
       {...props}
@@ -34,9 +34,9 @@ const AccordionTrigger = React.forwardRef<
       <div>
         {isLoading ? <div className="hidden" /> : null}
         {isLoading ? (
-          <Loader2 className="h-4 w-5 shrink-0 text-shade-secondary animate-spin" />
+          <Loader2 className="w-5 h-4 shrink-0 text-shade-secondary animate-spin" />
         ) : (
-          <ChevronRight className="h-4 w-4 shrink-0 text-shade-secondary transition-transform duration-200" />
+          <ChevronRight className="w-4 h-4 transition-transform duration-200 shrink-0 text-shade-secondary" />
         )}
         {children}
       </div>
