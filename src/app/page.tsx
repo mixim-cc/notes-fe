@@ -72,7 +72,7 @@ export default function Page() {
         <>
           <motion.div
             layout
-            className="flex hfix bg-base-hover md:gap-4 md:p-4"
+            className="flex h-screen hfix bg-base-hover md:gap-4 md:p-4"
           >
             <NoteSidebar />
             <NoteEditor />
@@ -95,9 +95,7 @@ export default function Page() {
 function Mobile() {
   return (
     <div className="flex flex-col h-screen">
-      <div className="h-full">
-        <NoteEditorMobile />
-      </div>
+      <NoteEditorMobile />
       <Appbar />
     </div>
   );
