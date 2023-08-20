@@ -48,7 +48,7 @@ export const NoteSidebarMobile = () => {
             onTabChange={(value) => setSelectedTab(value)}
           />
           {selectedTab === "default" && (
-            <div className="flex flex-col ">
+            <div className="flex flex-col h-[50dvh] overflow-y-auto ">
               <div className="px-4 py-4">
                 <SidebarAdd />
               </div>
