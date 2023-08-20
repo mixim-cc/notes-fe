@@ -84,8 +84,8 @@ export const EditorHeaderMobile = React.memo(
             </Drawer.Trigger>
             <Drawer.Overlay className="fixed inset-0 bg-black/40" />
             <Drawer.Portal>
-              <Drawer.Content className="bg-gray-100 z-10 w-full flex flex-col rounded-t-[10px] h-full mt-24 max-h-[75%] fixed bottom-0 left-0 right-0">
-                <div className="py-4 bg-white rounded-t-[10px] flex-1">
+              <Drawer.Content className="bg-gray-100 dark:bg-base z-10 w-full flex flex-col rounded-t-[10px] h-full mt-24 max-h-[75%] fixed bottom-0 left-0 right-0">
+                <div className="py-4 bg-base dark:bg-base rounded-t-[10px] flex-1">
                   <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-gray-300 mb-[14px]" />
                   <div className="mx-auto ">
                     <NoteSidebarMobile />

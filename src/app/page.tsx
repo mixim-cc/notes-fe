@@ -4,14 +4,12 @@ import { NoteEditor } from "@/components/notes/editor";
 import { NoteEditorMobile } from "@/components/notes/editor-mobile";
 import { EditorHeaderMobile } from "@/components/notes/editor-mobile/editor-header";
 import { NoteSidebar } from "@/components/notes/sidebar";
-import WhatsNewModal from "@/components/others/whats-new-dialog";
 import { Appbar } from "@/components/ui/appbar";
 import { Oasis } from "@/components/ui/oasis";
 import { setNetworkStatus } from "@/services/state/functions/file-system/set-network-status";
 import { useInitalLoad } from "@/services/state/functions/file-system/useInitialLoad";
 import { useSync } from "@/services/state/functions/file-system/useSync";
 import useIsMobile from "@/utils/useMobile";
-import { hasSeenWhatsNewModal } from "@/utils/userPreferences";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -65,14 +63,14 @@ export default function Page() {
 
   return (
     <>
-      {!hasSeenWhatsNewModal() && <WhatsNewModal />}
+      {/* {!hasSeenWhatsNewModal() && <WhatsNewModal />} */}
       {isMobile ? (
         <Mobile />
       ) : (
         <>
           <motion.div
             layout
-            className="flex hfix bg-base-hover md:gap-4 md:p-4"
+            className="flex h-screen bg-base-hover md:gap-4 md:p-4"
           >
             <NoteSidebar />
             <NoteEditor />
@@ -94,10 +92,8 @@ export default function Page() {
 
 function Mobile() {
   return (
-    <div className="flex flex-col h-screen">
-      <div className="h-full">
-        <NoteEditorMobile />
-      </div>
+    <div className="flex flex-col hfix">
+      <NoteEditorMobile />
       <Appbar />
     </div>
   );

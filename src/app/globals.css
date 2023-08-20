@@ -62,9 +62,8 @@
   max-width: unset !important;
   width: 100%;
 }
-
 .hfix {
-  height: 100dvh !important;
+  height: 100dvh;
 }
 
 .hcontainer {
