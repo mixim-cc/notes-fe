@@ -41,44 +41,50 @@ export const NoteEditorMobile = () => {
 
   if (!selectedNote) {
     return (
-      <div
-        className={cn(
-          "auto h-full w-full  overflow-hidden rounded-lg border border-stroke-base bg-base flex flex-col gap-4 items-center justify-center"
-        )}
-      >
-        <Image src="/no-note.svg" width={400} height={200} alt="No note" />
-        <div className="pt-8 text-xl text-shade-primary">
-          No Note Selected. Please Select a note or create.
-        </div>{" "}
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            leftIcon={<Plus className="w-4 h-4" />}
-            onClick={() => {
-              addNew({
-                title: "Untitled Note",
-                parentId: "",
-                type: "FILE",
-                depth: 0,
-              });
-            }}
-          >
-            New Note
-          </Button>
-          <Button
-            variant="outline"
-            leftIcon={<Plus className="w-4 h-4" />}
-            onClick={() => {
-              addNew({
-                title: "Untitled Folder",
-                parentId: "",
-                type: "FOLDER",
-                depth: 0,
-              });
-            }}
-          >
-            New Folder
-          </Button>
+      <div className="flex flex-col w-full ">
+        <div className="">
+          <EditorHeaderMobile />
+        </div>
+
+        <div
+          className={cn(
+            "auto hcontainer w-full  overflow-hidden rounded-lg border border-stroke-base bg-base flex flex-col gap-4 items-center justify-center"
+          )}
+        >
+          <Image src="/no-note.svg" width={200} height={100} alt="No note" />
+          <div className="px-4 pt-8 mx-auto text-xl text-shade-primary">
+            No Note Selected. Please Select a note or create.
+          </div>{" "}
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              leftIcon={<Plus className="w-4 h-4" />}
+              onClick={() => {
+                addNew({
+                  title: "Untitled Note",
+                  parentId: "",
+                  type: "FILE",
+                  depth: 0,
+                });
+              }}
+            >
+              New Note
+            </Button>
+            <Button
+              variant="outline"
+              leftIcon={<Plus className="w-4 h-4" />}
+              onClick={() => {
+                addNew({
+                  title: "Untitled Folder",
+                  parentId: "",
+                  type: "FOLDER",
+                  depth: 0,
+                });
+              }}
+            >
+              New Folder
+            </Button>
+          </div>
         </div>
       </div>
     );
