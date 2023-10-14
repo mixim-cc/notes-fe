@@ -4,11 +4,17 @@ Thank you so much for considering to contribute to Mixim Notes! If you have no i
 
 ## Ways to Contribute
 
+### Design & Feature
+
+We're open to new features requests. If you got some ideas to share with us please do. We'll design and find ways to implement it.
+
+We encourage to join our Discord Server [Invitation Link](https://discord.gg/eRbXWct3mT)
+
 ### Contributing code
 
 > Before you start contributing code, **make sure to read the [commit guidelines](#commit-guidelines), [git branch organization](#git-branch-organization) & [style guidelines](#style-guidelines).**
 
-As with other types of contributions, **the first step is to [open an issue](https://github.com/streetwriters/notesnook/issues/new/choose) on GitHub**. Opening an issue before you make changes ensures that someone else isn't already working on that particular problem. It also lets us all work together to find the right approach before you spend a bunch of time on a PR. **So again, when in doubt, open an issue**.
+As with other types of contributions, **the first step is to [open an issue](https://github.com/mixim-cc/notes-fe/issues/new) on GitHub**. Opening an issue before you make changes ensures that someone else isn't already working on that particular problem. It also lets us all work together to find the right approach before you spend a bunch of time on a PR. **So again, when in doubt, open an issue**.
 
 ### Reporting a bug
 
@@ -18,7 +24,7 @@ Ugh! Bugs!
 
 To help us understand what's happening, we first want to **make sure you're using the latest version of Mixim Notes**.
 
-Once you've **confirmed that the bug still exists in the latest version**, you'll want to check to make sure it's not something we already know about in the [opened GitHub issues](https://github.com/streetwriters/notesnook/issues).
+Once you've **confirmed that the bug still exists in the latest version**, you'll want to check to make sure it's not something we already know about in the [opened GitHub issues](https://github.com/mixim-cc/notes-fe/issues).
 
 If you've **upgraded to the latest version, and you can't find it in our open issues** list, it's time to [open a new issue](https://github.com/streetwriters/notesnook/issues/new/choose). It is recommended that you fill out all the fields in the GitHub issue form with as much detail as possible. This includes:
 
@@ -28,43 +34,13 @@ If you've **upgraded to the latest version, and you can't find it in our open is
 
 The **easier it is for us to recreate your problem, the faster it will be fixed**.
 
-### Suggesting a new feature
-
-If you've thought of a way that Notesnook could be better, we want to hear about it. **We track feature requests using GitHub Issues**, so feel free to [open an issue](https://github.com/streetwriters/notesnook/issues/new/choose) which describes the feature you would like to see, why you need it, and how it should work.
-
-Before you open a new feature request, please make sure it's not a duplicate. **Duplicate feature requests & bug reports are closed immediately.**
-
-### Helping out in the issue tracker
-
-New issues are always opened that need to be triaged, sorted & organized, so the developers can easily find the most critical and/or relevant bugs to fix. Any help in this regard is appreciated.
-
-In addition to this, you can help out in the following ways:
-
-1. Finding & highlighting stale/duplicate issues
-2. Answering questions & queries
-3. Reproducing bugs (or mentioning that you face a particular bug)
-4. Leaving your feedback on new feature requests
-
-
-
-#### Implementing a new feature or fixing a bug
-
-Each subproject in the monorepo contains its own set of documentation which you should refer to get started. This includes:
-
-1. Setting up the developer environment
-2. Build instructions
-3. Running tests (if any)
-4. Architecture docs explaining how everything fits together
-
-Once you are done, [open a new pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
-
 ## Opening & submitting a pull request
 
 **Before submitting a pull request,** please make sure the following is done:
 
 1. Fork [the repository](https://github.com/mixim-cc/notes-fe) and create your branch from `main` (you can name your branch anything).
 2. Run `pnpm install` in the repository root. To download all the required dependencies.
-3. Make sure your code lints (`npm run lint`). Tip: `npm run linc` to only check changed files.
+3. Make sure your code lints (`pnpm run lint`). Tip: `pnpm run linc` to only check changed files.
 4. Read & follow the commit guidelines.
 5. Read & follow the style guidelines.
 
@@ -74,35 +50,20 @@ Once you are done, [open a new pull request](https://docs.github.com/en/pull-req
 
 All commits must include valid scopes in the commit message. **Valid commit scopes include:**
 
-**Apps:**
+**Changes:**
 
-1. `mobile`: changes related to mobile clients
-2. `web`: changes related to the web client
-3. `desktop`: changes related to the desktop client
+- **fix**: a commit of the type fix patches a bug in your codebas (this correlates with PATCH in Semantic Versioning)
 
-**Packages:**
-
-1. `crypto`: changes related to the cryptographic core
-2. `editor`: changes related to the editor (including `@notesnook/editor-mobile`)
-3. `logger`: changes related to the logger
-4. `theme`: changes related to the theme
-
-**Repo maintenance:**
-
-1. `config`: changes related to config of installed tools in the repo (e.g. eslint rules)
-2. `ci`: changes related to CI
-3. `setup`: setting up something new in the repo (e.g. eslint, commitlint)
-4. `docs`: changes related to documentation (README etc.)
-5. `misc`: miscellaneous changes like package-lock.json updates
-6. `global`: changes related to the whole repo
+- **feat**: a commit of the type feat introduces a new feature to the codebase (this correlates with MINOR in Semantic Versioning).
 
 **Some example commits would look like this:**
 
 ```txt
-docs: list all valid scopes in commit guidelines
-web: impl xyz feature
-crypto: update libsodium version
+fix: changes in app.tsx
+feat: search added
 ```
+
+Refer [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for more Details.
 
 ## Style guidelines
 
@@ -114,7 +75,7 @@ However, there are still some styles that the linter cannot pick up. If you are 
 
 ## Git Branch Organization
 
-Submit all changes to [`dev branch`](https://github.com/mixim-cc/notes-fe). 
+Submit all PR to [`dev branch`](https://github.com/mixim-cc/notes-fe)
 
 ## Review Process
 
@@ -126,4 +87,6 @@ During the PR process, expect that there will be some back-and-forth. Please try
 2. If a PR takes too many iterations for its complexity or size, we may reject it.
 3. If you stop responding we may close the PR as abandoned.
 4. If a PR is accepted, a maintainer will merge your change.
-5. If we reject the PR, we will close the pull request with a comment explaining why. This decision isn't always final: if you feel we have misunderstood your intended change, please continue the conversation with a comment on the PR.
+5. If we reject the PR, we will close the pull request with a comment explaining why. This decision isn't always final: if you feel we have misunderstood your intended change, please continue the conversation with a comment on the PR
+
+This Docs is not complete and it needs some changes, which we can work on later. Happy Contributing.
