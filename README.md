@@ -26,11 +26,50 @@ npm run dev
 cp .env.example .env
 yarn install
 yarn dev
+
+#or 
+
+cp .env.example .env
+pnpm i
+pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup Backend Locally Using Docker
 
-You can start editing the page by modifying `pages/_app.tsx`. The page auto-updates as you edit the file.
+First a clean postgres database is required which can optionally be setup using docker as
+
+```docker
+docker pull bikash4416/notes-be
+docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=password postgres
+```
+
+Following env Variable must be supplied to run, PG_ values are for database. Note that the length of ENCRYPTION_SECRET value must not change from that of given sample. 
+
+Copy and Paste following code in your .env
+
+```env
+ENCRYPTION_SECRET=mix&p*~!l1/!s0^=B*x7ti01q1!x4o^@
+CLERK_SECRET_KEY=
+
+DB_PROFILE=local
+PG_HOST=host.docker.internal
+PG_PORT=5432
+PG_DB=postgres
+PG_USER=postgres
+PG_PASSWORD=password
+
+BE_PORT=8080
+```
+
+Run the backend service using command such as
+```docker
+docker run -p 8080:8080 --env-file .env --add-host=host.docker.internal:host-gateway -d bikash4416/notes-be
+```
+
+Playground URL
+Open [http://localhost:8080/playground](http://localhost:8080/playground) with your browser to access playground.
+
+
 
 ## Learn More
 
