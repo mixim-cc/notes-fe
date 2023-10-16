@@ -39,7 +39,7 @@
     "@graphql-codegen/import-types-preset": "^2.2.5",
     "@graphql-codegen/introspection": "3.0.1",
     "@graphql-codegen/typescript": "2.4.9",
-    "@graphql-codegen/typescript-operations": "2.3.6",
+    "@graphql-codegen/typescript-operations": "4.0.1",
     "@graphql-codegen/typescript-react-query": "^4.1.0",
     "@graphql-codegen/typescript-resolvers": "^4.0.1",
     "@imbios/next-pwa": "^1.1.1",
