@@ -89,7 +89,6 @@ export const SidebarFile = ({
               autoFocus
               placeholder="Untiled File"
               value={title}
-              onDoubleClick={() => setIsEditing(true)}
               className="w-full h-full py-2 overflow-hidden text-sm bg-transparent appearance-none resize-none text-shade-primary focus:outline-none"
               onChange={onTitleChange}
               onBlur={onTitleBlur}

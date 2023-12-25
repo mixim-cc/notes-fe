@@ -28,19 +28,19 @@
   }
 
   .dark {
-    --bg-base: #1d2228;
-    --bg-base-hover: #20262e;
+    --bg-base: #0e0f0f;
+    --bg-base-hover: #141515;
     --bg-back: #1a1e23;
     --bg-back-hover: #1d2228;
     --bg-front: #20262e;
     --bg-front-hover: #212830;
-    --bg-el: #232b34;
+    --bg-el: #1d1d21;
     --bg-el-hover: #2a313c;
     --bg-el-active: #313741;
     --bg-el-subtle: #20262e;
     --bg-el-subtle-hover: #212830;
     --bg-el-subtle-active: #232b34;
-    --border-base: #313741;
+    --border-base: #24252a;
     --border-base-strong: #4e5660;
     --border-back: #2a313c;
     --border-back-strong: #313741;

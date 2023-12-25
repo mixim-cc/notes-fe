@@ -87,9 +87,7 @@ export const NoteEditor = () => {
   return (
     <div
       key={selectedNote?.id}
-      className={cn(
-        "auto h-full w-full  overflow-hidden rounded-2xl border border-stroke-base bg-base"
-      )}
+      className={cn("auto h-full w-full  overflow-hidden rounded-2xl ")}
     >
       <div className="sticky top-0 z-50">
         <EditorHeader />

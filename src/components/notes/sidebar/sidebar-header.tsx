@@ -10,8 +10,8 @@ interface SidebarHeaderProps {
 
 export const SidebarHeader = ({ onTabChange, tab }: SidebarHeaderProps) => {
   return (
-    <div className="flex items-center justify-between px-4 h-14 shrink-0 ">
-      <h1 className="text-xl font-semibold leading-none text-shade-primary">
+    <div className="flex items-center justify-between h-12 px-4 shrink-0 ">
+      <h1 className="text-lg font-medium leading-none tracking-wide text-shade-primary">
         {tab === "default" ? "Mixim Notes" : "Journal"}
       </h1>
       {/* <div className="flex items-center gap-2">

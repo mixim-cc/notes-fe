@@ -46,10 +46,10 @@ export const NoteSidebar = () => {
           layout
           key="sidebar"
           initial={{ width: 0, opacity: 0 }}
-          animate={{ width: "320px", opacity: 1 }}
+          animate={{ width: "260px", opacity: 1 }}
           exit={{ width: 0, opacity: 0 }}
           className={cn(
-            "flex h-full shrink-0 flex-col  gap-4 overflow-y-auto no-scrollbar rounded-2xl border border-stroke-base bg-base"
+            "flex h-full shrink-0 flex-col  gap-4 overflow-y-auto no-scrollbar  border-r border-stroke-base bg-base-hover"
           )}
         >
           <SidebarHeader
@@ -60,7 +60,7 @@ export const NoteSidebar = () => {
             <div className="flex flex-col gap-4 px-4">
               <SidebarAdd />
               <SidebarFileSystem />
-              <div className="w-full h-1 border-t border-stroke-base"></div>
+
               <div>
                 {individualFiles?.map((file) => (
                   <React.Fragment key={file?.id}>

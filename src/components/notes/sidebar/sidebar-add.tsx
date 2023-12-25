@@ -7,7 +7,7 @@ export const SidebarAdd = () => {
   return (
     <div className="flex items-center justify-between gap-2 pb-4 border-b border-stroke-base">
       <Button
-        className="w-full"
+        className="flex justify-start w-full"
         variant="outline"
         onClick={() => {
           addNew({
@@ -18,10 +18,10 @@ export const SidebarAdd = () => {
         }}
       >
         <FilePlus size={18} className=" text-shade-secondary" />
-        New Note
+        Note
       </Button>
       <Button
-        className="w-full"
+        className="justify-start w-full"
         variant="outline"
         onClick={() => {
           addNew({
@@ -32,7 +32,7 @@ export const SidebarAdd = () => {
         }}
       >
         <FolderPlus size={18} className="w-5 h-5 text-shade-secondary" />
-        New Folder
+        Folder
       </Button>
     </div>
   );
