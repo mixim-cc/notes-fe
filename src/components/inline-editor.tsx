@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/utils/cn";
 import React, { useEffect, useRef, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
@@ -53,7 +54,10 @@ export const InlineEditor = React.forwardRef<
   }
 
   return (
-    <p className={props.className + " cursor-pointer truncate text-left"}>
+    <p
+      onDoubleClick={(e) => setIsEditing?.(true)}
+      className={cn(props.className + " cursor-pointer truncate text-left")}
+    >
       {text}
     </p>
   );

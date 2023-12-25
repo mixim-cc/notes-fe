@@ -81,7 +81,7 @@ export const SidebarFile = ({
             {hasParent ? (
               <div className="h-3 w-0.5 rounded-xl bg-stroke-back"></div>
             ) : (
-              <FileText className="text-shade-seondary h-5 w-5" />
+              <FileText className="w-5 h-5 text-shade-seondary" />
             )}
             <InlineEditor
               isEditing={isEditing}
@@ -89,7 +89,8 @@ export const SidebarFile = ({
               autoFocus
               placeholder="Untiled File"
               value={title}
-              className="h-full w-full resize-none  appearance-none overflow-hidden bg-transparent py-2 text-sm text-shade-primary focus:outline-none"
+              onDoubleClick={() => setIsEditing(true)}
+              className="w-full h-full py-2 overflow-hidden text-sm bg-transparent appearance-none resize-none text-shade-primary focus:outline-none"
               onChange={onTitleChange}
               onBlur={onTitleBlur}
               onKeyDown={onTitleKeyDown}

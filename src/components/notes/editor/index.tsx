@@ -47,13 +47,13 @@ export const NoteEditor = () => {
         )}
       >
         <Image src="/no-note.svg" width={400} height={200} alt="No note" />
-        <div className="text-xl text-shade-primary pt-8">
+        <div className="pt-8 text-xl text-shade-primary">
           No Note Selected. Please Select a note or create.
         </div>{" "}
         <div className="flex gap-2">
           <Button
             variant="outline"
-            leftIcon={<Plus className="h-4 w-4" />}
+            leftIcon={<Plus className="w-4 h-4" />}
             onClick={() => {
               addNew({
                 title: "Untitled Note",
@@ -67,7 +67,7 @@ export const NoteEditor = () => {
           </Button>
           <Button
             variant="outline"
-            leftIcon={<Plus className="h-4 w-4" />}
+            leftIcon={<Plus className="w-4 h-4" />}
             onClick={() => {
               addNew({
                 title: "Untitled Folder",
@@ -88,7 +88,7 @@ export const NoteEditor = () => {
     <div
       key={selectedNote?.id}
       className={cn(
-        "auto h-full w-full  overflow-hidden rounded-lg border border-stroke-base bg-base"
+        "auto h-full w-full  overflow-hidden rounded-2xl border border-stroke-base bg-base"
       )}
     >
       <div className="sticky top-0 z-50">
@@ -97,7 +97,7 @@ export const NoteEditor = () => {
 
       {networkStatus === "offline" ? (
         <div
-          className="flex h-full w-full justify-center overflow-y-auto"
+          className="flex justify-center w-full h-full overflow-y-auto"
           key={selectedNote?.id}
         >
           <Editor
@@ -128,12 +128,12 @@ export const NoteEditor = () => {
           />
         </div>
       ) : isLoading ? (
-        <div className="flex min-h-screen items-center justify-center">
-          <Loader2 className="h-10 w-10 animate-spin text-gray-800" />
+        <div className="flex items-center justify-center min-h-screen">
+          <Loader2 className="w-10 h-10 text-gray-800 animate-spin" />
         </div>
       ) : (
         <div
-          className="flex h-full w-full justify-center overflow-y-auto"
+          className="flex justify-center w-full h-full overflow-y-auto"
           key={selectedNote?.id}
         >
           <Editor
