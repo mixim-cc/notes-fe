@@ -44,7 +44,6 @@ export const Editor = ({
     },
   });
 
-
   useEffect(() => {
     const { unsubscribe } = watch((formData) => {
       onChange?.({
@@ -74,20 +73,20 @@ export const Editor = ({
     >
       {editorWidth === "default" ? (
         <div
-          className="flex h-6 cursor-pointer select-none items-center gap-2"
+          className="flex items-center h-6 gap-2 opacity-0 cursor-pointer select-none hover:opacity-100 "
           onClick={() => setEditorWidth("full")}
         >
-          <MoveHorizontal className="h-4 w-4 text-shade-secondary" />
+          <MoveHorizontal className="w-4 h-4 text-shade-secondary" />
           <p className="text-[13px] font-medium text-shade-primary">
             Wide Layout
           </p>
         </div>
       ) : (
         <div
-          className="flex h-6 cursor-pointer select-none items-center gap-2"
+          className="flex items-center h-6 gap-2 opacity-0 cursor-pointer select-none hover:opacity-100"
           onClick={() => setEditorWidth("default")}
         >
-          <MoveHorizontal className="h-4 w-4 text-shade-secondary" />
+          <MoveHorizontal className="w-4 h-4 text-shade-secondary" />
           <p className="text-[13px] font-medium">Default Layout</p>
         </div>
       )}
@@ -104,7 +103,7 @@ export const Editor = ({
             return false;
           }
         }}
-        className="min-h-12 w-full resize-none appearance-none overflow-hidden bg-transparent py-4 text-4xl font-bold leading-[3.75rem] focus:outline-none"
+        className="min-h-12 w-full resize-none appearance-none overflow-hidden bg-transparent  text-3xl font-medium leading-[3.75rem] focus:outline-none"
         {...register("title")}
       />
       {/* {isPreview ? (

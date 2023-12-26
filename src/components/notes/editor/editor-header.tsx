@@ -101,7 +101,9 @@ export const EditorHeader = React.memo(
               </div>
             ) : null}
 
-            <p className="text-sm text-shade-primary">{title || file?.title}</p>
+            <p className="text-sm tracking-wide text-shade-primary">
+              {title || file?.title}
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-2">
