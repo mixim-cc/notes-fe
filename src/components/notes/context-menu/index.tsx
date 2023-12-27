@@ -46,39 +46,39 @@ const CONTEXT_MENU_ITEMS = {
   RENAME: {
     title: "Rename",
     type: "RENAME",
-    icon: <Edit3 className="h-4 w-4" />,
+    icon: <Edit3 className="w-4 h-4" />,
     divider: false,
   },
   COPY: {
     title: "Make a Copy",
     type: "COPY",
-    icon: <Copy className="h-4 w-4" />,
+    icon: <Copy className="w-4 h-4" />,
     divider: false,
   },
   STAR: {
     title: "Star",
     type: "STAR",
-    icon: <Star className="h-4 w-4" />,
+    icon: <Star className="w-4 h-4" />,
     divider: false,
   },
   DELETE: {
     title: "Delete",
     type: "DELETE",
-    icon: <Trash2 className="h-4 w-4" />,
+    icon: <Trash2 className="w-4 h-4" />,
     divider: true,
     isDanger: true,
   },
   MAKE_DRAFT: {
     title: "Make a Note",
     type: "MAKE_DRAFT",
-    icon: <FilePlus2 className="h-4 w-4" />,
+    icon: <FilePlus2 className="w-4 h-4" />,
     divider: false,
     isDanger: false,
   },
   MAKE_FOLDER: {
     title: "Make Folder",
     type: "MAKE_FOLDER",
-    icon: <FolderPlusIcon className="h-4 w-4" />,
+    icon: <FolderPlusIcon className="w-4 h-4" />,
     divider: false,
     isDanger: false,
   },
@@ -136,19 +136,19 @@ export const NotesTripleDotsMenu = ({
         {children || (
           <IconButton
             variant="ghost"
-            size="sm"
+            size="default"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
             }}
           >
-            <MoreHorizontal className="h-3 w-3" />
+            <MoreHorizontal className="w-3 h-3" />
           </IconButton>
         )}
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          align="end"
+          align="center"
           className="z-[999] min-w-[240px] overflow-hidden rounded-md border border-stroke-base bg-front shadow-xl"
         >
           {options.map((item, index) => {

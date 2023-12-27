@@ -72,7 +72,7 @@ export const EditorHeader = React.memo(
     );
 
     return (
-      <div className="flex h-12 items-center justify-between gap-4 border-b border-stroke-base bg-base px-4">
+      <div className="flex items-center justify-between h-12 gap-4 px-4 border-b border-stroke-base bg-base">
         {" "}
         <div className="flex items-center gap-4">
           <IconButton
@@ -80,9 +80,15 @@ export const EditorHeader = React.memo(
             onClick={() => toggleSidebar(!isSidebarVisible)}
           >
             {isSidebarVisible ? (
-              <PanelLeftClose className="text-shade-seondary h-5 w-5" />
+              <PanelLeftClose
+                strokeWidth={1.5}
+                className="w-5 h-5 text-shade-seondary"
+              />
             ) : (
-              <PanelLeftOpen className="h-5 w-5 text-shade-secondary" />
+              <PanelLeftOpen
+                strokeWidth={1.5}
+                className="w-5 h-5 text-shade-secondary"
+              />
             )}
           </IconButton>
 
@@ -92,7 +98,7 @@ export const EditorHeader = React.memo(
             {hasParentFolder && !title ? (
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
-                  <FolderIcon className="text-shade-seondary h-5 w-5" />
+                  <FolderIcon className="w-5 h-5 text-shade-seondary" />
                   <p className="text-sm text-shade-secondary">
                     {fileSystem?.find((s) => s?.id === file?.parentId)?.title}
                   </p>
@@ -101,38 +107,40 @@ export const EditorHeader = React.memo(
               </div>
             ) : null}
 
-            <p className="text-sm text-shade-primary">{title || file?.title}</p>
+            <p className="text-sm font-medium tracking-wide text-shade-primary">
+              {title || file?.title}
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           {status === "offline" ? (
-            <p className="text-xs text-shade-subtle inline-flex items-center gap-2">
-              <CloudOff className="h-4 w-4" /> Offline -{" "}
+            <p className="inline-flex items-center gap-2 text-xs font-medium tracking-wide text-shade-subtle">
+              <CloudOff className="w-4 h-4" /> Offline -{" "}
               {file?.lastSyncedDate
                 ? dayjs(file?.lastSyncedDate).format("MMM DD, hh:mm a")
                 : "Never"}
             </p>
           ) : file?.isSyncing ? (
-            <p className="text-xs text-shade-subtle inline-flex items-center gap-2">
-              <Loader2 className="h-4 w-4 animate-spin text-gray-400" />{" "}
+            <p className="inline-flex items-center gap-2 text-xs font-medium tracking-wide text-shade-subtle">
+              <Loader2 className="w-4 h-4 text-gray-400 animate-spin" />{" "}
               <span>Syncing</span>
             </p>
           ) : (
-            <p className="text-xs text-shade-subtle inline-flex items-center gap-2">
-              <Cloud className="h-4 w-4 text-green-600" /> Online -{" "}
+            <p className="inline-flex items-center gap-2 text-xs font-medium tracking-wide text-shade-subtle">
+              <Cloud className="w-4 h-4 text-green-600" /> Online -{" "}
               {file?.lastSyncedDate
                 ? dayjs(file?.lastSyncedDate).format("MMM DD, hh:mm a")
                 : "Never"}
             </p>
           )}
 
-          <IconButton size="sm" variant="ghost">
-            <Star className="text-shade-seondary h-4 w-4" />
-          </IconButton>
+          {/* <IconButton size="sm" variant="ghost">
+            <Star className="w-4 h-4 text-shade-seondary" />
+          </IconButton> */}
           <Popover>
             <PopoverTrigger>
               <IconButton size="sm" variant="ghost">
-                <Link className="text-shade-seondary h-4 w-4" />
+                <Link className="w-4 h-4 text-shade-seondary" />
               </IconButton>
             </PopoverTrigger>
             <PopoverContent
@@ -144,7 +152,7 @@ export const EditorHeader = React.memo(
             >
               <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-2 font-medium text-shade-primary">
-                  <Share2 className="h-4 w-4" />
+                  <Share2 className="w-4 h-4" />
                   <p>Share your Note</p>
                 </div>
 
@@ -165,7 +173,7 @@ export const EditorHeader = React.memo(
                   <Button
                     isLoading={isLoading}
                     leftIcon={
-                      isCopied ? <CheckCircle className="h-4 w-4" /> : null
+                      isCopied ? <CheckCircle className="w-4 h-4" /> : null
                     }
                     onClick={async () => {
                       const response = await mutateAsync({
@@ -238,7 +246,7 @@ export const EditorHeader = React.memo(
               ]}
             >
               <IconButton size="sm" variant="ghost">
-                <MoreHorizontal className="text-shade-seondary h-4 w-4" />
+                <MoreHorizontal className="w-4 h-4 text-shade-seondary" />
               </IconButton>
             </NotesTripleDotsMenu>
           )}

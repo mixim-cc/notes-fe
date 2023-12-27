@@ -68,10 +68,7 @@ export default function Page() {
         <Mobile />
       ) : (
         <>
-          <motion.div
-            layout
-            className="flex h-screen bg-base-hover md:gap-4 md:p-4"
-          >
+          <motion.div layout className="flex h-screen bg-base md:gap-0 ">
             <NoteSidebar />
             <NoteEditor />
           </motion.div>
