@@ -80,9 +80,15 @@ export const EditorHeader = React.memo(
             onClick={() => toggleSidebar(!isSidebarVisible)}
           >
             {isSidebarVisible ? (
-              <PanelLeftClose className="w-5 h-5 text-shade-seondary" />
+              <PanelLeftClose
+                strokeWidth={1.5}
+                className="w-5 h-5 text-shade-seondary"
+              />
             ) : (
-              <PanelLeftOpen className="w-5 h-5 text-shade-secondary" />
+              <PanelLeftOpen
+                strokeWidth={1.5}
+                className="w-5 h-5 text-shade-secondary"
+              />
             )}
           </IconButton>
 
@@ -101,26 +107,26 @@ export const EditorHeader = React.memo(
               </div>
             ) : null}
 
-            <p className="text-sm tracking-wide text-shade-primary">
+            <p className="text-sm font-medium tracking-wide text-shade-primary">
               {title || file?.title}
             </p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           {status === "offline" ? (
-            <p className="inline-flex items-center gap-2 text-xs text-shade-subtle">
+            <p className="inline-flex items-center gap-2 text-xs font-medium tracking-wide text-shade-subtle">
               <CloudOff className="w-4 h-4" /> Offline -{" "}
               {file?.lastSyncedDate
                 ? dayjs(file?.lastSyncedDate).format("MMM DD, hh:mm a")
                 : "Never"}
             </p>
           ) : file?.isSyncing ? (
-            <p className="inline-flex items-center gap-2 text-xs text-shade-subtle">
+            <p className="inline-flex items-center gap-2 text-xs font-medium tracking-wide text-shade-subtle">
               <Loader2 className="w-4 h-4 text-gray-400 animate-spin" />{" "}
               <span>Syncing</span>
             </p>
           ) : (
-            <p className="inline-flex items-center gap-2 text-xs text-shade-subtle">
+            <p className="inline-flex items-center gap-2 text-xs font-medium tracking-wide text-shade-subtle">
               <Cloud className="w-4 h-4 text-green-600" /> Online -{" "}
               {file?.lastSyncedDate
                 ? dayjs(file?.lastSyncedDate).format("MMM DD, hh:mm a")

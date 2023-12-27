@@ -7,6 +7,7 @@ import { FilePlus, FolderPlus } from "lucide-react";
 import { remove } from "@/services/state/functions/file-system/remove";
 import { useSelector } from "@legendapp/state/react";
 import { state } from "@/services/state";
+import { toast } from "sonner";
 
 interface SidebarFolderProps {
   folderTitle: string;
@@ -67,6 +68,7 @@ export const SidebarFolder = ({
       handler: () => {
         try {
           remove({ id: folderId });
+          toast.success("Folder has been deleted!");
         } catch (e) {
           window.alert(e);
         }
@@ -89,7 +91,7 @@ export const SidebarFolder = ({
                 title: e.target.value,
               });
             }}
-            className="w-full resize-none appearance-none  bg-transparent text-ellipsis overflow-hidden text-sm text-shade-primary focus:outline-none"
+            className="w-full overflow-hidden text-sm bg-transparent appearance-none resize-none text-ellipsis text-shade-primary focus:outline-none"
           />
           {!!total && !isEditing && (
             <div className="bg-el px-1.5  rounded-[20px] text-[10px] leading-0">
@@ -98,8 +100,9 @@ export const SidebarFolder = ({
           )}
         </div>
 
-        <div className="flex gap-1">
+        <div className="flex gap-2">
           <FilePlus
+            strokeWidth={1.35}
             onClick={(e) => {
               e.preventDefault();
               addNew({
@@ -109,9 +112,10 @@ export const SidebarFolder = ({
                 type: "FILE",
               });
             }}
-            className="hidden h-4 w-4 shrink-0 cursor-pointer hover:text-shade-primary group-hover:block"
+            className="hidden w-5 h-5 cursor-pointer text-shade-secondary shrink-0 group-hover:block"
           />
           <FolderPlus
+            strokeWidth={1.35}
             onClick={(e) => {
               e.preventDefault();
               addNew({
@@ -121,7 +125,7 @@ export const SidebarFolder = ({
                 type: "FOLDER",
               });
             }}
-            className="hidden h-4 w-4 shrink-0 cursor-pointer hover:text-shade-primary group-hover:block"
+            className="hidden w-5 h-5 cursor-pointer shrink-0 hover:text-shade-primary group-hover:block"
           />
         </div>
       </div>

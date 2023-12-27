@@ -103,7 +103,7 @@ export const Editor = ({
             return false;
           }
         }}
-        className="min-h-12 w-full resize-none appearance-none overflow-hidden bg-transparent  text-3xl font-medium leading-[3.75rem] focus:outline-none"
+        className="w-full overflow-hidden text-3xl font-medium leading-tight bg-transparent appearance-none resize-none min-h-12 focus:outline-none"
         {...register("title")}
       />
       {/* {isPreview ? (

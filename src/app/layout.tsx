@@ -2,10 +2,14 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import type { Metadata } from "next";
 import Providers from "@/providers/provider";
-import { fontSans } from "@/utils/fonts";
+
 import { Analytics } from "@vercel/analytics/react";
 
 import { ThemeProvider } from "@/providers/theme-provider";
+
+import { GeistSans } from "geist/font/sans";
+
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: {
@@ -55,10 +59,11 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className={fontSans.className}>
+      <html lang="en" className={GeistSans.className} suppressHydrationWarning>
+        <body>
           <Providers>
             <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+              <Toaster richColors position="top-right" />
               {children}
               <Analytics />
             </ThemeProvider>

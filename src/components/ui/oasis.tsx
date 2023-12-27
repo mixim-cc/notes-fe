@@ -13,13 +13,14 @@ import { useEffect, useState } from "react";
 //   triggerSync,
 // } from "@/services/redux/reducers/file-explorer-reducer"
 import { cn } from "@/utils/cn";
-import { SignOutButton, useUser } from "@clerk/nextjs";
+import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import {
   ChevronLeft,
   ChevronRight,
   FileText,
+  Keyboard,
   LogOut,
   Plus,
   Search,
@@ -38,8 +39,18 @@ import { useSelector } from "@legendapp/state/react";
 import { state } from "@/services/state";
 import { selectFile } from "@/services/state/functions/file-system/select-file";
 import { addNew } from "@/services/state/functions/file-system/add-new";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./dialog";
+import { Badge } from "./badge";
 
-type OasisMenu = "none" | "menu" | "add" | "search" | "avatar";
+type OasisMenu = "none" | "menu" | "add" | "search" | "avatar" | "keyboard";
 
 export const Oasis = () => {
   const { user } = useUser();
@@ -78,18 +89,19 @@ export const Oasis = () => {
     };
   }, []);
 
-  useHotkeys(
-    ["alt + 0", "g + f"],
-    () => setCurrentMenu("none"),
-    [currentMenu],
-    {
-      enabled: true,
-      enableOnContentEditable: true,
-      enableOnFormTags: true,
-      preventDefault: true,
-    }
-  );
-  useHotkeys("alt + 1", () => setCurrentMenu("add"), [currentMenu], {
+  useHotkeys(["alt + H"], () => setCurrentMenu("none"), [currentMenu], {
+    enabled: true,
+    enableOnContentEditable: true,
+    enableOnFormTags: true,
+    preventDefault: true,
+  });
+  useHotkeys("alt + N", () => setCurrentMenu("add"), [currentMenu], {
+    enabled: true,
+    enableOnContentEditable: true,
+    enableOnFormTags: true,
+    preventDefault: true,
+  });
+  useHotkeys("alt + k", () => setCurrentMenu("keyboard"), [currentMenu], {
     enabled: true,
     enableOnContentEditable: true,
     enableOnFormTags: true,
@@ -122,29 +134,27 @@ export const Oasis = () => {
     <div className="absolute bottom-[52px] left-[50%] z-20 translate-x-[-50%]">
       <motion.div
         layout
-        className="z-20 flex w-auto max-w-[670px] flex-col gap-4 rounded-2xl bg-base p-3 shadow-2xl dark:border dark:border-stroke-base"
+        className="z-20 flex w-auto max-w-[670px] flex-col gap-4 rounded-full bg-base p-3 shadow-2xl dark:border dark:border-stroke-base"
       >
         {searchTerm && currentMenu === "search" && (
           <motion.div
-            animate={{
-              scale: [1, 1, 1, 1, 1],
-            }}
             transition={{
               layout: { duration: 0.3 },
+              ease: "easeOut",
             }}
-            className="flex cursor-pointer flex-col gap-2"
+            className="flex flex-col gap-2 cursor-pointer"
           >
             {searchItems?.map((searchItem) => (
               <div
                 key={searchItem?.id}
-                className="flex gap-2 rounded-md p-2 hover:bg-base-hover "
+                className="flex gap-2 p-2 rounded-md hover:bg-base-hover "
                 onClick={() => {
                   selectFile({ id: String(searchItem?.id) });
                   setCurrentMenu("menu");
                   setSearchTerm("");
                 }}
               >
-                <FileText className="h-4 w-4" />
+                <FileText className="w-4 h-4" />
                 <div className="">
                   <p className="text-xs text-shade-primary">
                     {searchItem?.title}
@@ -163,7 +173,7 @@ export const Oasis = () => {
             ))}
 
             <div
-              className="flex cursor-pointer items-center gap-2 rounded-md p-2 hover:bg-base-hover"
+              className="flex items-center gap-2 p-2 rounded-md cursor-pointer hover:bg-base-hover"
               onClick={() => {
                 const id = addNew({
                   parentId: "",
@@ -178,7 +188,7 @@ export const Oasis = () => {
               }}
             >
               <IconButton size="xs" variant="outline">
-                <Plus className="h-3 w-3 text-shade-secondary" />
+                <Plus className="w-3 h-3 text-shade-secondary" />
               </IconButton>
               <p className="text-sm text-shade-primary">
                 Create new Note with title &quot;{searchTerm}&quot;
@@ -187,60 +197,19 @@ export const Oasis = () => {
           </motion.div>
         )}
 
-        {currentMenu === "avatar" && (
-          <motion.div
-            animate={{
-              scale: [1, 1, 1, 1, 1],
-            }}
-            transition={{
-              layout: { duration: 0.3 },
-            }}
-            className="flex cursor-pointer flex-col gap-4 pb-6"
-          >
-            <div className="flex flex-col gap-2">
-              <p className="text-xs font-medium text-shade-secondary">
-                My Profile
-              </p>
-
-              <div className="flex items-center gap-2 rounded-lg bg-back p-2">
-                <Avatar className="cursor-pointer">
-                  <AvatarImage src={user.imageUrl} />
-                </Avatar>
-                <div className="flex flex-col ">
-                  <p className="font-medium text-shade-secondary">
-                    {user.fullName}
-                  </p>
-                  <p className="text-sm font-medium text-shade-subtle">
-                    {user?.primaryEmailAddress?.emailAddress}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <SignOutButton signOutCallback={() => clear()}>
-              <Button
-                className="border border-red-300 bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600 dark:border-back dark:bg-red-700 dark:text-red-200"
-                variant="outline"
-                leftIcon={<LogOut className="h-4 w-4" />}
-              >
-                Log Out
-              </Button>
-            </SignOutButton>
-          </motion.div>
-        )}
-
         <motion.div
           layout
-          className={"flex h-10 items-center justify-center gap-10 p-1"}
+          className={"flex h-10 items-center justify-center gap-8 p-1"}
         >
           <motion.div
             layout
             className={cn("flex shrink-0 items-center justify-center gap-4", {
-              "gap-10": currentMenu === "none",
+              "gap-8": currentMenu === "none",
             })}
           >
             <motion.div
               layout
-              className="group relative flex cursor-pointer items-center"
+              className="relative flex items-center cursor-pointer group"
               onClick={() => {
                 setCurrentMenu((prev) => {
                   if (prev === "menu") {
@@ -252,17 +221,17 @@ export const Oasis = () => {
             >
               {currentMenu === "none" ? (
                 <div className="flex items-center">
-                  <ChevronLeft className="absolute -left-4 hidden h-4 w-4 animate-pulse text-shade-secondary group-hover:block" />
+                  <ChevronLeft className="absolute hidden w-4 h-4 -left-4 animate-pulse text-shade-secondary group-hover:block" />
                   <motion.div animate={{ rotate: [0, 90] }}>
                     <img
                       src="/images/logo-dark.svg"
                       alt="logo"
-                      className="hidden h-10 w-10 object-contain dark:block"
+                      className="hidden object-contain w-10 h-8 dark:block"
                     />
                     <img
                       src="/images/logo.svg"
                       alt="logo"
-                      className="h-10 w-10 object-contain dark:hidden"
+                      className="object-contain w-10 h-8 dark:hidden"
                     />
                   </motion.div>
                 </div>
@@ -275,21 +244,21 @@ export const Oasis = () => {
                     <img
                       src="/images/logo-dark.svg"
                       alt="logo"
-                      className="hidden h-10 w-10 object-contain dark:block"
+                      className="hidden object-contain w-8 h-8 dark:block"
                     />
                     <img
                       src="/images/logo.svg"
                       alt="logo"
-                      className="h-10 w-10 object-contain dark:hidden"
+                      className="object-contain w-8 h-8 dark:hidden"
                     />
                   </motion.div>
-                  <ChevronRight className="absolute -right-4 hidden h-4 w-4 animate-pulse text-shade-secondary group-hover:block" />
+                  <ChevronRight className="absolute hidden w-4 h-4 -right-4 animate-pulse text-shade-secondary group-hover:block" />
                 </div>
               )}
             </motion.div>
             {currentMenu === "none" && (
-              <motion.div layout className="flex flex-col">
-                <div className="text-xs font-normal text-shade-secondary">
+              <motion.div layout className="flex flex-col text-center">
+                <div className="text-xs font-medium tracking-wide text-shade-secondary">
                   {getGreeting(currentTime.toDate())}, {user.firstName}
                 </div>
                 <div className="text-lg font-medium text-shade-primary">
@@ -309,17 +278,79 @@ export const Oasis = () => {
                 size="lg"
                 onClick={() => setCurrentMenu("add")}
               >
-                <Plus className="h-5 w-5" />
+                <Plus className="w-5 h-5" />
               </IconButton>
               <IconButton
                 variant="outline"
                 size="lg"
                 onClick={() => setCurrentMenu("search")}
               >
-                <Search className="h-5 w-5" />
+                <Search className="w-5 h-5" />
               </IconButton>
 
               <ThemeToggle />
+
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="flex items-center px-2">
+                    <Keyboard size={20} />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-md mx-auto border-none dark:bg-base-hover bg-base">
+                  <DialogHeader>
+                    <DialogTitle>Keyboard Shortcuts</DialogTitle>
+                    <DialogDescription>
+                      Learn the keyboard shortcuts to enhance your productivity.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="py-4">
+                    <div className="grid gap-4">
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold">Toggle Sidebar</p>
+                        <Badge className="ml-auto dark:bg-front-hover">
+                          M, ALT + M
+                        </Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold">Home</p>
+                        <Badge className="ml-auto dark:bg-front-hover">
+                          ALT + H
+                        </Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold">Search</p>
+                        <Badge className="ml-auto dark:bg-front-hover">
+                          ALT + S
+                        </Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold">Toggle Theme</p>
+                        <Badge className="ml-auto dark:bg-front-hover">
+                          ALT + T
+                        </Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold">Toggle Theme</p>
+                        <Badge className="ml-auto dark:bg-front-hover">
+                          ALT + T
+                        </Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold">Profile</p>
+                        <Badge className="ml-auto dark:bg-front-hover">
+                          ALT + P
+                        </Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold">Search</p>
+                        <Badge className="ml-auto dark:bg-front-hover">
+                          Ctrl + F
+                        </Badge>
+                      </div>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </motion.div>
           )}
 
@@ -335,7 +366,7 @@ export const Oasis = () => {
             >
               <Button
                 variant="outline"
-                leftIcon={<Plus className="h-4 w-4" />}
+                leftIcon={<Plus className="w-4 h-4" />}
                 onClick={() => {
                   addNew({
                     title: "Untitled Note",
@@ -349,7 +380,7 @@ export const Oasis = () => {
               </Button>
               <Button
                 variant="outline"
-                leftIcon={<Plus className="h-4 w-4" />}
+                leftIcon={<Plus className="w-4 h-4" />}
                 onClick={() => {
                   addNew({
                     title: "Untitled Folder",
@@ -370,7 +401,7 @@ export const Oasis = () => {
                 autoFocus
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                leftIcon={<Search className="h-5 w-5" />}
+                leftIcon={<Search className="w-5 h-5" />}
                 type="search"
                 placeholder="What are you searching for? Try writing it"
               />
@@ -378,16 +409,7 @@ export const Oasis = () => {
           )}
 
           <motion.div layout>
-            <Avatar
-              className="cursor-pointer"
-              onClick={() =>
-                setCurrentMenu((prev) =>
-                  prev === "avatar" ? "none" : "avatar"
-                )
-              }
-            >
-              <AvatarImage src={user.imageUrl} />
-            </Avatar>
+            <UserButton afterSignOutUrl="/" />
           </motion.div>
         </motion.div>
       </motion.div>

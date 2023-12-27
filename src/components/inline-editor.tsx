@@ -23,6 +23,7 @@ export const InlineEditor = React.forwardRef<
   if (isEditing) {
     return (
       <TextareaAutosize
+        className="w-full text-ellipsis"
         {...props}
         ref={ref}
         onKeyPress={(e) => {

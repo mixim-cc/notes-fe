@@ -17,6 +17,8 @@ import { useNestedLoad } from "@/services/state/functions/file-system/useNestedL
 import { selectFile } from "@/services/state/functions/file-system/select-file";
 import { remove } from "@/services/state/functions/file-system/remove";
 
+import { toast } from "sonner";
+
 export const NoteSidebar = () => {
   const [selectedTab, setSelectedTab] = useState<"default" | "journal">(
     "default"
@@ -70,6 +72,7 @@ export const NoteSidebar = () => {
                       isSelected={file?.id === selectedFileId}
                       onDelete={() => {
                         remove({ id: String(file?.id) });
+                        toast.info("Note has been deleted.");
                       }}
                       onCopy={() => {
                         copyFile({ id: String(file?.id) });
